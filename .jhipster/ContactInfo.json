@@ -1,0 +1,33 @@
+{
+    "name": "ContactInfo",
+    "fields": [
+        {
+            "fieldName": "facebookURL",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "twitterURL",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "doctor",
+            "otherEntityRelationshipName": "contactInfo",
+            "relationshipName": "doctor",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200130040911",
+    "entityTableName": "contact_info",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "doctor",
+    "applications": "*",
+    "microserviceName": "doctor"
+}

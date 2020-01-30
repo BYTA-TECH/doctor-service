@@ -1,0 +1,26 @@
+package com.bytatech.ayoos.doctor.service.mapper;
+
+import com.bytatech.ayoos.doctor.domain.*;
+import com.bytatech.ayoos.doctor.service.dto.ContactInfoDTO;
+
+import org.mapstruct.*;
+
+/**
+ * Mapper for the entity {@link ContactInfo} and its DTO {@link ContactInfoDTO}.
+ */
+@Mapper(componentModel = "spring", uses = {})
+public interface ContactInfoMapper extends EntityMapper<ContactInfoDTO, ContactInfo> {
+
+
+    @Mapping(target = "doctor", ignore = true)
+    ContactInfo toEntity(ContactInfoDTO contactInfoDTO);
+
+    default ContactInfo fromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        ContactInfo contactInfo = new ContactInfo();
+        contactInfo.setId(id);
+        return contactInfo;
+    }
+}
