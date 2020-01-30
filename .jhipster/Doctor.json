@@ -1,0 +1,102 @@
+{
+    "name": "Doctor",
+    "fields": [
+        {
+            "fieldName": "imageLink",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "doctorIdpCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "specialization",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "registerNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "practiceSince",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "totalRating",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "contactInfo",
+            "otherEntityRelationshipName": "doctor",
+            "relationshipName": "contactInfo",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "paymentSettings",
+            "otherEntityRelationshipName": "doctor",
+            "relationshipName": "paymentSettings",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "doctorSettings",
+            "otherEntityRelationshipName": "doctor",
+            "relationshipName": "doctorSettings",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "workPlace",
+            "otherEntityRelationshipName": "doctor",
+            "relationshipName": "workPlace"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "qualification",
+            "otherEntityRelationshipName": "doctor",
+            "relationshipName": "qualification"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "userRatingReview",
+            "otherEntityRelationshipName": "doctor",
+            "relationshipName": "userRatingReview"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "slot",
+            "otherEntityRelationshipName": "doctor",
+            "relationshipName": "slot"
+        }
+    ],
+    "changelogDate": "20200130040910",
+    "entityTableName": "doctor",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "doctor",
+    "applications": "*",
+    "microserviceName": "doctor"
+}

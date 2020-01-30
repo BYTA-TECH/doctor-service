@@ -1,0 +1,29 @@
+{
+    "name": "Qualification",
+    "fields": [
+        {
+            "fieldName": "qualification",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "doctor",
+            "otherEntityRelationshipName": "qualification",
+            "relationshipName": "doctor",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200130040913",
+    "entityTableName": "qualification",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "doctor",
+    "applications": "*",
+    "microserviceName": "doctor"
+}

@@ -1,0 +1,79 @@
+entity Doctor {
+	imageLink String,
+	doctorIdpCode String,
+	specialization String,
+	registerNumber String,
+	practiceSince LocalDate,
+	totalRating Double,
+	firstName String,
+	email String,
+	phoneNumber Long
+}
+entity ContactInfo{
+	facebookURL String,
+	twitterURL String
+}
+entity WorkPlace{
+	name String,
+	locationName String,
+	location String
+}
+entity Qualification{
+	qualification String
+}
+entity UserRatingReview{
+	userName String,
+	rating Double,
+        review String,
+	date LocalDate
+}
+
+entity Reply{
+	reply String
+}
+entity SessionInfo{
+	sessionName String,
+	date LocalDate,
+	weekDay Integer,
+	fromTime Instant ,
+	toTime Instant ,
+	interval Double
+}
+entity Slot{
+	date LocalDate,
+	startTime Double,
+	endTime Double
+}
+entity PaymentSettings{
+	isPaymentEnabled Boolean,
+	amount Double,
+	paymentMethod String,
+	currency String,
+	intent String,
+	noteToPayer String,
+	paymentGatewayProvider String,
+	paymentGatewayCredentials String
+}
+entity DoctorSettings{
+	approvalType String,
+	isMailNotificationsEnabled Boolean,
+	isSMSNotificationsEnabled Boolean
+}
+relationship OneToOne{
+	Doctor{contactInfo} to ContactInfo{doctor} , Doctor{paymentSettings} to PaymentSettings , Doctor{doctorSettings} to DoctorSettings
+}
+entity Status{
+	status String
+}
+relationship OneToMany{
+	Doctor{workPlace} to WorkPlace , 
+	WorkPlace{sessionInfo} to SessionInfo , 
+	Doctor{qualification} to Qualification , 
+	UserRatingReview{reply} to Reply , 
+	Doctor{userRatingReview} to UserRatingReview , 
+	Doctor{slot} to Slot ,
+	Slot{status} to Status
+}
+dto * with mapstruct
+paginate * with pagination
+service all with serviceImpl

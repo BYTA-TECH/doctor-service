@@ -1,0 +1,49 @@
+{
+    "name": "SessionInfo",
+    "fields": [
+        {
+            "fieldName": "sessionName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "weekDay",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "fromTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "toTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "interval",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "workPlace",
+            "otherEntityRelationshipName": "sessionInfo",
+            "relationshipName": "workPlace",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200130040916",
+    "entityTableName": "session_info",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "doctor",
+    "applications": "*",
+    "microserviceName": "doctor"
+}

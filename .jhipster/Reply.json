@@ -1,0 +1,29 @@
+{
+    "name": "Reply",
+    "fields": [
+        {
+            "fieldName": "reply",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "userRatingReview",
+            "otherEntityRelationshipName": "reply",
+            "relationshipName": "userRatingReview",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200130040915",
+    "entityTableName": "reply",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "doctor",
+    "applications": "*",
+    "microserviceName": "doctor"
+}
