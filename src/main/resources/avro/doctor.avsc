@@ -4,7 +4,8 @@
 	"name":"Doctor",
 	"fields":[
 		
-		{"name":"name","type":["null","string"],"default": null},
+		{"name":"name","type":["null","string"],"default": null}
+		]
 		
 	}
 	]
