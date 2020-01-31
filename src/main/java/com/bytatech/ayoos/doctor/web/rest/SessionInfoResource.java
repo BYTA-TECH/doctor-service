@@ -26,7 +26,8 @@ import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
-
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 /**
  * REST controller for managing {@link com.bytatech.ayoos.doctor.domain.SessionInfo}.
  */
@@ -144,4 +145,112 @@ public class SessionInfoResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+    
+    @PostMapping("/sessionInfoByDate/{fromDate}/{toDate}")
+	public List<SessionInfoDTO> setSessionByDates(@RequestBody SessionInfoDTO sessionList,
+			@PathVariable String fromDate, @PathVariable String toDate)/* throws ParseException*/ {
+
+		/*Date from_Date = new SimpleDateFormat("dd-MM-yyyy").parse(fromDate);
+		Date to_Date = new SimpleDateFormat("dd-MM-yyyy").parse(toDate);
+
+		Calendar c = Calendar.getInstance();
+
+		c.setTime(from_Date);
+
+		List<SessionInfoDTO> sessionDTO = new ArrayList<SessionInfoDTO>();
+
+		if (from_Date.before(to_Date)) {
+			for (int i = 0; !to_Date.equals(c.getTime()); i++) {
+
+				int weekRef = c.get(Calendar.DAY_OF_WEEK);
+
+				for (SessionInfoDTO sDTO : sessionList) {
+
+					log.info("..........weekRef............" + weekRef + ".......sDTO.getWeekDay()........"
+							+ sDTO.getWeekDay());
+
+					if (weekRef == sDTO.getWeekDay()) {
+
+						SessionInfo s = new SessionInfo();
+
+						s.setSessionName(sDTO.getSessionName());
+
+						s.setDate(c.getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+
+						s.setWeekDay(weekRef);
+
+						s.setFromTime(sDTO.getFromTime());
+
+						s.setToTime(sDTO.getToTime());
+
+						s.setInterval(sDTO.getInterval());
+						log.info("...............workplaceid.................." + sDTO.getWorkPlaceId());
+						WorkPlaceDTO workplaceDTO = workPlaceService.findOne(sDTO.getWorkPlaceId()).get();
+
+						s.setWorkPlace(workPlaceMapper.toEntity(workplaceDTO));
+
+						if (s.getId() != null) {
+
+							throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+						}
+
+						SessionInfoDTO sessionInfoDTO = sessionInfoMapper.toDto(s);
+
+						//SessionInfoDTO dto=null;
+						
+						//SessionInfoDTO alreadyExits= sessionInfoService.findBysessionNameAndDateAndWeekDayAndFromTimeAndToTimeAndWorkPlaceId(sessionInfoDTO.getSessionName(),sessionInfoDTO.getDate(),sessionInfoDTO.getWeekDay(),sessionInfoDTO.getFromTime(),sessionInfoDTO.getToTime(),sessionInfoDTO.getWorkPlaceId());
+					
+						
+						
+						SessionInfoDTO dto = sessionInfoService.save(sessionInfoDTO);
+						
+						if (dto.getId() == null) {
+							throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+						}
+
+						SessionInfoDTO result = sessionInfoService.save(dto);
+						
+						sessionDTO.add(dto);
+					}
+				}
+				// System.out.println(".........to_Date1........"+to_Date+"..............."+".........c.getTime()........"+c.getTime()+".........."+to_Date.equals(c.getTime()));
+				c.add(Calendar.DAY_OF_MONTH, +1);
+				// System.out.println(".........to_Date2........"+to_Date+"..............."+".........c.getTime()........"+c.getTime()+".........."+to_Date.equals(c.getTime()));
+			}
+		}
+		return sessionDTO;*/
+    	LocalDate startDate = LocalDate.parse(fromDate);
+		LocalDate endDate = LocalDate.parse(toDate);
+		sessionInfoService.setSessionInfosByDates(sessionList, startDate,endDate);
+    	return null;
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

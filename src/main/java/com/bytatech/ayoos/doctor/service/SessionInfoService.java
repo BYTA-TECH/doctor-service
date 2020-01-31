@@ -5,6 +5,8 @@ import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -53,4 +55,9 @@ public interface SessionInfoService {
      * @return the list of entities.
      */
     Page<SessionInfoDTO> search(String query, Pageable pageable);
+    
+    public List<SessionInfoDTO> setSessionInfosByDates(SessionInfoDTO sessionList,
+			 LocalDate  fromDate, LocalDate toDate);
+    
+    
 }

@@ -1,9 +1,11 @@
 package com.bytatech.ayoos.doctor.service.impl;
 
 import com.bytatech.ayoos.doctor.service.QualificationService;
+import com.bytatech.ayoos.doctor.domain.ContactInfo;
 import com.bytatech.ayoos.doctor.domain.Qualification;
 import com.bytatech.ayoos.doctor.repository.QualificationRepository;
 import com.bytatech.ayoos.doctor.repository.search.QualificationSearchRepository;
+import com.bytatech.ayoos.doctor.service.dto.ContactInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.QualificationDTO;
 import com.bytatech.ayoos.doctor.service.mapper.QualificationMapper;
 import org.slf4j.Logger;
@@ -51,10 +53,21 @@ public class QualificationServiceImpl implements QualificationService {
         Qualification qualification = qualificationMapper.toEntity(qualificationDTO);
         qualification = qualificationRepository.save(qualification);
         QualificationDTO result = qualificationMapper.toDto(qualification);
-        qualificationSearchRepository.save(qualification);
-        return result;
+        Qualification elasticResult= qualificationSearchRepository.save(qualification);
+        return updateToEs(elasticResult);
     }
 
+    private QualificationDTO updateToEs(Qualification elasticResult) {
+        log.debug("Request to updateToEs Qualification : {}", elasticResult);
+        Qualification qualification= qualificationSearchRepository.save(elasticResult);
+        QualificationDTO result = qualificationMapper.toDto(qualification);
+        return result;
+    }
+    
+    
+    
+    
+    
     /**
      * Get all the qualifications.
      *

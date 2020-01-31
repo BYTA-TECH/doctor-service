@@ -2,8 +2,10 @@ package com.bytatech.ayoos.doctor.service.impl;
 
 import com.bytatech.ayoos.doctor.service.SessionInfoService;
 import com.bytatech.ayoos.doctor.domain.SessionInfo;
+import com.bytatech.ayoos.doctor.domain.SessionInfo;
 import com.bytatech.ayoos.doctor.repository.SessionInfoRepository;
 import com.bytatech.ayoos.doctor.repository.search.SessionInfoSearchRepository;
+import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.mapper.SessionInfoMapper;
 import org.slf4j.Logger;
@@ -13,8 +15,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.*;
 import java.util.Optional;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -51,9 +58,18 @@ public class SessionInfoServiceImpl implements SessionInfoService {
         SessionInfo sessionInfo = sessionInfoMapper.toEntity(sessionInfoDTO);
         sessionInfo = sessionInfoRepository.save(sessionInfo);
         SessionInfoDTO result = sessionInfoMapper.toDto(sessionInfo);
-        sessionInfoSearchRepository.save(sessionInfo);
-        return result;
-    }
+        SessionInfo  elasticResult=sessionInfoSearchRepository.save(sessionInfo);
+  
+    return updateToEs(elasticResult);
+}
+
+private SessionInfoDTO updateToEs(SessionInfo elasticResult) {
+    log.debug("Request to updateToEs SessionInfo : {}", elasticResult);
+    SessionInfo sessionInfo= sessionInfoSearchRepository.save(elasticResult);
+    SessionInfoDTO result = sessionInfoMapper.toDto(sessionInfo);
+    return result;
+}
+    
 
     /**
      * Get all the sessionInfos.
@@ -110,4 +126,31 @@ public class SessionInfoServiceImpl implements SessionInfoService {
         return sessionInfoSearchRepository.search(queryStringQuery(query), pageable)
             .map(sessionInfoMapper::toDto);
     }
+    
+	public List<SessionInfoDTO> setSessionInfosByDates(SessionInfoDTO sessionInfo,
+			 LocalDate  startDate, LocalDate endDate){
+		long noOfDays=ChronoUnit.DAYS.between(startDate, endDate);
+		for(int i=1;i<=noOfDays;i++) {
+			sessionInfo.setDate(startDate.plusDays(noOfDays));
+			
+			save(sessionInfo);
+			
+		}
+		
+		
+		
+		
+		
+		
+				return null;
+		
+	}
+    
+    
+    
+    
+    
+    
+    
+    
 }

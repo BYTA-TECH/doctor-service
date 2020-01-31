@@ -1,11 +1,11 @@
 package com.bytatech.ayoos.doctor.service.impl;
 
 import com.bytatech.ayoos.doctor.service.WorkPlaceService;
-import com.bytatech.ayoos.doctor.domain.ContactInfo;
+import com.bytatech.ayoos.doctor.domain.WorkPlace;
 import com.bytatech.ayoos.doctor.domain.WorkPlace;
 import com.bytatech.ayoos.doctor.repository.WorkPlaceRepository;
 import com.bytatech.ayoos.doctor.repository.search.WorkPlaceSearchRepository;
-import com.bytatech.ayoos.doctor.service.dto.ContactInfoDTO;
+import com.bytatech.ayoos.doctor.service.dto.WorkPlaceDTO;
 import com.bytatech.ayoos.doctor.service.dto.WorkPlaceDTO;
 import com.bytatech.ayoos.doctor.service.mapper.WorkPlaceMapper;
 import org.slf4j.Logger;
@@ -57,8 +57,12 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
         return updateToEs(elasticResult);
     }
 
+   
+    
+    
+    
     private  WorkPlaceDTO updateToEs( WorkPlace elasticResult) {
-        log.debug("Request to updateToEs ContactInfo : {}", elasticResult);
+        log.debug("Request to updateToEs WorkPlace : {}", elasticResult);
         WorkPlace  workPlace=  workPlaceSearchRepository.save(elasticResult);
         WorkPlaceDTO result =  workPlaceMapper.toDto( workPlace);
         return result;
