@@ -14,14 +14,14 @@ import java.io.Serializable;
 @Entity
 @Table(name = "reply")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "reply")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "reply")
 public class Reply implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
- //   @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "reply")

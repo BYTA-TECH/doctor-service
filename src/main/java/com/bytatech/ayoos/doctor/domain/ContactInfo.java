@@ -14,14 +14,14 @@ import java.io.Serializable;
 @Entity
 @Table(name = "contact_info")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "contactinfo")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "contactinfo")
 public class ContactInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-  //  @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "facebook_url")

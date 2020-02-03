@@ -16,14 +16,14 @@ import java.util.Set;
 @Entity
 @Table(name = "work_place")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "workplace")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "workplace")
 public class WorkPlace implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+   @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "name")

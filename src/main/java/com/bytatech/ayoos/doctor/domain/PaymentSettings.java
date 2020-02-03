@@ -13,14 +13,14 @@ import java.io.Serializable;
 @Entity
 @Table(name = "payment_settings")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "paymentsettings")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "paymentsettings")
 public class PaymentSettings implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-  //  @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "is_payment_enabled")

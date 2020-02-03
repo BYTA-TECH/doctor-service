@@ -1,6 +1,6 @@
 package com.bytatech.ayoos.doctor.repository.search;
 
-import com.bytatech.ayoos.doctor.domain.search.Status;
+import com.bytatech.ayoos.doctor.domain.Status;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**
