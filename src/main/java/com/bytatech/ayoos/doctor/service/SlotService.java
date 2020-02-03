@@ -52,5 +52,5 @@ public interface SlotService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<SlotDTO> search(String query, Pageable pageable);
+   // Page<SlotDTO> search(String query, Pageable pageable);
 }

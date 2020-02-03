@@ -1,49 +1,46 @@
-package com.bytatech.ayoos.doctor.domain;
+package com.bytatech.ayoos.doctor.domain.search;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
- * A Slot.
+ * A SessionInfo.
  */
-@Entity
-@Table(name = "slot")
+
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "slot")
-public class Slot implements Serializable {
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "sessioninfo")
+public class SessionInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
-    @Column(name = "date")
+   
+    private String sessionName;
+
+    
     private LocalDate date;
 
-    @Column(name = "from_time")
+   
+    private Integer weekDay;
+
+
     private Instant fromTime;
 
-    @Column(name = "to_time")
+  
     private Instant toTime;
 
-    @OneToMany(mappedBy = "slot")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Status> statuses = new HashSet<>();
+   
+    private Double interval;
 
-    @ManyToOne
-    @JsonIgnoreProperties("slots")
-    private Doctor doctor;
+ 
+    private WorkPlace workPlace;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -54,11 +51,24 @@ public class Slot implements Serializable {
         this.id = id;
     }
 
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    public SessionInfo sessionName(String sessionName) {
+        this.sessionName = sessionName;
+        return this;
+    }
+
+    public void setSessionName(String sessionName) {
+        this.sessionName = sessionName;
+    }
+
     public LocalDate getDate() {
         return date;
     }
 
-    public Slot date(LocalDate date) {
+    public SessionInfo date(LocalDate date) {
         this.date = date;
         return this;
     }
@@ -67,11 +77,24 @@ public class Slot implements Serializable {
         this.date = date;
     }
 
+    public Integer getWeekDay() {
+        return weekDay;
+    }
+
+    public SessionInfo weekDay(Integer weekDay) {
+        this.weekDay = weekDay;
+        return this;
+    }
+
+    public void setWeekDay(Integer weekDay) {
+        this.weekDay = weekDay;
+    }
+
     public Instant getFromTime() {
         return fromTime;
     }
 
-    public Slot fromTime(Instant fromTime) {
+    public SessionInfo fromTime(Instant fromTime) {
         this.fromTime = fromTime;
         return this;
     }
@@ -84,7 +107,7 @@ public class Slot implements Serializable {
         return toTime;
     }
 
-    public Slot toTime(Instant toTime) {
+    public SessionInfo toTime(Instant toTime) {
         this.toTime = toTime;
         return this;
     }
@@ -93,42 +116,30 @@ public class Slot implements Serializable {
         this.toTime = toTime;
     }
 
-    public Set<Status> getStatuses() {
-        return statuses;
+    public Double getInterval() {
+        return interval;
     }
 
-    public Slot statuses(Set<Status> statuses) {
-        this.statuses = statuses;
+    public SessionInfo interval(Double interval) {
+        this.interval = interval;
         return this;
     }
 
-    public Slot addStatus(Status status) {
-        this.statuses.add(status);
-        status.setSlot(this);
+    public void setInterval(Double interval) {
+        this.interval = interval;
+    }
+
+    public WorkPlace getWorkPlace() {
+        return workPlace;
+    }
+
+    public SessionInfo workPlace(WorkPlace workPlace) {
+        this.workPlace = workPlace;
         return this;
     }
 
-    public Slot removeStatus(Status status) {
-        this.statuses.remove(status);
-        status.setSlot(null);
-        return this;
-    }
-
-    public void setStatuses(Set<Status> statuses) {
-        this.statuses = statuses;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public Slot doctor(Doctor doctor) {
-        this.doctor = doctor;
-        return this;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setWorkPlace(WorkPlace workPlace) {
+        this.workPlace = workPlace;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -137,10 +148,10 @@ public class Slot implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Slot)) {
+        if (!(o instanceof SessionInfo)) {
             return false;
         }
-        return id != null && id.equals(((Slot) o).id);
+        return id != null && id.equals(((SessionInfo) o).id);
     }
 
     @Override
@@ -150,11 +161,14 @@ public class Slot implements Serializable {
 
     @Override
     public String toString() {
-        return "Slot{" +
+        return "SessionInfo{" +
             "id=" + getId() +
+            ", sessionName='" + getSessionName() + "'" +
             ", date='" + getDate() + "'" +
+            ", weekDay=" + getWeekDay() +
             ", fromTime='" + getFromTime() + "'" +
             ", toTime='" + getToTime() + "'" +
+            ", interval=" + getInterval() +
             "}";
     }
 }

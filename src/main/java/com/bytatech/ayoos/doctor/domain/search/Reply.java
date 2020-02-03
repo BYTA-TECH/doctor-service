@@ -1,9 +1,9 @@
-package com.bytatech.ayoos.doctor.domain;
+package com.bytatech.ayoos.doctor.domain.search;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
+
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
@@ -11,24 +11,17 @@ import java.io.Serializable;
 /**
  * A Reply.
  */
-@Entity
-@Table(name = "reply")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "reply")
-public class Reply implements Serializable {
 
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
- //   @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+public class Reply  {
+
+ 
     private Long id;
 
-    @Column(name = "reply")
+  
     private String reply;
 
-    @ManyToOne
-    @JsonIgnoreProperties("replies")
+  
     private UserRatingReview userRatingReview;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

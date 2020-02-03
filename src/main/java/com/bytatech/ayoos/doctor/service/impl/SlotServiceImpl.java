@@ -51,7 +51,7 @@ public class SlotServiceImpl implements SlotService {
         Slot slot = slotMapper.toEntity(slotDTO);
         slot = slotRepository.save(slot);
         SlotDTO result = slotMapper.toDto(slot);
-        slotSearchRepository.save(slot);
+      //  slotSearchRepository.save(slot);
         return result;
     }
 
@@ -103,11 +103,11 @@ public class SlotServiceImpl implements SlotService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+   /* @Override
     @Transactional(readOnly = true)
     public Page<SlotDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Slots for query {}", query);
         return slotSearchRepository.search(queryStringQuery(query), pageable)
             .map(slotMapper::toDto);
-    }
+    }*/
 }

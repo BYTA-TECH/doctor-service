@@ -53,16 +53,17 @@ public class QualificationServiceImpl implements QualificationService {
         Qualification qualification = qualificationMapper.toEntity(qualificationDTO);
         qualification = qualificationRepository.save(qualification);
         QualificationDTO result = qualificationMapper.toDto(qualification);
-        Qualification elasticResult= qualificationSearchRepository.save(qualification);
-        return updateToEs(elasticResult);
+       /* Qualification elasticResult= qualificationSearchRepository.save(qualification);
+        return updateToEs(elasticResult);*/
+        return result;
     }
-
+/*
     private QualificationDTO updateToEs(Qualification elasticResult) {
         log.debug("Request to updateToEs Qualification : {}", elasticResult);
         Qualification qualification= qualificationSearchRepository.save(elasticResult);
         QualificationDTO result = qualificationMapper.toDto(qualification);
         return result;
-    }
+    }*/
     
     
     
@@ -116,11 +117,11 @@ public class QualificationServiceImpl implements QualificationService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+   /* @Override
     @Transactional(readOnly = true)
     public Page<QualificationDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Qualifications for query {}", query);
         return qualificationSearchRepository.search(queryStringQuery(query), pageable)
             .map(qualificationMapper::toDto);
-    }
+    }*/
 }

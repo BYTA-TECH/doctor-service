@@ -53,17 +53,18 @@ public class PaymentSettingsServiceImpl implements PaymentSettingsService {
         PaymentSettings paymentSettings = paymentSettingsMapper.toEntity(paymentSettingsDTO);
         paymentSettings = paymentSettingsRepository.save(paymentSettings);
         PaymentSettingsDTO result = paymentSettingsMapper.toDto(paymentSettings);
-        PaymentSettings elasticResult =paymentSettingsSearchRepository.save(paymentSettings);
+    /*    PaymentSettings elasticResult =paymentSettingsSearchRepository.save(paymentSettings);
       
-    return updateToEs(elasticResult);
+    return updateToEs(elasticResult);*/
+    return result;
   }
 
-  private PaymentSettingsDTO updateToEs(PaymentSettings elasticResult) {
+ /* private PaymentSettingsDTO updateToEs(PaymentSettings elasticResult) {
       log.debug("Request to updateToEs PaymentSettings : {}", elasticResult);
       PaymentSettings paymentSettings= paymentSettingsSearchRepository.save(elasticResult);
       PaymentSettingsDTO result = paymentSettingsMapper.toDto(paymentSettings);
       return result;
-  }
+  }*/
     
     
     
@@ -116,11 +117,11 @@ public class PaymentSettingsServiceImpl implements PaymentSettingsService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+   /* @Override
     @Transactional(readOnly = true)
     public Page<PaymentSettingsDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of PaymentSettings for query {}", query);
         return paymentSettingsSearchRepository.search(queryStringQuery(query), pageable)
             .map(paymentSettingsMapper::toDto);
-    }
+    }*/
 }

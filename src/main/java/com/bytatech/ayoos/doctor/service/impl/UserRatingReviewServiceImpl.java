@@ -51,7 +51,7 @@ public class UserRatingReviewServiceImpl implements UserRatingReviewService {
         UserRatingReview userRatingReview = userRatingReviewMapper.toEntity(userRatingReviewDTO);
         userRatingReview = userRatingReviewRepository.save(userRatingReview);
         UserRatingReviewDTO result = userRatingReviewMapper.toDto(userRatingReview);
-        userRatingReviewSearchRepository.save(userRatingReview);
+   //     userRatingReviewSearchRepository.save(userRatingReview);
         return result;
     }
 
@@ -103,11 +103,11 @@ public class UserRatingReviewServiceImpl implements UserRatingReviewService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+   /* @Override
     @Transactional(readOnly = true)
     public Page<UserRatingReviewDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of UserRatingReviews for query {}", query);
         return userRatingReviewSearchRepository.search(queryStringQuery(query), pageable)
             .map(userRatingReviewMapper::toDto);
-    }
+    }*/
 }

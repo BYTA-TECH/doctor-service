@@ -1,9 +1,9 @@
-package com.bytatech.ayoos.doctor.domain;
+package com.bytatech.ayoos.doctor.domain.search;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
+
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
@@ -13,34 +13,24 @@ import java.util.Set;
 /**
  * A WorkPlace.
  */
-@Entity
-@Table(name = "work_place")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "workplace")
-public class WorkPlace implements Serializable {
 
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+public class WorkPlace  {
+
+
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "location_name")
+   
     private String locationName;
 
-    @Column(name = "location")
+   
     private String location;
 
-    @OneToMany(mappedBy = "workPlace")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+   
     private Set<SessionInfo> sessionInfos = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties("workPlaces")
     private Doctor doctor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

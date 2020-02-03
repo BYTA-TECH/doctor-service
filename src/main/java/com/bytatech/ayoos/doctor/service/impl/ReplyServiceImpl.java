@@ -51,7 +51,7 @@ public class ReplyServiceImpl implements ReplyService {
         Reply reply = replyMapper.toEntity(replyDTO);
         reply = replyRepository.save(reply);
         ReplyDTO result = replyMapper.toDto(reply);
-        replySearchRepository.save(reply);
+     //   replySearchRepository.save(reply);
         return result;
     }
 
@@ -103,11 +103,11 @@ public class ReplyServiceImpl implements ReplyService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+   /* @Override
     @Transactional(readOnly = true)
     public Page<ReplyDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Replies for query {}", query);
         return replySearchRepository.search(queryStringQuery(query), pageable)
             .map(replyMapper::toDto);
-    }
+    }*/
 }

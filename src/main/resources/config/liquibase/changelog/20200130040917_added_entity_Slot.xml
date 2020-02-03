@@ -19,10 +19,10 @@
             <column name="date" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="start_time" type="double">
+            <column name="from_time" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="end_time" type="double">
+            <column name="to_time" type="datetime">
                 <constraints nullable="true" />
             </column>
             <column name="doctor_id" type="bigint">
@@ -30,6 +30,8 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="slot" columnName="from_time" columnDataType="datetime"/>
+        <dropDefaultValue tableName="slot" columnName="to_time" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200130040917-1-relations" author="jhipster">
@@ -52,8 +54,8 @@
                   tableName="slot">
             <column name="id" type="numeric"/>
             <column name="date" type="date"/>
-            <column name="start_time" type="numeric"/>
-            <column name="end_time" type="numeric"/>
+            <column name="from_time" type="datetime"/>
+            <column name="to_time" type="datetime"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

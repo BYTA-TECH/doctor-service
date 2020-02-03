@@ -52,5 +52,5 @@ public interface QualificationService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<QualificationDTO> search(String query, Pageable pageable);
+  //  Page<QualificationDTO> search(String query, Pageable pageable);
 }

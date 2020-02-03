@@ -53,21 +53,22 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
         WorkPlace workPlace = workPlaceMapper.toEntity(workPlaceDTO);
         workPlace = workPlaceRepository.save(workPlace);
         WorkPlaceDTO result = workPlaceMapper.toDto(workPlace);
-        WorkPlace elasticResult=   workPlaceSearchRepository.save(workPlace);
-        return updateToEs(elasticResult);
+     //   WorkPlace elasticResult=   workPlaceSearchRepository.save(workPlace);
+        //return updateToEs(elasticResult);
+        return result;
     }
 
    
     
     
     
-    private  WorkPlaceDTO updateToEs( WorkPlace elasticResult) {
+ /*   private  WorkPlaceDTO updateToEs( WorkPlace elasticResult) {
         log.debug("Request to updateToEs WorkPlace : {}", elasticResult);
         WorkPlace  workPlace=  workPlaceSearchRepository.save(elasticResult);
         WorkPlaceDTO result =  workPlaceMapper.toDto( workPlace);
         return result;
     }
-    
+    */
     
     
     
@@ -121,11 +122,11 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+   /* @Override
     @Transactional(readOnly = true)
     public Page<WorkPlaceDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of WorkPlaces for query {}", query);
         return workPlaceSearchRepository.search(queryStringQuery(query), pageable)
             .map(workPlaceMapper::toDto);
-    }
+    }*/
 }

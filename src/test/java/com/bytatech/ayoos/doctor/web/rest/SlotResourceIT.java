@@ -27,7 +27,9 @@ import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
+import java.time.Instant;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,11 +50,11 @@ public class SlotResourceIT {
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Double DEFAULT_START_TIME = 1D;
-    private static final Double UPDATED_START_TIME = 2D;
+    private static final Instant DEFAULT_FROM_TIME = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_FROM_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Double DEFAULT_END_TIME = 1D;
-    private static final Double UPDATED_END_TIME = 2D;
+    private static final Instant DEFAULT_TO_TIME = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_TO_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private SlotRepository slotRepository;
@@ -111,8 +113,8 @@ public class SlotResourceIT {
     public static Slot createEntity(EntityManager em) {
         Slot slot = new Slot()
             .date(DEFAULT_DATE)
-            .startTime(DEFAULT_START_TIME)
-            .endTime(DEFAULT_END_TIME);
+            .fromTime(DEFAULT_FROM_TIME)
+            .toTime(DEFAULT_TO_TIME);
         return slot;
     }
     /**
@@ -124,8 +126,8 @@ public class SlotResourceIT {
     public static Slot createUpdatedEntity(EntityManager em) {
         Slot slot = new Slot()
             .date(UPDATED_DATE)
-            .startTime(UPDATED_START_TIME)
-            .endTime(UPDATED_END_TIME);
+            .fromTime(UPDATED_FROM_TIME)
+            .toTime(UPDATED_TO_TIME);
         return slot;
     }
 
@@ -151,8 +153,8 @@ public class SlotResourceIT {
         assertThat(slotList).hasSize(databaseSizeBeforeCreate + 1);
         Slot testSlot = slotList.get(slotList.size() - 1);
         assertThat(testSlot.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testSlot.getStartTime()).isEqualTo(DEFAULT_START_TIME);
-        assertThat(testSlot.getEndTime()).isEqualTo(DEFAULT_END_TIME);
+        assertThat(testSlot.getFromTime()).isEqualTo(DEFAULT_FROM_TIME);
+        assertThat(testSlot.getToTime()).isEqualTo(DEFAULT_TO_TIME);
 
         // Validate the Slot in Elasticsearch
         verify(mockSlotSearchRepository, times(1)).save(testSlot);
@@ -194,8 +196,8 @@ public class SlotResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(slot.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].startTime").value(hasItem(DEFAULT_START_TIME.doubleValue())))
-            .andExpect(jsonPath("$.[*].endTime").value(hasItem(DEFAULT_END_TIME.doubleValue())));
+            .andExpect(jsonPath("$.[*].fromTime").value(hasItem(DEFAULT_FROM_TIME.toString())))
+            .andExpect(jsonPath("$.[*].toTime").value(hasItem(DEFAULT_TO_TIME.toString())));
     }
     
     @Test
@@ -210,8 +212,8 @@ public class SlotResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(slot.getId().intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.startTime").value(DEFAULT_START_TIME.doubleValue()))
-            .andExpect(jsonPath("$.endTime").value(DEFAULT_END_TIME.doubleValue()));
+            .andExpect(jsonPath("$.fromTime").value(DEFAULT_FROM_TIME.toString()))
+            .andExpect(jsonPath("$.toTime").value(DEFAULT_TO_TIME.toString()));
     }
 
     @Test
@@ -236,8 +238,8 @@ public class SlotResourceIT {
         em.detach(updatedSlot);
         updatedSlot
             .date(UPDATED_DATE)
-            .startTime(UPDATED_START_TIME)
-            .endTime(UPDATED_END_TIME);
+            .fromTime(UPDATED_FROM_TIME)
+            .toTime(UPDATED_TO_TIME);
         SlotDTO slotDTO = slotMapper.toDto(updatedSlot);
 
         restSlotMockMvc.perform(put("/api/slots")
@@ -250,8 +252,8 @@ public class SlotResourceIT {
         assertThat(slotList).hasSize(databaseSizeBeforeUpdate);
         Slot testSlot = slotList.get(slotList.size() - 1);
         assertThat(testSlot.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testSlot.getStartTime()).isEqualTo(UPDATED_START_TIME);
-        assertThat(testSlot.getEndTime()).isEqualTo(UPDATED_END_TIME);
+        assertThat(testSlot.getFromTime()).isEqualTo(UPDATED_FROM_TIME);
+        assertThat(testSlot.getToTime()).isEqualTo(UPDATED_TO_TIME);
 
         // Validate the Slot in Elasticsearch
         verify(mockSlotSearchRepository, times(1)).save(testSlot);
@@ -313,7 +315,7 @@ public class SlotResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(slot.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].startTime").value(hasItem(DEFAULT_START_TIME.doubleValue())))
-            .andExpect(jsonPath("$.[*].endTime").value(hasItem(DEFAULT_END_TIME.doubleValue())));
+            .andExpect(jsonPath("$.[*].fromTime").value(hasItem(DEFAULT_FROM_TIME.toString())))
+            .andExpect(jsonPath("$.[*].toTime").value(hasItem(DEFAULT_TO_TIME.toString())));
     }
 }

@@ -52,5 +52,5 @@ public interface PaymentSettingsService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<PaymentSettingsDTO> search(String query, Pageable pageable);
+  //  Page<PaymentSettingsDTO> search(String query, Pageable pageable);
 }

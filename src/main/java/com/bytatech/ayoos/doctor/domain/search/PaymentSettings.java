@@ -1,8 +1,8 @@
-package com.bytatech.ayoos.doctor.domain;
+package com.bytatech.ayoos.doctor.domain.search;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
+
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
@@ -10,41 +10,36 @@ import java.io.Serializable;
 /**
  * A PaymentSettings.
  */
-@Entity
-@Table(name = "payment_settings")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "paymentsettings")
-public class PaymentSettings implements Serializable {
 
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-  //  @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+public class PaymentSettings {
+
+   
+
+
     private Long id;
 
-    @Column(name = "is_payment_enabled")
+    
     private Boolean isPaymentEnabled;
 
-    @Column(name = "amount")
+
     private Double amount;
 
-    @Column(name = "payment_method")
+    
     private String paymentMethod;
 
-    @Column(name = "currency")
+ 
     private String currency;
 
-    @Column(name = "intent")
+   
     private String intent;
 
-    @Column(name = "note_to_payer")
     private String noteToPayer;
 
-    @Column(name = "payment_gateway_provider")
+ 
     private String paymentGatewayProvider;
 
-    @Column(name = "payment_gateway_credentials")
+ 
     private String paymentGatewayCredentials;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

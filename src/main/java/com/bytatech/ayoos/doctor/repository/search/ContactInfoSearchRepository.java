@@ -1,6 +1,6 @@
 package com.bytatech.ayoos.doctor.repository.search;
 
-import com.bytatech.ayoos.doctor.domain.ContactInfo;
+import com.bytatech.ayoos.doctor.domain.search.ContactInfo;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**

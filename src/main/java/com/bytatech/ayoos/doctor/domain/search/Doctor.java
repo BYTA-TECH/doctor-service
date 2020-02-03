@@ -1,84 +1,68 @@
-package com.bytatech.ayoos.doctor.domain;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+package com.bytatech.ayoos.doctor.domain.search;
 
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * A Doctor.
  */
-@Entity
-@Table(name = "doctor")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "doctor")
-public class Doctor implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "elasticdoctor") 
+public class Doctor  {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+  @Id
     private Long id;
 
-    @Column(name = "image_link")
+    
     private String imageLink;
 
-    @Column(name = "doctor_idp_code")
+    
     private String doctorIdpCode;
 
-    @Column(name = "specialization")
+
     private String specialization;
 
-    @Column(name = "register_number")
+ 
     private String registerNumber;
 
-    @Column(name = "practice_since")
+  
     private LocalDate practiceSince;
 
-    @Column(name = "total_rating")
+    
     private Double totalRating;
 
-    @Column(name = "first_name")
+   
     private String firstName;
 
-    @Column(name = "email")
+    
     private String email;
 
-    @Column(name = "phone_number")
+
     private Long phoneNumber;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+  
     private ContactInfo contactInfo;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    
     private PaymentSettings paymentSettings;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+  
     private DoctorSettings doctorSettings;
 
-    @OneToMany(mappedBy = "doctor")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    
     private Set<WorkPlace> workPlaces = new HashSet<>();
 
-    @OneToMany(mappedBy = "doctor")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+  
     private Set<Qualification> qualifications = new HashSet<>();
 
-    @OneToMany(mappedBy = "doctor")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    
     private Set<UserRatingReview> userRatingReviews = new HashSet<>();
 
-    @OneToMany(mappedBy = "doctor")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+   
     private Set<Slot> slots = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

@@ -1,4 +1,5 @@
 package com.bytatech.ayoos.doctor.service.dto;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,9 +13,9 @@ public class SlotDTO implements Serializable {
 
     private LocalDate date;
 
-    private Double startTime;
+    private Instant fromTime;
 
-    private Double endTime;
+    private Instant toTime;
 
 
     private Long doctorId;
@@ -35,20 +36,20 @@ public class SlotDTO implements Serializable {
         this.date = date;
     }
 
-    public Double getStartTime() {
-        return startTime;
+    public Instant getFromTime() {
+        return fromTime;
     }
 
-    public void setStartTime(Double startTime) {
-        this.startTime = startTime;
+    public void setFromTime(Instant fromTime) {
+        this.fromTime = fromTime;
     }
 
-    public Double getEndTime() {
-        return endTime;
+    public Instant getToTime() {
+        return toTime;
     }
 
-    public void setEndTime(Double endTime) {
-        this.endTime = endTime;
+    public void setToTime(Instant toTime) {
+        this.toTime = toTime;
     }
 
     public Long getDoctorId() {
@@ -85,8 +86,8 @@ public class SlotDTO implements Serializable {
         return "SlotDTO{" +
             "id=" + getId() +
             ", date='" + getDate() + "'" +
-            ", startTime=" + getStartTime() +
-            ", endTime=" + getEndTime() +
+            ", fromTime='" + getFromTime() + "'" +
+            ", toTime='" + getToTime() + "'" +
             ", doctorId=" + getDoctorId() +
             "}";
     }

@@ -52,5 +52,5 @@ public interface StatusService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<StatusDTO> search(String query, Pageable pageable);
+  //  Page<StatusDTO> search(String query, Pageable pageable);
 }

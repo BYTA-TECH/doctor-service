@@ -129,19 +129,5 @@ public class UserRatingReviewResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 
-    /**
-     * {@code SEARCH  /_search/user-rating-reviews?query=:query} : search for the userRatingReview corresponding
-     * to the query.
-     *
-     * @param query the query of the userRatingReview search.
-     * @param pageable the pagination information.
-     * @return the result of the search.
-     */
-    @GetMapping("/_search/user-rating-reviews")
-    public ResponseEntity<List<UserRatingReviewDTO>> searchUserRatingReviews(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of UserRatingReviews for query {}", query);
-        Page<UserRatingReviewDTO> page = userRatingReviewService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+    
 }

@@ -53,17 +53,14 @@ public class SessionInfoResourceIT {
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Integer DEFAULT_WEEK_DAY = 1;
-    private static final Integer UPDATED_WEEK_DAY = 2;
-
     private static final Instant DEFAULT_FROM_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_FROM_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Instant DEFAULT_TO_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_TO_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Double DEFAULT_INTERVAL = 1D;
-    private static final Double UPDATED_INTERVAL = 2D;
+    private static final Long DEFAULT_INTERVAL = 1L;
+    private static final Long UPDATED_INTERVAL = 2L;
 
     @Autowired
     private SessionInfoRepository sessionInfoRepository;
@@ -123,7 +120,6 @@ public class SessionInfoResourceIT {
         SessionInfo sessionInfo = new SessionInfo()
             .sessionName(DEFAULT_SESSION_NAME)
             .date(DEFAULT_DATE)
-            .weekDay(DEFAULT_WEEK_DAY)
             .fromTime(DEFAULT_FROM_TIME)
             .toTime(DEFAULT_TO_TIME)
             .interval(DEFAULT_INTERVAL);
@@ -139,7 +135,6 @@ public class SessionInfoResourceIT {
         SessionInfo sessionInfo = new SessionInfo()
             .sessionName(UPDATED_SESSION_NAME)
             .date(UPDATED_DATE)
-            .weekDay(UPDATED_WEEK_DAY)
             .fromTime(UPDATED_FROM_TIME)
             .toTime(UPDATED_TO_TIME)
             .interval(UPDATED_INTERVAL);
@@ -169,7 +164,6 @@ public class SessionInfoResourceIT {
         SessionInfo testSessionInfo = sessionInfoList.get(sessionInfoList.size() - 1);
         assertThat(testSessionInfo.getSessionName()).isEqualTo(DEFAULT_SESSION_NAME);
         assertThat(testSessionInfo.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testSessionInfo.getWeekDay()).isEqualTo(DEFAULT_WEEK_DAY);
         assertThat(testSessionInfo.getFromTime()).isEqualTo(DEFAULT_FROM_TIME);
         assertThat(testSessionInfo.getToTime()).isEqualTo(DEFAULT_TO_TIME);
         assertThat(testSessionInfo.getInterval()).isEqualTo(DEFAULT_INTERVAL);
@@ -215,10 +209,9 @@ public class SessionInfoResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(sessionInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].sessionName").value(hasItem(DEFAULT_SESSION_NAME)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].weekDay").value(hasItem(DEFAULT_WEEK_DAY)))
             .andExpect(jsonPath("$.[*].fromTime").value(hasItem(DEFAULT_FROM_TIME.toString())))
             .andExpect(jsonPath("$.[*].toTime").value(hasItem(DEFAULT_TO_TIME.toString())))
-            .andExpect(jsonPath("$.[*].interval").value(hasItem(DEFAULT_INTERVAL.doubleValue())));
+            .andExpect(jsonPath("$.[*].interval").value(hasItem(DEFAULT_INTERVAL.intValue())));
     }
     
     @Test
@@ -234,10 +227,9 @@ public class SessionInfoResourceIT {
             .andExpect(jsonPath("$.id").value(sessionInfo.getId().intValue()))
             .andExpect(jsonPath("$.sessionName").value(DEFAULT_SESSION_NAME))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.weekDay").value(DEFAULT_WEEK_DAY))
             .andExpect(jsonPath("$.fromTime").value(DEFAULT_FROM_TIME.toString()))
             .andExpect(jsonPath("$.toTime").value(DEFAULT_TO_TIME.toString()))
-            .andExpect(jsonPath("$.interval").value(DEFAULT_INTERVAL.doubleValue()));
+            .andExpect(jsonPath("$.interval").value(DEFAULT_INTERVAL.intValue()));
     }
 
     @Test
@@ -263,7 +255,6 @@ public class SessionInfoResourceIT {
         updatedSessionInfo
             .sessionName(UPDATED_SESSION_NAME)
             .date(UPDATED_DATE)
-            .weekDay(UPDATED_WEEK_DAY)
             .fromTime(UPDATED_FROM_TIME)
             .toTime(UPDATED_TO_TIME)
             .interval(UPDATED_INTERVAL);
@@ -280,7 +271,6 @@ public class SessionInfoResourceIT {
         SessionInfo testSessionInfo = sessionInfoList.get(sessionInfoList.size() - 1);
         assertThat(testSessionInfo.getSessionName()).isEqualTo(UPDATED_SESSION_NAME);
         assertThat(testSessionInfo.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testSessionInfo.getWeekDay()).isEqualTo(UPDATED_WEEK_DAY);
         assertThat(testSessionInfo.getFromTime()).isEqualTo(UPDATED_FROM_TIME);
         assertThat(testSessionInfo.getToTime()).isEqualTo(UPDATED_TO_TIME);
         assertThat(testSessionInfo.getInterval()).isEqualTo(UPDATED_INTERVAL);
@@ -346,9 +336,8 @@ public class SessionInfoResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(sessionInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].sessionName").value(hasItem(DEFAULT_SESSION_NAME)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].weekDay").value(hasItem(DEFAULT_WEEK_DAY)))
             .andExpect(jsonPath("$.[*].fromTime").value(hasItem(DEFAULT_FROM_TIME.toString())))
             .andExpect(jsonPath("$.[*].toTime").value(hasItem(DEFAULT_TO_TIME.toString())))
-            .andExpect(jsonPath("$.[*].interval").value(hasItem(DEFAULT_INTERVAL.doubleValue())));
+            .andExpect(jsonPath("$.[*].interval").value(hasItem(DEFAULT_INTERVAL.intValue())));
     }
 }

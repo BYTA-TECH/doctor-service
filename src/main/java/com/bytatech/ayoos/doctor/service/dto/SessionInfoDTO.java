@@ -15,13 +15,11 @@ public class SessionInfoDTO implements Serializable {
 
     private LocalDate date;
 
-    private Integer weekDay;
-
     private Instant fromTime;
 
     private Instant toTime;
 
-    private Double interval;
+    private Long interval;
 
 
     private Long workPlaceId;
@@ -50,14 +48,6 @@ public class SessionInfoDTO implements Serializable {
         this.date = date;
     }
 
-    public Integer getWeekDay() {
-        return weekDay;
-    }
-
-    public void setWeekDay(Integer weekDay) {
-        this.weekDay = weekDay;
-    }
-
     public Instant getFromTime() {
         return fromTime;
     }
@@ -74,11 +64,11 @@ public class SessionInfoDTO implements Serializable {
         this.toTime = toTime;
     }
 
-    public Double getInterval() {
+    public Long getInterval() {
         return interval;
     }
 
-    public void setInterval(Double interval) {
+    public void setInterval(Long interval) {
         this.interval = interval;
     }
 
@@ -117,7 +107,6 @@ public class SessionInfoDTO implements Serializable {
             "id=" + getId() +
             ", sessionName='" + getSessionName() + "'" +
             ", date='" + getDate() + "'" +
-            ", weekDay=" + getWeekDay() +
             ", fromTime='" + getFromTime() + "'" +
             ", toTime='" + getToTime() + "'" +
             ", interval=" + getInterval() +

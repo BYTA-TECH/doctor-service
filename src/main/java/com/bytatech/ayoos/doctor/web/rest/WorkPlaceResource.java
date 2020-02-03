@@ -129,19 +129,5 @@ public class WorkPlaceResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 
-    /**
-     * {@code SEARCH  /_search/work-places?query=:query} : search for the workPlace corresponding
-     * to the query.
-     *
-     * @param query the query of the workPlace search.
-     * @param pageable the pagination information.
-     * @return the result of the search.
-     */
-    @GetMapping("/_search/work-places")
-    public ResponseEntity<List<WorkPlaceDTO>> searchWorkPlaces(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of WorkPlaces for query {}", query);
-        Page<WorkPlaceDTO> page = workPlaceService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+ 
 }

@@ -1,8 +1,8 @@
-package com.bytatech.ayoos.doctor.domain;
+package com.bytatech.ayoos.doctor.domain.search;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
+
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
@@ -10,26 +10,18 @@ import java.io.Serializable;
 /**
  * A DoctorSettings.
  */
-@Entity
-@Table(name = "doctor_settings")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "doctorsettings")
-public class DoctorSettings implements Serializable {
 
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-  //  @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+public class DoctorSettings {
+
+
     private Long id;
-
-    @Column(name = "approval_type")
     private String approvalType;
 
-    @Column(name = "is_mail_notifications_enabled")
+    
     private Boolean isMailNotificationsEnabled;
 
-    @Column(name = "is_sms_notifications_enabled")
+
     private Boolean isSMSNotificationsEnabled;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

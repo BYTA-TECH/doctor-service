@@ -143,11 +143,11 @@ public class ContactInfoResource {
      * @param pageable the pagination information.
      * @return the result of the search.
      */
-    @GetMapping("/_search/contact-infos")
+ /*   @GetMapping("/_search/contact-infos")
     public ResponseEntity<List<ContactInfoDTO>> searchContactInfos(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of ContactInfos for query {}", query);
         Page<ContactInfoDTO> page = contactInfoService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+    }*/
 }

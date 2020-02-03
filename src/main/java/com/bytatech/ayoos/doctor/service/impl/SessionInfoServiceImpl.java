@@ -58,18 +58,19 @@ public class SessionInfoServiceImpl implements SessionInfoService {
         SessionInfo sessionInfo = sessionInfoMapper.toEntity(sessionInfoDTO);
         sessionInfo = sessionInfoRepository.save(sessionInfo);
         SessionInfoDTO result = sessionInfoMapper.toDto(sessionInfo);
-        SessionInfo  elasticResult=sessionInfoSearchRepository.save(sessionInfo);
+       // SessionInfo  elasticResult=sessionInfoSearchRepository.save(sessionInfo);
   
-    return updateToEs(elasticResult);
+  //  return updateToEs(elasticResult);
+        return result;
 }
 
-private SessionInfoDTO updateToEs(SessionInfo elasticResult) {
+/*private SessionInfoDTO updateToEs(SessionInfo elasticResult) {
     log.debug("Request to updateToEs SessionInfo : {}", elasticResult);
-    SessionInfo sessionInfo= sessionInfoSearchRepository.save(elasticResult);
+   SessionInfo sessionInfo= sessionInfoSearchRepository.save(elasticResult);
     SessionInfoDTO result = sessionInfoMapper.toDto(sessionInfo);
     return result;
 }
-    
+    */
 
     /**
      * Get all the sessionInfos.
@@ -119,13 +120,13 @@ private SessionInfoDTO updateToEs(SessionInfo elasticResult) {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+   /* @Override
     @Transactional(readOnly = true)
     public Page<SessionInfoDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of SessionInfos for query {}", query);
         return sessionInfoSearchRepository.search(queryStringQuery(query), pageable)
             .map(sessionInfoMapper::toDto);
-    }
+    }*/
     
 	public List<SessionInfoDTO> setSessionInfosByDates(SessionInfoDTO sessionInfo,
 			 LocalDate  startDate, LocalDate endDate){

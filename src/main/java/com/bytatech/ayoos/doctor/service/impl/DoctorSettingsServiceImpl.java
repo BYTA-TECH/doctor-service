@@ -53,16 +53,17 @@ public class DoctorSettingsServiceImpl implements DoctorSettingsService {
         DoctorSettings doctorSettings = doctorSettingsMapper.toEntity(doctorSettingsDTO);
         doctorSettings = doctorSettingsRepository.save(doctorSettings);
         DoctorSettingsDTO result = doctorSettingsMapper.toDto(doctorSettings);
-        DoctorSettings elasticResult= doctorSettingsSearchRepository.save(doctorSettings);
-        return updateToEs(elasticResult);
+      /*  DoctorSettings elasticResult= doctorSettingsSearchRepository.save(doctorSettings);
+        return updateToEs(elasticResult);*/
+        return result ;
     }
 
-    private DoctorSettingsDTO updateToEs(DoctorSettings elasticResult) {
+ /*   private DoctorSettingsDTO updateToEs(DoctorSettings elasticResult) {
         log.debug("Request to updateToEs DoctorSettings : {}", elasticResult);
         DoctorSettings doctorSettings= doctorSettingsSearchRepository.save(elasticResult);
         DoctorSettingsDTO result = doctorSettingsMapper.toDto(doctorSettings);
         return result;
-    }
+    }*/
 
     /**
      * Get all the doctorSettings.
@@ -105,6 +106,12 @@ public class DoctorSettingsServiceImpl implements DoctorSettingsService {
         doctorSettingsSearchRepository.deleteById(id);
     }
 
+	@Override
+	public Page<DoctorSettingsDTO> search(String query, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
     /**
      * Search for the doctorSettings corresponding to the query.
      *
@@ -112,11 +119,11 @@ public class DoctorSettingsServiceImpl implements DoctorSettingsService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+ /*   @Override
     @Transactional(readOnly = true)
     public Page<DoctorSettingsDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of DoctorSettings for query {}", query);
         return doctorSettingsSearchRepository.search(queryStringQuery(query), pageable)
             .map(doctorSettingsMapper::toDto);
-    }
+    }*/
 }

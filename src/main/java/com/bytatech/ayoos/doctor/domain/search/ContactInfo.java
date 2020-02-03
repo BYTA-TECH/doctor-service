@@ -1,9 +1,9 @@
-package com.bytatech.ayoos.doctor.domain;
+package com.bytatech.ayoos.doctor.domain.search;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
+
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
@@ -11,26 +11,19 @@ import java.io.Serializable;
 /**
  * A ContactInfo.
  */
-@Entity
-@Table(name = "contact_info")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "contactinfo")
-public class ContactInfo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-  //  @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+public class ContactInfo  {
+
     private Long id;
 
-    @Column(name = "facebook_url")
+ 
     private String facebookURL;
 
-    @Column(name = "twitter_url")
+ 
     private String twitterURL;
 
-    @OneToOne(mappedBy = "contactInfo")
+   
     @JsonIgnore
     private Doctor doctor;
 

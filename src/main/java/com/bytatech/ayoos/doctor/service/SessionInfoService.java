@@ -54,7 +54,7 @@ public interface SessionInfoService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<SessionInfoDTO> search(String query, Pageable pageable);
+   // Page<SessionInfoDTO> search(String query, Pageable pageable);
     
     public List<SessionInfoDTO> setSessionInfosByDates(SessionInfoDTO sessionList,
 			 LocalDate  fromDate, LocalDate toDate);

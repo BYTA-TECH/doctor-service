@@ -52,5 +52,5 @@ public interface ReplyService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<ReplyDTO> search(String query, Pageable pageable);
+   // Page<ReplyDTO> search(String query, Pageable pageable);
 }

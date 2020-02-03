@@ -137,11 +137,11 @@ public class ReplyResource {
      * @param pageable the pagination information.
      * @return the result of the search.
      */
-    @GetMapping("/_search/replies")
+  /*  @GetMapping("/_search/replies")
     public ResponseEntity<List<ReplyDTO>> searchReplies(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Replies for query {}", query);
         Page<ReplyDTO> page = replyService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+    }*/
 }

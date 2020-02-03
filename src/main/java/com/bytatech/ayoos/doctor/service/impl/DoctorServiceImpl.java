@@ -51,7 +51,7 @@ public class DoctorServiceImpl implements DoctorService {
         Doctor doctor = doctorMapper.toEntity(doctorDTO);
         doctor = doctorRepository.save(doctor);
         DoctorDTO result = doctorMapper.toDto(doctor);
-        doctorSearchRepository.save(doctor);
+      //  doctorSearchRepository.save(doctor);
         return result;
     }
 
@@ -103,11 +103,11 @@ public class DoctorServiceImpl implements DoctorService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+   /* @Override
     @Transactional(readOnly = true)
     public Page<DoctorDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Doctors for query {}", query);
         return doctorSearchRepository.search(queryStringQuery(query), pageable)
             .map(doctorMapper::toDto);
-    }
+    }*/
 }

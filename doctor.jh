@@ -34,15 +34,14 @@ entity Reply{
 entity SessionInfo{
 	sessionName String,
 	date LocalDate,
-	weekDay Integer,
 	fromTime Instant ,
 	toTime Instant ,
-	interval Double
+	interval Long
 }
 entity Slot{
 	date LocalDate,
-	startTime Double,
-	endTime Double
+	fromTime Instant,
+	toTime Instant
 }
 entity PaymentSettings{
 	isPaymentEnabled Boolean,

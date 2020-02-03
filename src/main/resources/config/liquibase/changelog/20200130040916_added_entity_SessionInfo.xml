@@ -22,16 +22,13 @@
             <column name="date" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="week_day" type="integer">
-                <constraints nullable="true" />
-            </column>
             <column name="from_time" type="datetime">
                 <constraints nullable="true" />
             </column>
             <column name="to_time" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="jhi_interval" type="double">
+            <column name="jhi_interval" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="work_place_id" type="bigint">
@@ -64,7 +61,6 @@
             <column name="id" type="numeric"/>
             <column name="session_name" type="string"/>
             <column name="date" type="date"/>
-            <column name="week_day" type="numeric"/>
             <column name="from_time" type="datetime"/>
             <column name="to_time" type="datetime"/>
             <column name="jhi_interval" type="numeric"/>

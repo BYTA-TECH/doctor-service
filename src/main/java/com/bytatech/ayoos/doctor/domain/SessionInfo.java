@@ -32,9 +32,6 @@ public class SessionInfo implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
-    @Column(name = "week_day")
-    private Integer weekDay;
-
     @Column(name = "from_time")
     private Instant fromTime;
 
@@ -42,7 +39,7 @@ public class SessionInfo implements Serializable {
     private Instant toTime;
 
     @Column(name = "jhi_interval")
-    private Double interval;
+    private Long interval;
 
     @ManyToOne
     @JsonIgnoreProperties("sessionInfos")
@@ -83,19 +80,6 @@ public class SessionInfo implements Serializable {
         this.date = date;
     }
 
-    public Integer getWeekDay() {
-        return weekDay;
-    }
-
-    public SessionInfo weekDay(Integer weekDay) {
-        this.weekDay = weekDay;
-        return this;
-    }
-
-    public void setWeekDay(Integer weekDay) {
-        this.weekDay = weekDay;
-    }
-
     public Instant getFromTime() {
         return fromTime;
     }
@@ -122,16 +106,16 @@ public class SessionInfo implements Serializable {
         this.toTime = toTime;
     }
 
-    public Double getInterval() {
+    public Long getInterval() {
         return interval;
     }
 
-    public SessionInfo interval(Double interval) {
+    public SessionInfo interval(Long interval) {
         this.interval = interval;
         return this;
     }
 
-    public void setInterval(Double interval) {
+    public void setInterval(Long interval) {
         this.interval = interval;
     }
 
@@ -171,7 +155,6 @@ public class SessionInfo implements Serializable {
             "id=" + getId() +
             ", sessionName='" + getSessionName() + "'" +
             ", date='" + getDate() + "'" +
-            ", weekDay=" + getWeekDay() +
             ", fromTime='" + getFromTime() + "'" +
             ", toTime='" + getToTime() + "'" +
             ", interval=" + getInterval() +

@@ -55,16 +55,17 @@ public class ContactInfoServiceImpl implements ContactInfoService {
         ContactInfo contactInfo = contactInfoMapper.toEntity(contactInfoDTO);
         contactInfo = contactInfoRepository.save(contactInfo);
         ContactInfoDTO result = contactInfoMapper.toDto(contactInfo);
-        ContactInfo elasticResult=  contactInfoSearchRepository.save(contactInfo);
-        return updateToEs(elasticResult);
+        /*ContactInfo elasticResult=  contactInfoSearchRepository.save(contactInfo);
+        return updateToEs(elasticResult);*/
+        return result;
     }
 
-    private ContactInfoDTO updateToEs(ContactInfo elasticResult) {
+  /*  private ContactInfoDTO updateToEs(ContactInfo elasticResult) {
         log.debug("Request to updateToEs ContactInfo : {}", elasticResult);
         ContactInfo contactInfo= contactInfoSearchRepository.save(elasticResult);
         ContactInfoDTO result = contactInfoMapper.toDto(contactInfo);
         return result;
-    }
+    }*/
     
     
     
@@ -134,11 +135,11 @@ public class ContactInfoServiceImpl implements ContactInfoService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+  /*  @Override
     @Transactional(readOnly = true)
     public Page<ContactInfoDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of ContactInfos for query {}", query);
         return contactInfoSearchRepository.search(queryStringQuery(query), pageable)
             .map(contactInfoMapper::toDto);
-    }
+    }*/
 }

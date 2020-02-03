@@ -52,5 +52,5 @@ public interface UserRatingReviewService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<UserRatingReviewDTO> search(String query, Pageable pageable);
+ //   Page<UserRatingReviewDTO> search(String query, Pageable pageable);
 }

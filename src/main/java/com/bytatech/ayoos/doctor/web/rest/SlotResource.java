@@ -129,19 +129,5 @@ public class SlotResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 
-    /**
-     * {@code SEARCH  /_search/slots?query=:query} : search for the slot corresponding
-     * to the query.
-     *
-     * @param query the query of the slot search.
-     * @param pageable the pagination information.
-     * @return the result of the search.
-     */
-    @GetMapping("/_search/slots")
-    public ResponseEntity<List<SlotDTO>> searchSlots(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of Slots for query {}", query);
-        Page<SlotDTO> page = slotService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+   
 }

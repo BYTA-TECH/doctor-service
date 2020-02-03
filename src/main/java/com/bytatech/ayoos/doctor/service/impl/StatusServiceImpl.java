@@ -51,7 +51,7 @@ public class StatusServiceImpl implements StatusService {
         Status status = statusMapper.toEntity(statusDTO);
         status = statusRepository.save(status);
         StatusDTO result = statusMapper.toDto(status);
-        statusSearchRepository.save(status);
+    //    statusSearchRepository.save(status);
         return result;
     }
 
@@ -103,11 +103,11 @@ public class StatusServiceImpl implements StatusService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    @Override
+   /* @Override
     @Transactional(readOnly = true)
     public Page<StatusDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Statuses for query {}", query);
         return statusSearchRepository.search(queryStringQuery(query), pageable)
             .map(statusMapper::toDto);
-    }
+    }*/
 }

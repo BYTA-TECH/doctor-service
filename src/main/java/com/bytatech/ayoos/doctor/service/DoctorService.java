@@ -52,5 +52,5 @@ public interface DoctorService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<DoctorDTO> search(String query, Pageable pageable);
+   // Page<DoctorDTO> search(String query, Pageable pageable);
 }
