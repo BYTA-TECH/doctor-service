@@ -26,7 +26,8 @@ import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
-
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 /**
  * REST controller for managing {@link com.bytatech.ayoos.doctor.domain.SessionInfo}.
  */
@@ -129,13 +130,16 @@ public class SessionInfoResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 
-    /**
-     * {@code SEARCH  /_search/session-infos?query=:query} : search for the sessionInfo corresponding
-     * to the query.
-     *
-     * @param query the query of the sessionInfo search.
-     * @param pageable the pagination information.
-     * @return the result of the search.
-     */
+    @PostMapping("/sessionInfoByDate/{fromDate}/{toDate}")
+   	public List<SessionInfoDTO> setSessionByDates(@RequestBody SessionInfoDTO sessionList,
+   			@PathVariable String fromDate, @PathVariable String toDate)/* throws ParseException*/ {
+
+   		
+       	LocalDate startDate = LocalDate.parse(fromDate);
+   		LocalDate endDate = LocalDate.parse(toDate);
+   		sessionInfoService.setSessionInfosByDates(sessionList, startDate,endDate);
+       	return null;
+   	}
+       
    
 }
