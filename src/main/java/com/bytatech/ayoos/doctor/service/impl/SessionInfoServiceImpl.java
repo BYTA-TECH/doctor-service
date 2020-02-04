@@ -128,22 +128,22 @@ public class SessionInfoServiceImpl implements SessionInfoService {
             .map(sessionInfoMapper::toDto);
     }*/
     
-	public List<SessionInfoDTO> setSessionInfosByDates(SessionInfoDTO sessionInfo,
+	public List<SessionInfoDTO> setSessionInfosByDates(SessionInfoDTO session,
 			 LocalDate  startDate, LocalDate endDate){
+		List<SessionInfoDTO> sessionInfoDTOList =new ArrayList<>();
 		long noOfDays=ChronoUnit.DAYS.between(startDate, endDate);
 		for(int i=1;i<=noOfDays;i++) {
-			sessionInfo.setDate(startDate.plusDays(noOfDays));
-			
-			save(sessionInfo);
+			SessionInfoDTO sessionInfoDTO =new SessionInfoDTO();
+			sessionInfoDTO.setFromTime(session.getFromTime());
+			sessionInfoDTO.setToTime(session.getToTime());
+			sessionInfoDTO.setSessionName(session.getSessionName());
+			sessionInfoDTO.setWorkPlaceId(session.getWorkPlaceId());
+			sessionInfoDTO.setDate(startDate.plusDays(i));
+			SessionInfoDTO sessionInfo=save(sessionInfoDTO);
+			sessionInfoDTOList.add(sessionInfo);
 			
 		}
-		
-		
-		
-		
-		
-		
-				return null;
+			return null;
 		
 	}
     

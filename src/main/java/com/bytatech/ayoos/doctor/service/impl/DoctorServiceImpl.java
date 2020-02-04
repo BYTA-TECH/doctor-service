@@ -51,7 +51,7 @@ public class DoctorServiceImpl implements DoctorService {
         Doctor doctor = doctorMapper.toEntity(doctorDTO);
         doctor = doctorRepository.save(doctor);
         DoctorDTO result = doctorMapper.toDto(doctor);
-      //  doctorSearchRepository.save(doctor);
+        doctorSearchRepository.save(doctor);
         return result;
     }
 
