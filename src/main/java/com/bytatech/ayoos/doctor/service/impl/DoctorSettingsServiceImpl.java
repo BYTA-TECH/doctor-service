@@ -3,8 +3,10 @@ package com.bytatech.ayoos.doctor.service.impl;
 import com.bytatech.ayoos.doctor.service.DoctorSettingsService;
 import com.bytatech.ayoos.doctor.domain.DoctorSettings;
 import com.bytatech.ayoos.doctor.domain.DoctorSettings;
+import com.bytatech.ayoos.doctor.domain.DoctorSettings;
 import com.bytatech.ayoos.doctor.repository.DoctorSettingsRepository;
 import com.bytatech.ayoos.doctor.repository.search.DoctorSettingsSearchRepository;
+import com.bytatech.ayoos.doctor.service.dto.DoctorSettingsDTO;
 import com.bytatech.ayoos.doctor.service.dto.DoctorSettingsDTO;
 import com.bytatech.ayoos.doctor.service.dto.DoctorSettingsDTO;
 import com.bytatech.ayoos.doctor.service.mapper.DoctorSettingsMapper;
@@ -53,17 +55,26 @@ public class DoctorSettingsServiceImpl implements DoctorSettingsService {
         DoctorSettings doctorSettings = doctorSettingsMapper.toEntity(doctorSettingsDTO);
         doctorSettings = doctorSettingsRepository.save(doctorSettings);
         DoctorSettingsDTO result = doctorSettingsMapper.toDto(doctorSettings);
-      /*  DoctorSettings elasticResult= doctorSettingsSearchRepository.save(doctorSettings);
-        return updateToEs(elasticResult);*/
-        return result ;
+       DoctorSettings elasticResult= doctorSettingsSearchRepository.save(doctorSettings);
+       return updateToEs(result);
     }
 
- /*   private DoctorSettingsDTO updateToEs(DoctorSettings elasticResult) {
-        log.debug("Request to updateToEs DoctorSettings : {}", elasticResult);
-        DoctorSettings doctorSettings= doctorSettingsSearchRepository.save(elasticResult);
-        DoctorSettingsDTO result = doctorSettingsMapper.toDto(doctorSettings);
+   
+    
+    
+    
+   private  DoctorSettingsDTO updateToEs( DoctorSettingsDTO doctorSettingsDTO) {
+	   
+       log.debug("Request to updateToEs DoctorSettings : {}", doctorSettingsDTO);
+       log.debug("Request to save DoctorSettings : {}", doctorSettingsDTO);
+       DoctorSettings doctorSettings = doctorSettingsMapper.toEntity(doctorSettingsDTO);
+       doctorSettings = doctorSettingsRepository.save(doctorSettings);
+       
+       DoctorSettingsDTO result =  doctorSettingsMapper.toDto( doctorSettings);
+        doctorSettingsSearchRepository.save(doctorSettings);
+        
         return result;
-    }*/
+    }
 
     /**
      * Get all the doctorSettings.

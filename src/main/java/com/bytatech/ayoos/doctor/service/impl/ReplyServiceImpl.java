@@ -2,9 +2,11 @@ package com.bytatech.ayoos.doctor.service.impl;
 
 import com.bytatech.ayoos.doctor.service.ReplyService;
 import com.bytatech.ayoos.doctor.domain.Reply;
+import com.bytatech.ayoos.doctor.domain.SessionInfo;
 import com.bytatech.ayoos.doctor.repository.ReplyRepository;
 import com.bytatech.ayoos.doctor.repository.search.ReplySearchRepository;
 import com.bytatech.ayoos.doctor.service.dto.ReplyDTO;
+import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.mapper.ReplyMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,10 +53,22 @@ public class ReplyServiceImpl implements ReplyService {
         Reply reply = replyMapper.toEntity(replyDTO);
         reply = replyRepository.save(reply);
         ReplyDTO result = replyMapper.toDto(reply);
-     //   replySearchRepository.save(reply);
-        return result;
+        replySearchRepository.save(reply);
+        return updateToEs(result);
     }
-
+    private ReplyDTO updateToEs(ReplyDTO replyDTO) {
+ 	   
+        log.debug("Request to updateToEs WorkPlace : {}",replyDTO);
+        
+       Reply reply =replyMapper.toEntity(replyDTO);
+        reply =replyRepository.save(reply);
+        
+       ReplyDTO result = replyMapper.toDto(reply);
+        replySearchRepository.save(reply);
+         
+         return result;
+     }
+     
     /**
      * Get all the replies.
      *

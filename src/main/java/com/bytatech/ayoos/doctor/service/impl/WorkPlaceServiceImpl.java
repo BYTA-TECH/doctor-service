@@ -53,22 +53,27 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
         WorkPlace workPlace = workPlaceMapper.toEntity(workPlaceDTO);
         workPlace = workPlaceRepository.save(workPlace);
         WorkPlaceDTO result = workPlaceMapper.toDto(workPlace);
-     //   WorkPlace elasticResult=   workPlaceSearchRepository.save(workPlace);
-        //return updateToEs(elasticResult);
-        return result;
+        workPlaceSearchRepository.save(workPlace);
+        return updateToEs(result);
     }
 
    
     
     
     
- /*   private  WorkPlaceDTO updateToEs( WorkPlace elasticResult) {
-        log.debug("Request to updateToEs WorkPlace : {}", elasticResult);
-        WorkPlace  workPlace=  workPlaceSearchRepository.save(elasticResult);
-        WorkPlaceDTO result =  workPlaceMapper.toDto( workPlace);
+   private  WorkPlaceDTO updateToEs( WorkPlaceDTO workPlaceDTO) {
+	   
+       log.debug("Request to updateToEs WorkPlace : {}", workPlaceDTO);
+       log.debug("Request to save WorkPlace : {}", workPlaceDTO);
+       WorkPlace workPlace = workPlaceMapper.toEntity(workPlaceDTO);
+       workPlace = workPlaceRepository.save(workPlace);
+       
+       WorkPlaceDTO result =  workPlaceMapper.toDto( workPlace);
+        workPlaceSearchRepository.save(workPlace);
+        
         return result;
     }
-    */
+    
     
     
     

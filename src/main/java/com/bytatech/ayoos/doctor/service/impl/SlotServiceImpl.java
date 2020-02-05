@@ -51,7 +51,7 @@ public class SlotServiceImpl implements SlotService {
         Slot slot = slotMapper.toEntity(slotDTO);
         slot = slotRepository.save(slot);
         SlotDTO result = slotMapper.toDto(slot);
-      //  slotSearchRepository.save(slot);
+       slotSearchRepository.save(slot);
         return result;
     }
 

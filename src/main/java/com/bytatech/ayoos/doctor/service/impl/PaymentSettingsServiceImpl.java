@@ -3,8 +3,10 @@ package com.bytatech.ayoos.doctor.service.impl;
 import com.bytatech.ayoos.doctor.service.PaymentSettingsService;
 import com.bytatech.ayoos.doctor.domain.PaymentSettings;
 import com.bytatech.ayoos.doctor.domain.PaymentSettings;
+import com.bytatech.ayoos.doctor.domain.PaymentSettings;
 import com.bytatech.ayoos.doctor.repository.PaymentSettingsRepository;
 import com.bytatech.ayoos.doctor.repository.search.PaymentSettingsSearchRepository;
+import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
 import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
 import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
 import com.bytatech.ayoos.doctor.service.mapper.PaymentSettingsMapper;
@@ -53,18 +55,27 @@ public class PaymentSettingsServiceImpl implements PaymentSettingsService {
         PaymentSettings paymentSettings = paymentSettingsMapper.toEntity(paymentSettingsDTO);
         paymentSettings = paymentSettingsRepository.save(paymentSettings);
         PaymentSettingsDTO result = paymentSettingsMapper.toDto(paymentSettings);
-    /*    PaymentSettings elasticResult =paymentSettingsSearchRepository.save(paymentSettings);
+       PaymentSettings elasticResult =paymentSettingsSearchRepository.save(paymentSettings);
       
-    return updateToEs(elasticResult);*/
-    return result;
-  }
+       return updateToEs(result);
+    }
 
- /* private PaymentSettingsDTO updateToEs(PaymentSettings elasticResult) {
-      log.debug("Request to updateToEs PaymentSettings : {}", elasticResult);
-      PaymentSettings paymentSettings= paymentSettingsSearchRepository.save(elasticResult);
-      PaymentSettingsDTO result = paymentSettingsMapper.toDto(paymentSettings);
-      return result;
-  }*/
+   
+    
+    
+    
+   private  PaymentSettingsDTO updateToEs( PaymentSettingsDTO paymentSettingsDTO) {
+	   
+       log.debug("Request to updateToEs PaymentSettings : {}", paymentSettingsDTO);
+       log.debug("Request to save PaymentSettings : {}", paymentSettingsDTO);
+       PaymentSettings paymentSettings = paymentSettingsMapper.toEntity(paymentSettingsDTO);
+       paymentSettings = paymentSettingsRepository.save(paymentSettings);
+       
+       PaymentSettingsDTO result =  paymentSettingsMapper.toDto( paymentSettings);
+        paymentSettingsSearchRepository.save(paymentSettings);
+        
+        return result;
+    }
     
     
     

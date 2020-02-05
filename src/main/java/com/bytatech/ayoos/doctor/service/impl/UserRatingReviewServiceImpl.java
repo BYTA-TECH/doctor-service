@@ -2,8 +2,10 @@ package com.bytatech.ayoos.doctor.service.impl;
 
 import com.bytatech.ayoos.doctor.service.UserRatingReviewService;
 import com.bytatech.ayoos.doctor.domain.UserRatingReview;
+import com.bytatech.ayoos.doctor.domain.UserRatingReview;
 import com.bytatech.ayoos.doctor.repository.UserRatingReviewRepository;
 import com.bytatech.ayoos.doctor.repository.search.UserRatingReviewSearchRepository;
+import com.bytatech.ayoos.doctor.service.dto.UserRatingReviewDTO;
 import com.bytatech.ayoos.doctor.service.dto.UserRatingReviewDTO;
 import com.bytatech.ayoos.doctor.service.mapper.UserRatingReviewMapper;
 import org.slf4j.Logger;
@@ -51,9 +53,24 @@ public class UserRatingReviewServiceImpl implements UserRatingReviewService {
         UserRatingReview userRatingReview = userRatingReviewMapper.toEntity(userRatingReviewDTO);
         userRatingReview = userRatingReviewRepository.save(userRatingReview);
         UserRatingReviewDTO result = userRatingReviewMapper.toDto(userRatingReview);
-   //     userRatingReviewSearchRepository.save(userRatingReview);
-        return result;
+       userRatingReviewSearchRepository.save(userRatingReview);
+        return updateToEs(result);
     }
+    
+    
+    private  UserRatingReviewDTO updateToEs( UserRatingReviewDTO userRatingReviewDTO) {
+ 	   
+        log.debug("Request to updateToEs UserRatingReview : {}", userRatingReviewDTO);
+        log.debug("Request to save UserRatingReview : {}", userRatingReviewDTO);
+        UserRatingReview userRatingReview = userRatingReviewMapper.toEntity(userRatingReviewDTO);
+        userRatingReview = userRatingReviewRepository.save(userRatingReview);
+        
+        UserRatingReviewDTO result =  userRatingReviewMapper.toDto( userRatingReview);
+         userRatingReviewSearchRepository.save(userRatingReview);
+         
+         return result;
+     }
+     
 
     /**
      * Get all the userRatingReviews.

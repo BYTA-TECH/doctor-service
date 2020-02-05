@@ -2,8 +2,10 @@ package com.bytatech.ayoos.doctor.service.impl;
 
 import com.bytatech.ayoos.doctor.service.StatusService;
 import com.bytatech.ayoos.doctor.domain.Status;
+import com.bytatech.ayoos.doctor.domain.Status;
 import com.bytatech.ayoos.doctor.repository.StatusRepository;
 import com.bytatech.ayoos.doctor.repository.search.StatusSearchRepository;
+import com.bytatech.ayoos.doctor.service.dto.StatusDTO;
 import com.bytatech.ayoos.doctor.service.dto.StatusDTO;
 import com.bytatech.ayoos.doctor.service.mapper.StatusMapper;
 import org.slf4j.Logger;
@@ -51,9 +53,24 @@ public class StatusServiceImpl implements StatusService {
         Status status = statusMapper.toEntity(statusDTO);
         status = statusRepository.save(status);
         StatusDTO result = statusMapper.toDto(status);
-    //    statusSearchRepository.save(status);
-        return result;
+      statusSearchRepository.save(status);
+      return updateToEs(result);
     }
+    
+    
+    private  StatusDTO updateToEs( StatusDTO statusDTO) {
+ 	   
+        log.debug("Request to updateToEs Status : {}", statusDTO);
+        log.debug("Request to save Status : {}", statusDTO);
+        Status status = statusMapper.toEntity(statusDTO);
+        status = statusRepository.save(status);
+        
+        StatusDTO result =  statusMapper.toDto( status);
+         statusSearchRepository.save(status);
+         
+         return result;
+     }
+     
 
     /**
      * Get all the statuses.
