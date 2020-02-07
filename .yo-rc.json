@@ -33,9 +33,17 @@
     "enableTranslation": true,
     "clientPackageManager": "npm",
     "nativeLanguage": "en",
-    "languages": ["en"],
+    "languages": [
+      "en"
+    ],
     "blueprints": [],
     "skipClient": true,
     "skipUserManagement": true
+  },
+  "generator-jhipster-swagger-cli": {
+    "promptValues": {
+      "inputSpec": "D:\\alfresco-core.json",
+      "cliName": "dms"
+    }
   }
 }
