@@ -33,7 +33,7 @@ import java.util.Optional;
 
 @Api(value = "Renditions", description = "the Renditions API")
 public interface RenditionsApi {
-
+/*
     @ApiOperation(value = "Create rendition", nickname = "createRendition", notes = "**Note:** this endpoint is available in Alfresco 5.2 and newer versions.  An asynchronous request to create a rendition for file **nodeId**.  The rendition is specified by name **id** in the request body: ```JSON {   \"id\":\"doclib\" } ``` ", tags={ "renditions", })
     @ApiResponses(value = { 
         @ApiResponse(code = 202, message = "Request accepted"),
@@ -94,5 +94,5 @@ public interface RenditionsApi {
         produces = "application/json", 
         method = RequestMethod.GET)
     ResponseEntity<RenditionPaging> listRenditions(@ApiParam(value = "The identifier of a node.",required=true) @PathVariable("nodeId") String nodeId,@ApiParam(value = "A string to restrict the returned objects by using a predicate.") @Valid @RequestParam(value = "where", required = false) String where);
-
+*/
 }
