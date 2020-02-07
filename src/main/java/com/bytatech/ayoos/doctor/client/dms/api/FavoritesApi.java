@@ -49,23 +49,7 @@ public interface FavoritesApi {
         produces = "application/json", 
         consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<FavoriteEntry> createFavorite(@ApiParam(value = "The identifier of a person.",required=true) @PathVariable("personId") String personId,@ApiParam(value = "An object identifying the entity to be favorited. 
-
-The object consists of a single property which is an object with the name `site`, `file`, or `folder`. 
-The content of that object is the `guid` of the target entity.
-
-For example, to favorite a file the following body would be used:
-
-```JSON
-{
-   "target": {
-      "file": {
-         "guid": "abcde-01234-...."
-      }
-   }
-}
-```
-" ,required=true )  @Valid @RequestBody FavoriteBodyCreate favoriteBodyCreate,@ApiParam(value = "Returns additional information about favorites, the following optional fields can be requested: * path (note, this only applies to files and folders)   ") @Valid @RequestParam(value = "include", required = false) List<String> include,@ApiParam(value = "A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. ") @Valid @RequestParam(value = "fields", required = false) List<String> fields);
+    ResponseEntity<FavoriteEntry> createFavorite(@ApiParam(value = "The identifier of a person.",required=true) @PathVariable("personId") String personId,@ApiParam(value = "An object identifying the entity to be favorited." ,required=true )  @Valid @RequestBody FavoriteBodyCreate favoriteBodyCreate,@ApiParam(value = "Returns additional information about favorites, the following optional fields can be requested: * path (note, this only applies to files and folders)   ") @Valid @RequestParam(value = "include", required = false) List<String> include,@ApiParam(value = "A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. ") @Valid @RequestParam(value = "fields", required = false) List<String> fields);
 
 
     @ApiOperation(value = "Create a site favorite", nickname = "createSiteFavorite", notes = "**Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future. Use `/people/{personId}/favorites` instead.  Create a site favorite for person **personId**.  You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.   **Note:** You can favorite more than one site by  specifying a list of sites in the JSON body like this:  ```JSON [   {     \"id\": \"test-site-1\"   },   {     \"id\": \"test-site-2\"   } ] ``` If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:  ```JSON {   \"list\": {     \"pagination\": {       \"count\": 2,       \"hasMoreItems\": false,       \"totalItems\": 2,       \"skipCount\": 0,       \"maxItems\": 100     },     \"entries\": [       {         \"entry\": {           ...         }       },       {         \"entry\": {           ...         }       }     ]   } } ``` ", response = FavoriteSiteEntry.class, tags={ "favorites", })

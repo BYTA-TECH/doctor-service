@@ -45,17 +45,7 @@ public interface RatingsApi {
         produces = "application/json", 
         consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<RatingEntry> createRating(@ApiParam(value = "The identifier of a node.",required=true) @PathVariable("nodeId") String nodeId,@ApiParam(value = "For "myRating" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
-
-For example, to "like" a file the following body would be used:
-
-```JSON
-  {
-    "id": "likes",
-    "myRating": true
-  }
-```
-" ,required=true )  @Valid @RequestBody RatingBody ratingBody,@ApiParam(value = "A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. ") @Valid @RequestParam(value = "fields", required = false) List<String> fields);
+    ResponseEntity<RatingEntry> createRating(@ApiParam(value = "The identifier of a node.",required=true) @PathVariable("nodeId") String nodeId,@ApiParam(value = "For myRating the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar." ,required=true )  @Valid @RequestBody RatingBody ratingBody,@ApiParam(value = "A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. ") @Valid @RequestParam(value = "fields", required = false) List<String> fields);
 
 
     @ApiOperation(value = "Delete a rating", nickname = "deleteRating", notes = "Deletes rating **ratingId** from node **nodeId**.", tags={ "ratings", })

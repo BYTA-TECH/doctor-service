@@ -62,8 +62,7 @@ public interface SitesApi {
         produces = "application/json", 
         consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<Void> approveSiteMembershipRequest(@ApiParam(value = "The identifier of a site.",required=true) @PathVariable("siteId") String siteId,@ApiParam(value = "The invitee user name.",required=true) @PathVariable("inviteeId") String inviteeId,@ApiParam(value = "Accepting a request to join, optionally, allows assignment of a role to the user.
-"  )  @Valid @RequestBody SiteMembershipApprovalBody siteMembershipApprovalBody);
+    ResponseEntity<Void> approveSiteMembershipRequest(@ApiParam(value = "The identifier of a site.",required=true) @PathVariable("siteId") String siteId,@ApiParam(value = "The invitee user name.",required=true) @PathVariable("inviteeId") String inviteeId,@ApiParam(value = "Accepting a request to join, optionally, allows assignment of a role to the user."  )  @Valid @RequestBody SiteMembershipApprovalBody siteMembershipApprovalBody);
 
 
     @ApiOperation(value = "Create a site", nickname = "createSite", notes = "**Note:** this endpoint is available in Alfresco 5.2 and newer versions.  Creates a default site with the given details.  Unless explicitly specified, the site id will be generated from the site title. The site id must be unique and only contain alphanumeric and/or dash characters.  Note: the id of a site cannot be updated once the site has been created.  For example, to create a public site called \"Marketing\" the following body could be used: ```JSON {   \"title\": \"Marketing\",   \"visibility\": \"PUBLIC\" } ```  The creation of the (surf) configuration files required by Share can be skipped via the **skipConfiguration** query parameter.  **Note:** if skipped then such a site will **not** work within Share.  The addition of the site to the user's site favorites can be skipped via the **skipAddToFavorites** query parameter.  The creator will be added as a member with Site Manager role.  When you create a site, a container called **documentLibrary** is created for you in the new site.  This container is the root folder for content stored in the site. ", response = SiteEntry.class, tags={ "sites", })
@@ -309,8 +308,7 @@ public interface SitesApi {
         produces = "application/json", 
         consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<Void> rejectSiteMembershipRequest(@ApiParam(value = "The identifier of a site.",required=true) @PathVariable("siteId") String siteId,@ApiParam(value = "The invitee user name.",required=true) @PathVariable("inviteeId") String inviteeId,@ApiParam(value = "Rejecting a request to join, optionally, allows the inclusion of comment.
-"  )  @Valid @RequestBody SiteMembershipRejectionBody siteMembershipRejectionBody);
+    ResponseEntity<Void> rejectSiteMembershipRequest(@ApiParam(value = "The identifier of a site.",required=true) @PathVariable("siteId") String siteId,@ApiParam(value = "The invitee user name.",required=true) @PathVariable("inviteeId") String inviteeId,@ApiParam(value = "Rejecting a request to join, optionally, allows the inclusion of comment."  )  @Valid @RequestBody SiteMembershipRejectionBody siteMembershipRejectionBody);
 
 
     @ApiOperation(value = "Update a site", nickname = "updateSite", notes = "**Note:** this endpoint is available in Alfresco 5.2 and newer versions.  Update the details for the given site **siteId**. Site Manager or otherwise a  (site) admin can update title, description or visibility.  Note: the id of a site cannot be updated once the site has been created. ", response = SiteEntry.class, tags={ "sites", })
