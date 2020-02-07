@@ -6,14 +6,30 @@ import com.bytatech.ayoos.doctor.repository.DoctorRepository;
 import com.bytatech.ayoos.doctor.repository.search.DoctorSearchRepository;
 import com.bytatech.ayoos.doctor.service.dto.DoctorDTO;
 import com.bytatech.ayoos.doctor.service.mapper.DoctorMapper;
+import com.bytatech.ayoos.doctor.client.dms.model.PersonBodyCreate;
+import com.bytatech.ayoos.doctor.client.dms.api.PeopleApi;
+import com.bytatech.ayoos.doctor.client.dms.api.SitesApi;
+import com.bytatech.ayoos.doctor.client.dms.model.PersonBodyCreate;
+import com.bytatech.ayoos.doctor.client.dms.model.PersonEntry;
+import com.bytatech.ayoos.doctor.client.dms.model.SiteBodyCreate;
+import com.bytatech.ayoos.doctor.client.dms.model.SiteEntry;
+import com.bytatech.ayoos.doctor.client.dms.model.SiteMemberEntry;
+import com.bytatech.ayoos.doctor.client.dms.model.SiteMembershipBodyCreate;
+import com.bytatech.ayoos.doctor.client.dms.model.SiteBodyCreate.VisibilityEnum;
+import com.bytatech.ayoos.doctor.client.dms.model.SiteMembershipBodyCreate.RoleEnum;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -32,6 +48,11 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorMapper doctorMapper;
 
     private final DoctorSearchRepository doctorSearchRepository;
+    
+    @Autowired
+    PeopleApi peopleApi;
+    @Autowired
+    SitesApi sitesApi;
 
     public DoctorServiceImpl(DoctorRepository doctorRepository, DoctorMapper doctorMapper, DoctorSearchRepository doctorSearchRepository) {
         this.doctorRepository = doctorRepository;
@@ -111,4 +132,47 @@ public class DoctorServiceImpl implements DoctorService {
         return doctorSearchRepository.search(queryStringQuery(query), pageable)
             .map(doctorMapper::toDto);
     }*/
+    
+    
+    
+    
+    
+     	public void createPersonOnDMS( DoctorDTO doctorDTO) {
+		log.debug("=================into the process CreatePeople()===========");
+System.out.println("#################################"+doctorDTO.getDoctorIdpCode());
+		PersonBodyCreate personBodyCreate = new PersonBodyCreate();
+		personBodyCreate.setId(doctorDTO.getDoctorIdpCode());
+		personBodyCreate.setFirstName(doctorDTO.getDoctorIdpCode());
+		personBodyCreate.setEmail(doctorDTO.getEmail());
+		personBodyCreate.setPassword(doctorDTO.getDoctorIdpCode());
+		personBodyCreate.setEnabled(true);
+		ResponseEntity<PersonEntry> p=peopleApi.createPerson(personBodyCreate, null);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+p.getBody());
+	}
+ 
+    
+	public String createSite( String siteId) {
+		SiteBodyCreate siteBodyCreate = new SiteBodyCreate();
+		siteBodyCreate.setTitle(siteId);
+		siteBodyCreate.setId(siteId);
+		siteBodyCreate.setVisibility(VisibilityEnum.MODERATED);
+		List<String> s = new ArrayList();
+		s.add("id");
+		s.add("title");
+	
+
+		ResponseEntity<SiteEntry> entry = sitesApi.createSite(siteBodyCreate, false, false,s);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@"+entry.getBody().getEntry().getTitle());
+		return entry.getBody().getEntry().getId();
+	}  
+	 
+    
+	public SiteMemberEntry createSiteMembership(String siteId, String id) {
+		SiteMembershipBodyCreate siteMembershipBodyCreate = new SiteMembershipBodyCreate();
+		siteMembershipBodyCreate.setRole(RoleEnum.SITEMANAGER);
+		siteMembershipBodyCreate.setId(id);
+		return sitesApi.createSiteMembership(siteId, siteMembershipBodyCreate, null).getBody();
+	}
+
+    
 }

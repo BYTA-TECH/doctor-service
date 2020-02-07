@@ -6,12 +6,12 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "startTime",
-            "fieldType": "Double"
+            "fieldName": "fromTime",
+            "fieldType": "Instant"
         },
         {
-            "fieldName": "endTime",
-            "fieldType": "Double"
+            "fieldName": "toTime",
+            "fieldType": "Instant"
         }
     ],
     "relationships": [
