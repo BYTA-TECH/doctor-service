@@ -7,7 +7,8 @@ entity Doctor {
 	totalRating Double,
 	firstName String,
 	email String,
-	phoneNumber Long
+	phoneNumber Long,
+	dmsId String
 }
 entity ContactInfo{
 	facebookURL String,

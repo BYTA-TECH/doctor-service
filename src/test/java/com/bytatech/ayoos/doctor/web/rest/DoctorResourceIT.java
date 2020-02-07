@@ -72,6 +72,9 @@ public class DoctorResourceIT {
     private static final Long DEFAULT_PHONE_NUMBER = 1L;
     private static final Long UPDATED_PHONE_NUMBER = 2L;
 
+    private static final String DEFAULT_DMS_ID = "AAAAAAAAAA";
+    private static final String UPDATED_DMS_ID = "BBBBBBBBBB";
+
     @Autowired
     private DoctorRepository doctorRepository;
 
@@ -136,7 +139,8 @@ public class DoctorResourceIT {
             .totalRating(DEFAULT_TOTAL_RATING)
             .firstName(DEFAULT_FIRST_NAME)
             .email(DEFAULT_EMAIL)
-            .phoneNumber(DEFAULT_PHONE_NUMBER);
+            .phoneNumber(DEFAULT_PHONE_NUMBER)
+            .dmsId(DEFAULT_DMS_ID);
         return doctor;
     }
     /**
@@ -155,7 +159,8 @@ public class DoctorResourceIT {
             .totalRating(UPDATED_TOTAL_RATING)
             .firstName(UPDATED_FIRST_NAME)
             .email(UPDATED_EMAIL)
-            .phoneNumber(UPDATED_PHONE_NUMBER);
+            .phoneNumber(UPDATED_PHONE_NUMBER)
+            .dmsId(UPDATED_DMS_ID);
         return doctor;
     }
 
@@ -189,6 +194,7 @@ public class DoctorResourceIT {
         assertThat(testDoctor.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testDoctor.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testDoctor.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
+        assertThat(testDoctor.getDmsId()).isEqualTo(DEFAULT_DMS_ID);
 
         // Validate the Doctor in Elasticsearch
         verify(mockDoctorSearchRepository, times(1)).save(testDoctor);
@@ -237,7 +243,8 @@ public class DoctorResourceIT {
             .andExpect(jsonPath("$.[*].totalRating").value(hasItem(DEFAULT_TOTAL_RATING.doubleValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.intValue())));
+            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.intValue())))
+            .andExpect(jsonPath("$.[*].dmsId").value(hasItem(DEFAULT_DMS_ID)));
     }
     
     @Test
@@ -259,7 +266,8 @@ public class DoctorResourceIT {
             .andExpect(jsonPath("$.totalRating").value(DEFAULT_TOTAL_RATING.doubleValue()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
-            .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER.intValue()));
+            .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER.intValue()))
+            .andExpect(jsonPath("$.dmsId").value(DEFAULT_DMS_ID));
     }
 
     @Test
@@ -291,7 +299,8 @@ public class DoctorResourceIT {
             .totalRating(UPDATED_TOTAL_RATING)
             .firstName(UPDATED_FIRST_NAME)
             .email(UPDATED_EMAIL)
-            .phoneNumber(UPDATED_PHONE_NUMBER);
+            .phoneNumber(UPDATED_PHONE_NUMBER)
+            .dmsId(UPDATED_DMS_ID);
         DoctorDTO doctorDTO = doctorMapper.toDto(updatedDoctor);
 
         restDoctorMockMvc.perform(put("/api/doctors")
@@ -312,6 +321,7 @@ public class DoctorResourceIT {
         assertThat(testDoctor.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testDoctor.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testDoctor.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
+        assertThat(testDoctor.getDmsId()).isEqualTo(UPDATED_DMS_ID);
 
         // Validate the Doctor in Elasticsearch
         verify(mockDoctorSearchRepository, times(1)).save(testDoctor);
@@ -380,6 +390,7 @@ public class DoctorResourceIT {
             .andExpect(jsonPath("$.[*].totalRating").value(hasItem(DEFAULT_TOTAL_RATING.doubleValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.intValue())));
+            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.intValue())))
+            .andExpect(jsonPath("$.[*].dmsId").value(hasItem(DEFAULT_DMS_ID)));
     }
 }

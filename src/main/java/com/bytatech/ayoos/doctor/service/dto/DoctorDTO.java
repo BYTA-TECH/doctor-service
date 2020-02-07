@@ -28,6 +28,8 @@ public class DoctorDTO implements Serializable {
 
     private Long phoneNumber;
 
+    private String dmsId;
+
 
     private Long contactInfoId;
 
@@ -115,6 +117,14 @@ public class DoctorDTO implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getDmsId() {
+        return dmsId;
+    }
+
+    public void setDmsId(String dmsId) {
+        this.dmsId = dmsId;
+    }
+
     public Long getContactInfoId() {
         return contactInfoId;
     }
@@ -173,6 +183,7 @@ public class DoctorDTO implements Serializable {
             ", firstName='" + getFirstName() + "'" +
             ", email='" + getEmail() + "'" +
             ", phoneNumber=" + getPhoneNumber() +
+            ", dmsId='" + getDmsId() + "'" +
             ", contactInfoId=" + getContactInfoId() +
             ", paymentSettingsId=" + getPaymentSettingsId() +
             ", doctorSettingsId=" + getDoctorSettingsId() +

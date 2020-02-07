@@ -23,7 +23,7 @@ public class Doctor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "image_link")
@@ -52,6 +52,9 @@ public class Doctor implements Serializable {
 
     @Column(name = "phone_number")
     private Long phoneNumber;
+
+    @Column(name = "dms_id")
+    private String dmsId;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -205,6 +208,19 @@ public class Doctor implements Serializable {
 
     public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getDmsId() {
+        return dmsId;
+    }
+
+    public Doctor dmsId(String dmsId) {
+        this.dmsId = dmsId;
+        return this;
+    }
+
+    public void setDmsId(String dmsId) {
+        this.dmsId = dmsId;
     }
 
     public ContactInfo getContactInfo() {
@@ -376,6 +392,7 @@ public class Doctor implements Serializable {
             ", firstName='" + getFirstName() + "'" +
             ", email='" + getEmail() + "'" +
             ", phoneNumber=" + getPhoneNumber() +
+            ", dmsId='" + getDmsId() + "'" +
             "}";
     }
 }

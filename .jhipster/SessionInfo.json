@@ -10,10 +10,6 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "weekDay",
-            "fieldType": "Integer"
-        },
-        {
             "fieldName": "fromTime",
             "fieldType": "Instant"
         },
@@ -23,7 +19,7 @@
         },
         {
             "fieldName": "interval",
-            "fieldType": "Double"
+            "fieldType": "Long"
         }
     ],
     "relationships": [

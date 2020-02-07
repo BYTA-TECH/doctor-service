@@ -97,6 +97,14 @@ public class DoctorResource {
         if (doctorDTO.getId() != null) {
             throw new BadRequestAlertException("A new doctor cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        
+         doctorService. createPersonOnDMS(doctorDTO);
+        
+        String siteId = doctorDTO.getDoctorIdpCode() + "site";
+		String dmsId =  doctorService.createSite(siteId);
+		doctorDTO.setDmsId(dmsId);
+		doctorService.createSiteMembership(dmsId, doctorDTO.getDoctorIdpCode());
+       
         DoctorDTO result = doctorService.save(doctorDTO);
         return ResponseEntity.created(new URI("/api/doctors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
