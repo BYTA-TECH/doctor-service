@@ -1,5 +1,6 @@
 package com.bytatech.ayoos.doctor.service;
 
+import com.bytatech.ayoos.doctor.service.dto.DoctorSessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 
 import org.springframework.data.domain.Page;
@@ -56,8 +57,7 @@ public interface SessionInfoService {
      */
    // Page<SessionInfoDTO> search(String query, Pageable pageable);
     
-    public List<SessionInfoDTO> setSessionInfosByDates(SessionInfoDTO sessionList,
-			 LocalDate  fromDate, LocalDate toDate);
+    public List<SessionInfoDTO> setSessionInfosByDates(List<DoctorSessionInfoDTO> doctorSessionInfoDTO );
     
     
 }
