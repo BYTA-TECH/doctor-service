@@ -2,6 +2,7 @@ package com.bytatech.ayoos.doctor.web.rest;
 
 import com.bytatech.ayoos.doctor.service.SessionInfoService;
 import com.bytatech.ayoos.doctor.web.rest.errors.BadRequestAlertException;
+import com.bytatech.ayoos.doctor.service.dto.DoctorSessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -130,15 +131,10 @@ public class SessionInfoResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 
-    @PostMapping("/sessionInfoByDate/{fromDate}/{toDate}")
-   	public List<SessionInfoDTO> setSessionByDates(@RequestBody SessionInfoDTO sessionList,
-   			@PathVariable String fromDate, @PathVariable String toDate)/* throws ParseException*/ {
-
-   		
-       	LocalDate startDate = LocalDate.parse(fromDate);
-   		LocalDate endDate = LocalDate.parse(toDate);
-   		sessionInfoService.setSessionInfosByDates(sessionList, startDate,endDate);
-       	return null;
+    @PostMapping("/sessionInfoByDate")
+   	public List<SessionInfoDTO> setSessionByDates(@RequestBody List<DoctorSessionInfoDTO> doctorSessionInfoDTO)/* throws ParseException*/ {
+    	return sessionInfoService.setSessionInfosByDates(doctorSessionInfoDTO);
+       	 
    	}
        
    

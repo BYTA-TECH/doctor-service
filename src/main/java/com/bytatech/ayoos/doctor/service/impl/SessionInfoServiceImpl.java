@@ -6,6 +6,7 @@ import com.bytatech.ayoos.doctor.domain.WorkPlace;
 import com.bytatech.ayoos.doctor.domain.SessionInfo;
 import com.bytatech.ayoos.doctor.repository.SessionInfoRepository;
 import com.bytatech.ayoos.doctor.repository.search.SessionInfoSearchRepository;
+import com.bytatech.ayoos.doctor.service.dto.DoctorSessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
@@ -138,31 +139,47 @@ public class SessionInfoServiceImpl implements SessionInfoService {
         return sessionInfoSearchRepository.search(queryStringQuery(query), pageable)
             .map(sessionInfoMapper::toDto);
     }*/
-    
-	public List<SessionInfoDTO> setSessionInfosByDates(SessionInfoDTO session,
-			 LocalDate  startDate, LocalDate endDate){
+    /**
+     *  Set doctor session(Take a list of doctor selection as  DoctorSessionInfoDTO and convert into required SessionInfoDTO 
+     * 
+     * @author ajayes
+     * @param list of Doctor selected sessions 
+     * @return the list of doctor session
+     */
+	public List<SessionInfoDTO> setSessionInfosByDates(List<DoctorSessionInfoDTO> doctorSessionInfoDTO){
 		List<SessionInfoDTO> sessionInfoDTOList =new ArrayList<>();
-		long noOfDays=ChronoUnit.DAYS.between(startDate, endDate);
-		for(int i=1;i<=noOfDays;i++) {
-			SessionInfoDTO sessionInfoDTO =new SessionInfoDTO();
-			sessionInfoDTO.setFromTime(session.getFromTime());
-			sessionInfoDTO.setToTime(session.getToTime());
-			sessionInfoDTO.setSessionName(session.getSessionName());
-			sessionInfoDTO.setWorkPlaceId(session.getWorkPlaceId());
-			sessionInfoDTO.setDate(startDate.plusDays(i));
-			SessionInfoDTO sessionInfo=save(sessionInfoDTO);
-			sessionInfoDTOList.add(sessionInfo);
-			
+		
+		for(DoctorSessionInfoDTO doctorSessionInfo:doctorSessionInfoDTO) {
+			//Code to get the int value for Weekday of starting date
+			 DayOfWeek dayOfWeekStart = doctorSessionInfo.getFromDate().getDayOfWeek();
+			 int intValueStart=dayOfWeekStart.getValue();
+			 log.debug(intValueStart+"*****\n");
+			 //Code to get difference with given weekday and starting date's weekday
+			 long l=7%(intValueStart-(doctorSessionInfo.getWeekday()));
+			 //Calculate the 1st date of given weekday after starting date
+			 LocalDate startDate=doctorSessionInfo.getFromDate().plusDays(l);
+			 //Loop to get all weekday in between
+			 while (!startDate.isAfter(doctorSessionInfo.getToDate())) {
+                  /*
+				  * convertion of LocalDate and LocalTime into Instant with using String
+				  */ 
+				 Instant startInstant=Instant.parse(startDate+"T"+doctorSessionInfo.getFromTime()+":00Z");
+				 Instant endInstant=Instant.parse(startDate+"T"+doctorSessionInfo.getToTime()+":00Z");
+				 
+				 SessionInfoDTO sessionInfoDTO =new SessionInfoDTO();
+				 sessionInfoDTO.setDate(startDate);
+				 sessionInfoDTO.setFromTime(startInstant);
+				 sessionInfoDTO.setToTime(endInstant);
+				  save(sessionInfoDTO);
+				 sessionInfoDTOList.add(sessionInfoDTO);
+				 //Calculate next weekday by adding 7
+				 startDate=startDate.plusDays(7);				  
+			 }
 		}
-			return null;
+ 
+		 return sessionInfoDTOList;
+		}
+			 
 		
 	}
-    
-    
-    
-    
-    
-    
-    
-    
-}
+ 
