@@ -227,4 +227,11 @@ kafka:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
+dms:
+   url: https://gotjmq.trial.alfresco.com/alfresco/api/-default-/public/alfresco/versions/1
+   security:
+      basicAuth:
+         username: sarath.kumar.s@lxisoft.com      
+         password: fg5q4riwxy   
+
 # application:
