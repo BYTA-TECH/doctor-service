@@ -2,12 +2,14 @@ package com.bytatech.ayoos.doctor.service.impl;
 
 import com.bytatech.ayoos.doctor.service.PaymentSettingsService;
 import com.bytatech.ayoos.doctor.domain.PaymentSettings;
+import com.bytatech.ayoos.doctor.domain.WorkPlace;
 import com.bytatech.ayoos.doctor.domain.PaymentSettings;
 import com.bytatech.ayoos.doctor.domain.PaymentSettings;
 import com.bytatech.ayoos.doctor.domain.PaymentSettings;
 import com.bytatech.ayoos.doctor.repository.PaymentSettingsRepository;
 import com.bytatech.ayoos.doctor.repository.search.PaymentSettingsSearchRepository;
 import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
+import com.bytatech.ayoos.doctor.service.dto.WorkPlaceDTO;
 import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
 import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
 import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
@@ -57,15 +59,24 @@ public class PaymentSettingsServiceImpl implements PaymentSettingsService {
         PaymentSettings paymentSettings = paymentSettingsMapper.toEntity(paymentSettingsDTO);
         paymentSettings = paymentSettingsRepository.save(paymentSettings);
         PaymentSettingsDTO result = paymentSettingsMapper.toDto(paymentSettings);
+        paymentSettingsSearchRepository.save(paymentSettings);
        PaymentSettings elasticResult =paymentSettingsSearchRepository.save(paymentSettings);
       
        return updateToEs(result);
     }
+    
+//    @Override
+//    public WorkPlaceDTO save(WorkPlaceDTO workPlaceDTO) {
+//     
+//    	log.debug("Request to save WorkPlace : {}", workPlaceDTO);
+//        WorkPlace workPlace = workPlaceMapper.toEntity(workPlaceDTO);
+//        workPlace = workPlaceRepository.save(workPlace);
+//        WorkPlaceDTO result = workPlaceMapper.toDto(workPlace);
+//        workPlaceSearchRepository.save(workPlace);
+//        return updateToEs(result);
+//    }
 
-   
-    
-    
-    
+     
    private  PaymentSettingsDTO updateToEs( PaymentSettingsDTO paymentSettingsDTO) {
 	   
 
