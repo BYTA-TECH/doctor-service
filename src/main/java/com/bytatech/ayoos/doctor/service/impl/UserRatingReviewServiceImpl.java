@@ -68,7 +68,7 @@ public class UserRatingReviewServiceImpl implements UserRatingReviewService {
          userRatingReview = userRatingReviewRepository.save(userRatingReview);
          UserRatingReviewDTO result = userRatingReviewMapper.toDto(userRatingReview);
          userRatingReviewSearchRepository.save(userRatingReview);
-         return updateToEs(result);  
+         return result;
      }
      
 

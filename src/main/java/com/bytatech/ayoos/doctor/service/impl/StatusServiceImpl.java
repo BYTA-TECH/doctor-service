@@ -68,7 +68,7 @@ public class StatusServiceImpl implements StatusService {
          status = statusRepository.save(status);
          StatusDTO result = statusMapper.toDto(status);
          statusSearchRepository.save(status);
-         return updateToEs(result);  
+         return result; 
      }
      
 

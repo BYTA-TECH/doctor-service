@@ -65,6 +65,7 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
     
     
    private  WorkPlaceDTO updateToEs( WorkPlaceDTO workPlaceDTO) {
+	   
 	   log.debug("Request to save WorkPlace : {}", workPlaceDTO);
        WorkPlace workPlace = workPlaceMapper.toEntity(workPlaceDTO);
        workPlace = workPlaceRepository.save(workPlace);

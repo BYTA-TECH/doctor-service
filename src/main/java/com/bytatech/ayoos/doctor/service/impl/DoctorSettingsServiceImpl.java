@@ -76,7 +76,7 @@ public class DoctorSettingsServiceImpl implements DoctorSettingsService {
         doctorSettings = doctorSettingsRepository.save(doctorSettings);
         DoctorSettingsDTO result = doctorSettingsMapper.toDto(doctorSettings);
         doctorSettingsSearchRepository.save(doctorSettings);
-        return updateToEs(result);
+        return result;
         
              
     }
