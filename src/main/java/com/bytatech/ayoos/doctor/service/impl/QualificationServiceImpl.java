@@ -4,9 +4,11 @@ import com.bytatech.ayoos.doctor.service.QualificationService;
 import com.bytatech.ayoos.doctor.domain.ContactInfo;
 import com.bytatech.ayoos.doctor.domain.Qualification;
 import com.bytatech.ayoos.doctor.domain.Qualification;
+import com.bytatech.ayoos.doctor.domain.Qualification;
 import com.bytatech.ayoos.doctor.repository.QualificationRepository;
 import com.bytatech.ayoos.doctor.repository.search.QualificationSearchRepository;
 import com.bytatech.ayoos.doctor.service.dto.ContactInfoDTO;
+import com.bytatech.ayoos.doctor.service.dto.QualificationDTO;
 import com.bytatech.ayoos.doctor.service.dto.QualificationDTO;
 import com.bytatech.ayoos.doctor.service.dto.QualificationDTO;
 import com.bytatech.ayoos.doctor.service.mapper.QualificationMapper;
@@ -65,15 +67,13 @@ public class QualificationServiceImpl implements QualificationService {
     
    private  QualificationDTO updateToEs( QualificationDTO qualificationDTO) {
 	   
-       log.debug("Request to updateToEs Qualification : {}", qualificationDTO);
-       
-       Qualification qualification = qualificationMapper.toEntity(qualificationDTO);
-       qualification = qualificationRepository.save(qualification);
-       
-       QualificationDTO result =  qualificationMapper.toDto( qualification);
-        qualificationSearchRepository.save(qualification);
         
-        return result;
+        log.debug("Request to save Qualification : {}", qualificationDTO);
+        Qualification qualification = qualificationMapper.toEntity(qualificationDTO);
+        qualification = qualificationRepository.save(qualification);
+        QualificationDTO result = qualificationMapper.toDto(qualification);
+        qualificationSearchRepository.save(qualification);
+        return result;  
     }
     
     

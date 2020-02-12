@@ -4,8 +4,10 @@ import com.bytatech.ayoos.doctor.service.PaymentSettingsService;
 import com.bytatech.ayoos.doctor.domain.PaymentSettings;
 import com.bytatech.ayoos.doctor.domain.PaymentSettings;
 import com.bytatech.ayoos.doctor.domain.PaymentSettings;
+import com.bytatech.ayoos.doctor.domain.PaymentSettings;
 import com.bytatech.ayoos.doctor.repository.PaymentSettingsRepository;
 import com.bytatech.ayoos.doctor.repository.search.PaymentSettingsSearchRepository;
+import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
 import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
 import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
 import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
@@ -66,15 +68,14 @@ public class PaymentSettingsServiceImpl implements PaymentSettingsService {
     
    private  PaymentSettingsDTO updateToEs( PaymentSettingsDTO paymentSettingsDTO) {
 	   
-       log.debug("Request to updateToEs PaymentSettings : {}", paymentSettingsDTO);
-       log.debug("Request to save PaymentSettings : {}", paymentSettingsDTO);
-       PaymentSettings paymentSettings = paymentSettingsMapper.toEntity(paymentSettingsDTO);
-       paymentSettings = paymentSettingsRepository.save(paymentSettings);
-       
-       PaymentSettingsDTO result =  paymentSettingsMapper.toDto( paymentSettings);
+
+	    log.debug("Request to updateToEs PaymentSettings : {}", paymentSettingsDTO);
+        log.debug("Request to save PaymentSettings : {}", paymentSettingsDTO);
+        PaymentSettings paymentSettings = paymentSettingsMapper.toEntity(paymentSettingsDTO);
+        paymentSettings = paymentSettingsRepository.save(paymentSettings);
+        PaymentSettingsDTO result = paymentSettingsMapper.toDto(paymentSettings);
         paymentSettingsSearchRepository.save(paymentSettings);
-        
-        return result;
+        return result;  
     }
     
     
