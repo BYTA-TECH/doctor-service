@@ -59,33 +59,21 @@ public class PaymentSettingsServiceImpl implements PaymentSettingsService {
         PaymentSettings paymentSettings = paymentSettingsMapper.toEntity(paymentSettingsDTO);
         paymentSettings = paymentSettingsRepository.save(paymentSettings);
         PaymentSettingsDTO result = paymentSettingsMapper.toDto(paymentSettings);
-        paymentSettingsSearchRepository.save(paymentSettings);
        PaymentSettings elasticResult =paymentSettingsSearchRepository.save(paymentSettings);
       
        return updateToEs(result);
     }
-    
-//    @Override
-//    public WorkPlaceDTO save(WorkPlaceDTO workPlaceDTO) {
-//     
-//    	log.debug("Request to save WorkPlace : {}", workPlaceDTO);
-//        WorkPlace workPlace = workPlaceMapper.toEntity(workPlaceDTO);
-//        workPlace = workPlaceRepository.save(workPlace);
-//        WorkPlaceDTO result = workPlaceMapper.toDto(workPlace);
-//        workPlaceSearchRepository.save(workPlace);
-//        return updateToEs(result);
-//    }
-
-     
+       
    private  PaymentSettingsDTO updateToEs( PaymentSettingsDTO paymentSettingsDTO) {
 	   
-
+	    System.out.println("Request to update PaymentSettings :"+paymentSettingsDTO);
 	    log.debug("Request to updateToEs PaymentSettings : {}", paymentSettingsDTO);
         log.debug("Request to save PaymentSettings : {}", paymentSettingsDTO);
         PaymentSettings paymentSettings = paymentSettingsMapper.toEntity(paymentSettingsDTO);
         paymentSettings = paymentSettingsRepository.save(paymentSettings);
         PaymentSettingsDTO result = paymentSettingsMapper.toDto(paymentSettings);
-        paymentSettingsSearchRepository.save(paymentSettings);
+        PaymentSettings elasticResult =paymentSettingsSearchRepository.save(paymentSettings);
+        System.out.println("After update PaymentSettings :"+elasticResult);
         return result; 
     }
     
