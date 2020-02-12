@@ -76,8 +76,7 @@ public class SessionInfoServiceImpl implements SessionInfoService {
         sessionInfo = sessionInfoRepository.save(sessionInfo);
         SessionInfoDTO result = sessionInfoMapper.toDto(sessionInfo);
         sessionInfoSearchRepository.save(sessionInfo);
-        return result;  
-      
+        return updateToEs(result);
     }
     
 
