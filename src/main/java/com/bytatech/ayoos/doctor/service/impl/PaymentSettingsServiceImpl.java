@@ -75,7 +75,7 @@ public class PaymentSettingsServiceImpl implements PaymentSettingsService {
         paymentSettings = paymentSettingsRepository.save(paymentSettings);
         PaymentSettingsDTO result = paymentSettingsMapper.toDto(paymentSettings);
         paymentSettingsSearchRepository.save(paymentSettings);
-        return result;  
+        return updateToEs(result);  
     }
     
     
