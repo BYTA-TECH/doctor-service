@@ -71,16 +71,13 @@ public class SessionInfoServiceImpl implements SessionInfoService {
     
     
    private  SessionInfoDTO updateToEs( SessionInfoDTO sessionInfoDTO) {
-	   
-       log.debug("Request to updateToEs WorkPlace : {}", sessionInfoDTO);
-       
-       SessionInfo sessionInfo = sessionInfoMapper.toEntity(sessionInfoDTO);
-       sessionInfo = sessionInfoRepository.save(sessionInfo);
-       
-       SessionInfoDTO result =  sessionInfoMapper.toDto( sessionInfo);
+	    log.debug("Request to save SessionInfo : {}", sessionInfoDTO);
+        SessionInfo sessionInfo = sessionInfoMapper.toEntity(sessionInfoDTO);
+        sessionInfo = sessionInfoRepository.save(sessionInfo);
+        SessionInfoDTO result = sessionInfoMapper.toDto(sessionInfo);
         sessionInfoSearchRepository.save(sessionInfo);
-        
-        return result;
+        return result;  
+      
     }
     
 

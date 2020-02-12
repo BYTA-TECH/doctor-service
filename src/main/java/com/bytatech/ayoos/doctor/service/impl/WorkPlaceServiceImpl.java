@@ -3,8 +3,10 @@ package com.bytatech.ayoos.doctor.service.impl;
 import com.bytatech.ayoos.doctor.service.WorkPlaceService;
 import com.bytatech.ayoos.doctor.domain.WorkPlace;
 import com.bytatech.ayoos.doctor.domain.WorkPlace;
+import com.bytatech.ayoos.doctor.domain.WorkPlace;
 import com.bytatech.ayoos.doctor.repository.WorkPlaceRepository;
 import com.bytatech.ayoos.doctor.repository.search.WorkPlaceSearchRepository;
+import com.bytatech.ayoos.doctor.service.dto.WorkPlaceDTO;
 import com.bytatech.ayoos.doctor.service.dto.WorkPlaceDTO;
 import com.bytatech.ayoos.doctor.service.dto.WorkPlaceDTO;
 import com.bytatech.ayoos.doctor.service.mapper.WorkPlaceMapper;
@@ -49,7 +51,8 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
      */
     @Override
     public WorkPlaceDTO save(WorkPlaceDTO workPlaceDTO) {
-        log.debug("Request to save WorkPlace : {}", workPlaceDTO);
+     
+    	log.debug("Request to save WorkPlace : {}", workPlaceDTO);
         WorkPlace workPlace = workPlaceMapper.toEntity(workPlaceDTO);
         workPlace = workPlaceRepository.save(workPlace);
         WorkPlaceDTO result = workPlaceMapper.toDto(workPlace);
@@ -62,17 +65,13 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
     
     
    private  WorkPlaceDTO updateToEs( WorkPlaceDTO workPlaceDTO) {
-	   
-       log.debug("Request to updateToEs WorkPlace : {}", workPlaceDTO);
-       log.debug("Request to save WorkPlace : {}", workPlaceDTO);
+	   log.debug("Request to save WorkPlace : {}", workPlaceDTO);
        WorkPlace workPlace = workPlaceMapper.toEntity(workPlaceDTO);
        workPlace = workPlaceRepository.save(workPlace);
-       
-       WorkPlaceDTO result =  workPlaceMapper.toDto( workPlace);
-        workPlaceSearchRepository.save(workPlace);
-        
-        return result;
-    }
+       WorkPlaceDTO result = workPlaceMapper.toDto(workPlace);
+       workPlaceSearchRepository.save(workPlace);
+       return result;  
+       }
     
     
     
