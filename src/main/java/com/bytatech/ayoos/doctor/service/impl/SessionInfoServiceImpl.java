@@ -6,6 +6,8 @@ import com.bytatech.ayoos.doctor.repository.SessionInfoRepository;
 import com.bytatech.ayoos.doctor.repository.search.SessionInfoSearchRepository;
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.mapper.SessionInfoMapper;
+
+import com.bytatech.ayoos.doctor.service.dto.DoctorSessionInfoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +16,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -110,4 +117,39 @@ public class SessionInfoServiceImpl implements SessionInfoService {
         return sessionInfoSearchRepository.search(queryStringQuery(query), pageable)
             .map(sessionInfoMapper::toDto);
     }
+    public List<SessionInfoDTO> setSessionInfosByDates(List<DoctorSessionInfoDTO> doctorSessionInfoDTO){
+		List<SessionInfoDTO> sessionInfoDTOList =new ArrayList<>();
+		
+		for(DoctorSessionInfoDTO doctorSessionInfo:doctorSessionInfoDTO) {
+			//Code to get the int value for Weekday of starting date
+			 DayOfWeek dayOfWeekStart = doctorSessionInfo.getFromDate().getDayOfWeek();
+			 int intValueStart=dayOfWeekStart.getValue();
+			 log.debug(intValueStart+"*****\n");
+			 //Code to get difference with given weekday and starting date's weekday
+			 long l=7%(intValueStart-(doctorSessionInfo.getWeekday()));
+			 //Calculate the 1st date of given weekday after starting date
+			 LocalDate startDate=doctorSessionInfo.getFromDate().plusDays(l);
+			 //Loop to get all weekday in between
+			 while (!startDate.isAfter(doctorSessionInfo.getToDate())) {
+                  /*
+				  * convertion of LocalDate and LocalTime into Instant with using String
+				  */ 
+				 Instant startInstant=Instant.parse(startDate+"T"+doctorSessionInfo.getFromTime()+":00Z");
+				 Instant endInstant=Instant.parse(startDate+"T"+doctorSessionInfo.getToTime()+":00Z");
+				 
+				 SessionInfoDTO sessionInfoDTO =new SessionInfoDTO();
+				 sessionInfoDTO.setDate(startDate);
+				 sessionInfoDTO.setFromTime(startInstant);
+				 sessionInfoDTO.setToTime(endInstant);
+				  save(sessionInfoDTO);
+				 sessionInfoDTOList.add(sessionInfoDTO);
+				 //Calculate next weekday by adding 7
+				 startDate=startDate.plusDays(7);				  
+			 }
+		}
+ 
+		 return sessionInfoDTOList;
+		}
+		
+    
 }
