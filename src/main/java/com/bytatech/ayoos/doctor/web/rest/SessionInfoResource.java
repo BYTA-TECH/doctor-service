@@ -2,7 +2,6 @@ package com.bytatech.ayoos.doctor.web.rest;
 
 import com.bytatech.ayoos.doctor.service.SessionInfoService;
 import com.bytatech.ayoos.doctor.web.rest.errors.BadRequestAlertException;
-import com.bytatech.ayoos.doctor.service.dto.DoctorSessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -27,8 +26,7 @@ import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+
 /**
  * REST controller for managing {@link com.bytatech.ayoos.doctor.domain.SessionInfo}.
  */
@@ -131,11 +129,19 @@ public class SessionInfoResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 
-    @PostMapping("/sessionInfoByDate")
-   	public List<SessionInfoDTO> setSessionByDates(@RequestBody List<DoctorSessionInfoDTO> doctorSessionInfoDTO)/* throws ParseException*/ {
-    	return sessionInfoService.setSessionInfosByDates(doctorSessionInfoDTO);
-       	 
-   	}
-       
-   
+    /**
+     * {@code SEARCH  /_search/session-infos?query=:query} : search for the sessionInfo corresponding
+     * to the query.
+     *
+     * @param query the query of the sessionInfo search.
+     * @param pageable the pagination information.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/session-infos")
+    public ResponseEntity<List<SessionInfoDTO>> searchSessionInfos(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of SessionInfos for query {}", query);
+        Page<SessionInfoDTO> page = sessionInfoService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
 }

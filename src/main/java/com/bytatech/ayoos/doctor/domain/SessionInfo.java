@@ -41,6 +41,9 @@ public class SessionInfo implements Serializable {
     @Column(name = "jhi_interval")
     private Long interval;
 
+    @Column(name = "week_day")
+    private Long weekDay;
+
     @ManyToOne
     @JsonIgnoreProperties("sessionInfos")
     private WorkPlace workPlace;
@@ -119,6 +122,19 @@ public class SessionInfo implements Serializable {
         this.interval = interval;
     }
 
+    public Long getWeekDay() {
+        return weekDay;
+    }
+
+    public SessionInfo weekDay(Long weekDay) {
+        this.weekDay = weekDay;
+        return this;
+    }
+
+    public void setWeekDay(Long weekDay) {
+        this.weekDay = weekDay;
+    }
+
     public WorkPlace getWorkPlace() {
         return workPlace;
     }
@@ -158,6 +174,7 @@ public class SessionInfo implements Serializable {
             ", fromTime='" + getFromTime() + "'" +
             ", toTime='" + getToTime() + "'" +
             ", interval=" + getInterval() +
+            ", weekDay=" + getWeekDay() +
             "}";
     }
 }

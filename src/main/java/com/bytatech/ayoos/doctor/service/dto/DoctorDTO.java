@@ -1,6 +1,7 @@
 package com.bytatech.ayoos.doctor.service.dto;
 import java.time.LocalDate;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.persistence.Lob;
@@ -194,23 +195,15 @@ public class DoctorDTO implements Serializable {
         return Objects.hashCode(getId());
     }
 
-    @Override
-    public String toString() {
-        return "DoctorDTO{" +
-            "id=" + getId() +
-            ", imageLink='" + getImageLink() + "'" +
-            ", doctorIdpCode='" + getDoctorIdpCode() + "'" +
-            ", specialization='" + getSpecialization() + "'" +
-            ", registerNumber='" + getRegisterNumber() + "'" +
-            ", practiceSince='" + getPracticeSince() + "'" +
-            ", totalRating=" + getTotalRating() +
-            ", firstName='" + getFirstName() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", phoneNumber=" + getPhoneNumber() +
-            ", dmsId='" + getDmsId() + "'" +
-            ", contactInfoId=" + getContactInfoId() +
-            ", paymentSettingsId=" + getPaymentSettingsId() +
-            ", doctorSettingsId=" + getDoctorSettingsId() +
-            "}";
-    }
+	@Override
+	public String toString() {
+		return "DoctorDTO [id=" + id + ", imageLink=" + imageLink + ", doctorIdpCode=" + doctorIdpCode
+				+ ", specialization=" + specialization + ", registerNumber=" + registerNumber + ", practiceSince="
+				+ practiceSince + ", totalRating=" + totalRating + ", firstName=" + firstName + ", email=" + email
+				+ ", phoneNumber=" + phoneNumber + ", dmsId=" + dmsId + ", image=" + Arrays.toString(image)
+				+ ", imageContentType=" + imageContentType + ", contactInfoId=" + contactInfoId + ", paymentSettingsId="
+				+ paymentSettingsId + ", doctorSettingsId=" + doctorSettingsId + "]";
+	}
+
+   
 }

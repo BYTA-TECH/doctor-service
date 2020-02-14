@@ -20,6 +20,10 @@
         {
             "fieldName": "interval",
             "fieldType": "Long"
+        },
+        {
+            "fieldName": "weekDay",
+            "fieldType": "Long"
         }
     ],
     "relationships": [
