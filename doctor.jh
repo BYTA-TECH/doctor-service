@@ -37,7 +37,8 @@ entity SessionInfo{
 	date LocalDate,
 	fromTime Instant ,
 	toTime Instant ,
-	interval Long
+	interval Long,
+	weekDay Long
 }
 entity Slot{
 	date LocalDate,
