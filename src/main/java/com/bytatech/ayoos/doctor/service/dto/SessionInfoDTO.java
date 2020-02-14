@@ -20,7 +20,8 @@ public class SessionInfoDTO implements Serializable {
     private Instant toTime;
 
     private Long interval;
-
+    
+    private Long weekDay;
 
     private Long workPlaceId;
 
@@ -80,7 +81,15 @@ public class SessionInfoDTO implements Serializable {
         this.workPlaceId = workPlaceId;
     }
 
-    @Override
+    public Long getWeekDay() {
+		return weekDay;
+	}
+
+	public void setWeekDay(Long weekDay) {
+		this.weekDay = weekDay;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
