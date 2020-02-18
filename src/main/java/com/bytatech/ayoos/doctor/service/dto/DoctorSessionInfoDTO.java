@@ -14,6 +14,7 @@ public class DoctorSessionInfoDTO implements Serializable{
 	private LocalDate toDate;
 	private LocalTime fromTime;
 	private LocalTime toTime;
+	private LocalTime interval;
 	private Long weekday;
 	
 	public Long getId() {
@@ -51,6 +52,12 @@ public class DoctorSessionInfoDTO implements Serializable{
 	}
 	public void setWeekday(Long weekday) {
 		this.weekday = weekday;
+	}
+	public LocalTime getInterval() {
+		return interval;
+	}
+	public void setInterval(LocalTime interval) {
+		this.interval = interval;
 	}
 
 }
