@@ -20,7 +20,7 @@ public class SessionInfoDTO implements Serializable {
 
     private Instant toTime;
 
-    private LocalTime interval;
+    private Long interval;
 
     private Long weekDay;
 
@@ -120,11 +120,11 @@ public class SessionInfoDTO implements Serializable {
             "}";
     }
 
-	public LocalTime getInterval() {
+	public Long getInterval() {
 		return interval;
 	}
 
-	public void setInterval(LocalTime interval) {
+	public void setInterval(Long interval) {
 		this.interval = interval;
 	}
 }
