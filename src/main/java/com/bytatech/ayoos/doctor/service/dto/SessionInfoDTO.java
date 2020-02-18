@@ -1,6 +1,7 @@
 package com.bytatech.ayoos.doctor.service.dto;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public class SessionInfoDTO implements Serializable {
 
     private Instant toTime;
 
-    private Long interval;
+    private LocalTime interval;
 
     private Long weekDay;
 
@@ -66,13 +67,7 @@ public class SessionInfoDTO implements Serializable {
         this.toTime = toTime;
     }
 
-    public Long getInterval() {
-        return interval;
-    }
-
-    public void setInterval(Long interval) {
-        this.interval = interval;
-    }
+   
 
     public Long getWeekDay() {
         return weekDay;
@@ -124,4 +119,12 @@ public class SessionInfoDTO implements Serializable {
             ", workPlaceId=" + getWorkPlaceId() +
             "}";
     }
+
+	public LocalTime getInterval() {
+		return interval;
+	}
+
+	public void setInterval(LocalTime interval) {
+		this.interval = interval;
+	}
 }

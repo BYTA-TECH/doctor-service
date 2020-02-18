@@ -141,6 +141,7 @@ public class SessionInfoServiceImpl implements SessionInfoService {
 				 sessionInfoDTO.setDate(startDate);
 				 sessionInfoDTO.setFromTime(startInstant);
 				 sessionInfoDTO.setToTime(endInstant);
+				 sessionInfoDTO.setInterval(doctorSessionInfo.getInterval());
 				  save(sessionInfoDTO);
 				 sessionInfoDTOList.add(sessionInfoDTO);
 				 //Calculate next weekday by adding 7
