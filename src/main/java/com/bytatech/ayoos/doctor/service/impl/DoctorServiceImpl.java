@@ -17,6 +17,7 @@ import com.bytatech.ayoos.doctor.client.dms.model.SiteMemberEntry;
 import com.bytatech.ayoos.doctor.client.dms.model.SiteMembershipBodyCreate;
 import com.bytatech.ayoos.doctor.client.dms.model.SiteBodyCreate.VisibilityEnum;
 import com.bytatech.ayoos.doctor.client.dms.model.SiteMembershipBodyCreate.RoleEnum;
+import com.bytatech.ayoos.doctor.service.ImageService;
 
 
 import org.slf4j.Logger;
@@ -31,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -53,6 +55,8 @@ public class DoctorServiceImpl implements DoctorService {
     PeopleApi peopleApi;
     @Autowired
     SitesApi sitesApi;
+    @Autowired
+	private ImageService imageService;
 
     public DoctorServiceImpl(DoctorRepository doctorRepository, DoctorMapper doctorMapper, DoctorSearchRepository doctorSearchRepository) {
         this.doctorRepository = doctorRepository;
@@ -68,8 +72,13 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDTO save(DoctorDTO doctorDTO) {
+    	
         log.debug("Request to save Doctor : {}", doctorDTO);
         Doctor doctor = doctorMapper.toEntity(doctorDTO);
+        
+//        String imageLink  = imageService.saveFile("doctor", UUID.randomUUID().toString(), doctorDTO.getImage());
+//		doctor.setImageLink(imageLink);
+        
         doctor = doctorRepository.save(doctor);
         DoctorDTO result = doctorMapper.toDto(doctor);
         System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"+doctor);
