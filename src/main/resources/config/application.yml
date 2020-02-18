@@ -235,3 +235,13 @@ dms:
          password: fg5q4riwxy   
 
 # application:
+
+minio:
+   server:
+      url: http://localhost:9000 
+      accessKey: minioadmin
+      secretKey: minioadmin
+   buckets:
+      doctor: ayoos-doctor-images
+   configuration:
+      contentType: images/png
