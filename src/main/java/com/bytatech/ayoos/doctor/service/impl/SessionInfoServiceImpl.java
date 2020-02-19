@@ -126,9 +126,10 @@ public class SessionInfoServiceImpl implements SessionInfoService {
 			 int intValueStart=dayOfWeekStart.getValue();
 			 log.debug(intValueStart+"*****\n");
 			 //Code to get difference with given weekday and starting date's weekday
-			 long l=7%(intValueStart-(doctorSessionInfo.getWeekday()));
+			 long dayDifference= doctorSessionInfo.getWeekday()-intValueStart ;
+			 dayDifference=(dayDifference<0)?(7+dayDifference):dayDifference;
 			 //Calculate the 1st date of given weekday after starting date
-			 LocalDate startDate=doctorSessionInfo.getFromDate().plusDays(l);
+			 LocalDate startDate=doctorSessionInfo.getFromDate().plusDays(dayDifference);
 			 //Loop to get all weekday in between
 			 while (!startDate.isAfter(doctorSessionInfo.getToDate())) {
                   /*
