@@ -117,6 +117,10 @@ public class SessionInfoServiceImpl implements SessionInfoService {
         return sessionInfoSearchRepository.search(queryStringQuery(query), pageable)
             .map(sessionInfoMapper::toDto);
     }
+    /*
+     * @author:ajay.e.s
+     * Method to split the session of doctors in given dates limit
+     */
     public List<SessionInfoDTO> setSessionInfosByDates(List<DoctorSessionInfoDTO> doctorSessionInfoDTO){
 		List<SessionInfoDTO> sessionInfoDTOList =new ArrayList<>();
 		
