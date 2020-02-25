@@ -228,10 +228,10 @@ kafka:
 # ===================================================================
 
 dms:
-   url: https://gotjmq.trial.alfresco.com/alfresco/api/-default-/public/alfresco/versions/1
+   url: https://a5lxku.trial.alfresco.com/alfresco/api/-default-/public/alfresco/versions/1
    security:
       basicAuth:
-         username: sarath.kumar.s@lxisoft.com      
-         password: fg5q4riwxy   
+         username: sanjana.p@lxisoft.com      
+         password: 7wd6e3pb91   
 
 # application:
