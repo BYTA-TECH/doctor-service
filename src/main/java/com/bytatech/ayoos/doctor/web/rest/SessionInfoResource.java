@@ -1,9 +1,9 @@
 package com.bytatech.ayoos.doctor.web.rest;
 
 import com.bytatech.ayoos.doctor.service.SessionInfoService;
-import com.bytatech.ayoos.doctor.web.rest.errors.BadRequestAlertException;
-import com.bytatech.ayoos.doctor.service.dto.DoctorSessionInfoDTO;
+import com.bytatech.ayoos.doctor.web.rest.errors.BadRequestAlertException; 
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
+import com.bytatech.ayoos.doctor.service.dto.TimingDetail;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -146,7 +146,7 @@ public class SessionInfoResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
     @PostMapping("/sessionInfoByDate")
-   	public List<SessionInfoDTO> setSessionByDates(@RequestBody List<DoctorSessionInfoDTO> doctorSessionInfoDTO)/* throws ParseException*/ {
+   	public List<SessionInfoDTO> setSessionByDates(@RequestBody List<TimingDetail> doctorSessionInfoDTO)/* throws ParseException*/ {
     	return sessionInfoService.setSessionInfosByDates(doctorSessionInfoDTO);
        	 
    	}

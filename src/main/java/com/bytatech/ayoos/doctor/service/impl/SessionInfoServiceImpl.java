@@ -1,11 +1,11 @@
 package com.bytatech.ayoos.doctor.service.impl;
-
+ 
 import com.bytatech.ayoos.doctor.service.SessionInfoService;
 import com.bytatech.ayoos.doctor.domain.SessionInfo;
 import com.bytatech.ayoos.doctor.repository.SessionInfoRepository;
-import com.bytatech.ayoos.doctor.repository.search.SessionInfoSearchRepository;
-import com.bytatech.ayoos.doctor.service.dto.DoctorSessionInfoDTO;
+import com.bytatech.ayoos.doctor.repository.search.SessionInfoSearchRepository; 
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
+import com.bytatech.ayoos.doctor.service.dto.TimingDetail;
 import com.bytatech.ayoos.doctor.service.mapper.SessionInfoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,10 +120,10 @@ public class SessionInfoServiceImpl implements SessionInfoService {
      * @author:ajay.e.s
      * Method to split the session of doctors in given dates limit
      */
-    public List<SessionInfoDTO> setSessionInfosByDates(List<DoctorSessionInfoDTO> doctorSessionInfoDTO){
+    public List<SessionInfoDTO> setSessionInfosByDates(List<TimingDetail> doctorSessionInfoDTO){
 		List<SessionInfoDTO> sessionInfoDTOList =new ArrayList<>();
 		
-		for(DoctorSessionInfoDTO doctorSessionInfo:doctorSessionInfoDTO) {
+		for(TimingDetail doctorSessionInfo:doctorSessionInfoDTO) {
 			//Code to get the int value for Weekday of starting date
 			 DayOfWeek dayOfWeekStart = doctorSessionInfo.getFromDate().getDayOfWeek();
 			 int intValueStart=dayOfWeekStart.getValue();
@@ -155,5 +155,6 @@ public class SessionInfoServiceImpl implements SessionInfoService {
  
 		 return sessionInfoDTOList;
 		}
+ 
 		
 }

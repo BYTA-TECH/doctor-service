@@ -7,7 +7,7 @@ import java.time.LocalTime;
 /**
  * A DTO for Doctor session info
  */
-public class DoctorSessionInfoDTO implements Serializable{
+public class TimingDetail implements Serializable{
 
 	private Long id;
 	private LocalDate fromDate;
