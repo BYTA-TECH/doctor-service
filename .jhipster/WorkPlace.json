@@ -2,6 +2,10 @@
     "name": "WorkPlace",
     "fields": [
         {
+            "fieldName": "doctorIdpCode",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "name",
             "fieldType": "String"
         },

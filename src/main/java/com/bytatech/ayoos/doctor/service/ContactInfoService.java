@@ -5,7 +5,6 @@ import com.bytatech.ayoos.doctor.service.dto.ContactInfoDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,12 +27,6 @@ public interface ContactInfoService {
      * @return the list of entities.
      */
     Page<ContactInfoDTO> findAll(Pageable pageable);
-    /**
-     * Get all the ContactInfoDTO where Doctor is {@code null}.
-     *
-     * @return the list of entities.
-     */
-    List<ContactInfoDTO> findAllWhereDoctorIsNull();
 
 
     /**
@@ -59,5 +52,5 @@ public interface ContactInfoService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
- //   Page<ContactInfoDTO> search(String query, Pageable pageable);
+    Page<ContactInfoDTO> search(String query, Pageable pageable);
 }

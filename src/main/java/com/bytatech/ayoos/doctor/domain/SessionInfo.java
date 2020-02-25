@@ -26,6 +26,9 @@ public class SessionInfo implements Serializable {
     @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
+    @Column(name = "doctor_idp_code")
+    private String doctorIdpCode;
+
     @Column(name = "session_name")
     private String sessionName;
 
@@ -44,6 +47,10 @@ public class SessionInfo implements Serializable {
     @Column(name = "week_day")
     private Long weekDay;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Status status;
+
     @ManyToOne
     @JsonIgnoreProperties("sessionInfos")
     private WorkPlace workPlace;
@@ -55,6 +62,19 @@ public class SessionInfo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDoctorIdpCode() {
+        return doctorIdpCode;
+    }
+
+    public SessionInfo doctorIdpCode(String doctorIdpCode) {
+        this.doctorIdpCode = doctorIdpCode;
+        return this;
+    }
+
+    public void setDoctorIdpCode(String doctorIdpCode) {
+        this.doctorIdpCode = doctorIdpCode;
     }
 
     public String getSessionName() {
@@ -135,6 +155,19 @@ public class SessionInfo implements Serializable {
         this.weekDay = weekDay;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public SessionInfo status(Status status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public WorkPlace getWorkPlace() {
         return workPlace;
     }
@@ -169,6 +202,7 @@ public class SessionInfo implements Serializable {
     public String toString() {
         return "SessionInfo{" +
             "id=" + getId() +
+            ", doctorIdpCode='" + getDoctorIdpCode() + "'" +
             ", sessionName='" + getSessionName() + "'" +
             ", date='" + getDate() + "'" +
             ", fromTime='" + getFromTime() + "'" +

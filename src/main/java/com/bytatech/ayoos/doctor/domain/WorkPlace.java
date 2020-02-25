@@ -23,8 +23,11 @@ public class WorkPlace implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
+
+    @Column(name = "doctor_idp_code")
+    private String doctorIdpCode;
 
     @Column(name = "name")
     private String name;
@@ -50,6 +53,19 @@ public class WorkPlace implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDoctorIdpCode() {
+        return doctorIdpCode;
+    }
+
+    public WorkPlace doctorIdpCode(String doctorIdpCode) {
+        this.doctorIdpCode = doctorIdpCode;
+        return this;
+    }
+
+    public void setDoctorIdpCode(String doctorIdpCode) {
+        this.doctorIdpCode = doctorIdpCode;
     }
 
     public String getName() {
@@ -150,6 +166,7 @@ public class WorkPlace implements Serializable {
     public String toString() {
         return "WorkPlace{" +
             "id=" + getId() +
+            ", doctorIdpCode='" + getDoctorIdpCode() + "'" +
             ", name='" + getName() + "'" +
             ", locationName='" + getLocationName() + "'" +
             ", location='" + getLocation() + "'" +

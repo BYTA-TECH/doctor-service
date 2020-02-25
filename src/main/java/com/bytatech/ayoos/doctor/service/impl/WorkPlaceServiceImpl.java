@@ -2,12 +2,8 @@ package com.bytatech.ayoos.doctor.service.impl;
 
 import com.bytatech.ayoos.doctor.service.WorkPlaceService;
 import com.bytatech.ayoos.doctor.domain.WorkPlace;
-import com.bytatech.ayoos.doctor.domain.WorkPlace;
-import com.bytatech.ayoos.doctor.domain.WorkPlace;
 import com.bytatech.ayoos.doctor.repository.WorkPlaceRepository;
 import com.bytatech.ayoos.doctor.repository.search.WorkPlaceSearchRepository;
-import com.bytatech.ayoos.doctor.service.dto.WorkPlaceDTO;
-import com.bytatech.ayoos.doctor.service.dto.WorkPlaceDTO;
 import com.bytatech.ayoos.doctor.service.dto.WorkPlaceDTO;
 import com.bytatech.ayoos.doctor.service.mapper.WorkPlaceMapper;
 import org.slf4j.Logger;
@@ -51,34 +47,14 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
      */
     @Override
     public WorkPlaceDTO save(WorkPlaceDTO workPlaceDTO) {
-     
-    	log.debug("Request to save WorkPlace : {}", workPlaceDTO);
+        log.debug("Request to save WorkPlace : {}", workPlaceDTO);
         WorkPlace workPlace = workPlaceMapper.toEntity(workPlaceDTO);
         workPlace = workPlaceRepository.save(workPlace);
         WorkPlaceDTO result = workPlaceMapper.toDto(workPlace);
         workPlaceSearchRepository.save(workPlace);
-        return updateToEs(result);
+        return result;
     }
 
-   
-    
-    
-    
-   private  WorkPlaceDTO updateToEs( WorkPlaceDTO workPlaceDTO) {
-	   
-	   log.debug("Request to save WorkPlace : {}", workPlaceDTO);
-       WorkPlace workPlace = workPlaceMapper.toEntity(workPlaceDTO);
-       workPlace = workPlaceRepository.save(workPlace);
-       WorkPlaceDTO result = workPlaceMapper.toDto(workPlace);
-       workPlaceSearchRepository.save(workPlace);
-       return result;  
-       }
-    
-    
-    
-    
-    
-    
     /**
      * Get all the workPlaces.
      *
@@ -127,11 +103,11 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-   /* @Override
+    @Override
     @Transactional(readOnly = true)
     public Page<WorkPlaceDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of WorkPlaces for query {}", query);
         return workPlaceSearchRepository.search(queryStringQuery(query), pageable)
             .map(workPlaceMapper::toDto);
-    }*/
+    }
 }

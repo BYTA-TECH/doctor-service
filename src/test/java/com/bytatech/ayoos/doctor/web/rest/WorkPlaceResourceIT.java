@@ -43,6 +43,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = {DoctorApp.class, TestSecurityConfiguration.class})
 public class WorkPlaceResourceIT {
 
+    private static final String DEFAULT_DOCTOR_IDP_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_DOCTOR_IDP_CODE = "BBBBBBBBBB";
+
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -108,6 +111,7 @@ public class WorkPlaceResourceIT {
      */
     public static WorkPlace createEntity(EntityManager em) {
         WorkPlace workPlace = new WorkPlace()
+            .doctorIdpCode(DEFAULT_DOCTOR_IDP_CODE)
             .name(DEFAULT_NAME)
             .locationName(DEFAULT_LOCATION_NAME)
             .location(DEFAULT_LOCATION);
@@ -121,6 +125,7 @@ public class WorkPlaceResourceIT {
      */
     public static WorkPlace createUpdatedEntity(EntityManager em) {
         WorkPlace workPlace = new WorkPlace()
+            .doctorIdpCode(UPDATED_DOCTOR_IDP_CODE)
             .name(UPDATED_NAME)
             .locationName(UPDATED_LOCATION_NAME)
             .location(UPDATED_LOCATION);
@@ -148,6 +153,7 @@ public class WorkPlaceResourceIT {
         List<WorkPlace> workPlaceList = workPlaceRepository.findAll();
         assertThat(workPlaceList).hasSize(databaseSizeBeforeCreate + 1);
         WorkPlace testWorkPlace = workPlaceList.get(workPlaceList.size() - 1);
+        assertThat(testWorkPlace.getDoctorIdpCode()).isEqualTo(DEFAULT_DOCTOR_IDP_CODE);
         assertThat(testWorkPlace.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testWorkPlace.getLocationName()).isEqualTo(DEFAULT_LOCATION_NAME);
         assertThat(testWorkPlace.getLocation()).isEqualTo(DEFAULT_LOCATION);
@@ -191,6 +197,7 @@ public class WorkPlaceResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(workPlace.getId().intValue())))
+            .andExpect(jsonPath("$.[*].doctorIdpCode").value(hasItem(DEFAULT_DOCTOR_IDP_CODE)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].locationName").value(hasItem(DEFAULT_LOCATION_NAME)))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)));
@@ -207,6 +214,7 @@ public class WorkPlaceResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(workPlace.getId().intValue()))
+            .andExpect(jsonPath("$.doctorIdpCode").value(DEFAULT_DOCTOR_IDP_CODE))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.locationName").value(DEFAULT_LOCATION_NAME))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION));
@@ -233,6 +241,7 @@ public class WorkPlaceResourceIT {
         // Disconnect from session so that the updates on updatedWorkPlace are not directly saved in db
         em.detach(updatedWorkPlace);
         updatedWorkPlace
+            .doctorIdpCode(UPDATED_DOCTOR_IDP_CODE)
             .name(UPDATED_NAME)
             .locationName(UPDATED_LOCATION_NAME)
             .location(UPDATED_LOCATION);
@@ -247,6 +256,7 @@ public class WorkPlaceResourceIT {
         List<WorkPlace> workPlaceList = workPlaceRepository.findAll();
         assertThat(workPlaceList).hasSize(databaseSizeBeforeUpdate);
         WorkPlace testWorkPlace = workPlaceList.get(workPlaceList.size() - 1);
+        assertThat(testWorkPlace.getDoctorIdpCode()).isEqualTo(UPDATED_DOCTOR_IDP_CODE);
         assertThat(testWorkPlace.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testWorkPlace.getLocationName()).isEqualTo(UPDATED_LOCATION_NAME);
         assertThat(testWorkPlace.getLocation()).isEqualTo(UPDATED_LOCATION);
@@ -310,6 +320,7 @@ public class WorkPlaceResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(workPlace.getId().intValue())))
+            .andExpect(jsonPath("$.[*].doctorIdpCode").value(hasItem(DEFAULT_DOCTOR_IDP_CODE)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].locationName").value(hasItem(DEFAULT_LOCATION_NAME)))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)));

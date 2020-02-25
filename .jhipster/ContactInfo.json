@@ -10,15 +10,7 @@
             "fieldType": "String"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "doctor",
-            "otherEntityRelationshipName": "contactInfo",
-            "relationshipName": "doctor",
-            "ownerSide": false
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20200130040911",
     "entityTableName": "contact_info",
     "dto": "mapstruct",

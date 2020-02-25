@@ -1,7 +1,6 @@
 package com.bytatech.ayoos.doctor.service.mapper;
 
 import org.junit.jupiter.api.BeforeEach;
-import com.bytatech.ayoos.doctor.service.impl.*;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 

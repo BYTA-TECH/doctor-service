@@ -93,16 +93,10 @@ public class ContactInfoResource {
 
      * @param pageable the pagination information.
 
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of contactInfos in body.
      */
     @GetMapping("/contact-infos")
-    public ResponseEntity<List<ContactInfoDTO>> getAllContactInfos(Pageable pageable, @RequestParam(required = false) String filter) {
-        if ("doctor-is-null".equals(filter)) {
-            log.debug("REST request to get all ContactInfos where doctor is null");
-            return new ResponseEntity<>(contactInfoService.findAllWhereDoctorIsNull(),
-                    HttpStatus.OK);
-        }
+    public ResponseEntity<List<ContactInfoDTO>> getAllContactInfos(Pageable pageable) {
         log.debug("REST request to get a page of ContactInfos");
         Page<ContactInfoDTO> page = contactInfoService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -143,11 +137,11 @@ public class ContactInfoResource {
      * @param pageable the pagination information.
      * @return the result of the search.
      */
- /*   @GetMapping("/_search/contact-infos")
+    @GetMapping("/_search/contact-infos")
     public ResponseEntity<List<ContactInfoDTO>> searchContactInfos(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of ContactInfos for query {}", query);
         Page<ContactInfoDTO> page = contactInfoService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }*/
+    }
 }

@@ -129,5 +129,19 @@ public class StatusResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 
- 
+    /**
+     * {@code SEARCH  /_search/statuses?query=:query} : search for the status corresponding
+     * to the query.
+     *
+     * @param query the query of the status search.
+     * @param pageable the pagination information.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/statuses")
+    public ResponseEntity<List<StatusDTO>> searchStatuses(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of Statuses for query {}", query);
+        Page<StatusDTO> page = statusService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
 }

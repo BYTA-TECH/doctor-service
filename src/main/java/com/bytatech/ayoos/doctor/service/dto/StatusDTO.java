@@ -12,8 +12,6 @@ public class StatusDTO implements Serializable {
     private String status;
 
 
-    private Long slotId;
-
     public Long getId() {
         return id;
     }
@@ -28,14 +26,6 @@ public class StatusDTO implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Long getSlotId() {
-        return slotId;
-    }
-
-    public void setSlotId(Long slotId) {
-        this.slotId = slotId;
     }
 
     @Override
@@ -64,7 +54,6 @@ public class StatusDTO implements Serializable {
         return "StatusDTO{" +
             "id=" + getId() +
             ", status='" + getStatus() + "'" +
-            ", slotId=" + getSlotId() +
             "}";
     }
 }

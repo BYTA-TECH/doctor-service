@@ -15,6 +15,7 @@ entity ContactInfo{
 	twitterURL String
 }
 entity WorkPlace{
+	doctorIdpCode String,
 	name String,
 	locationName String,
 	location String
@@ -33,17 +34,13 @@ entity Reply{
 	reply String
 }
 entity SessionInfo{
+	doctorIdpCode String,
 	sessionName String,
 	date LocalDate,
 	fromTime Instant ,
 	toTime Instant ,
 	interval Long,
 	weekDay Long
-}
-entity Slot{
-	date LocalDate,
-	fromTime Instant,
-	toTime Instant
 }
 entity PaymentSettings{
 	isPaymentEnabled Boolean,
@@ -61,7 +58,7 @@ entity DoctorSettings{
 	isSMSNotificationsEnabled Boolean
 }
 relationship OneToOne{
-	Doctor{contactInfo} to ContactInfo{doctor} , Doctor{paymentSettings} to PaymentSettings , Doctor{doctorSettings} to DoctorSettings
+	Doctor{contactInfo} to ContactInfo , Doctor{paymentSettings} to PaymentSettings , Doctor{doctorSettings} to DoctorSettings , SessionInfo{status} to Status
 }
 entity Status{
 	status String
@@ -71,9 +68,8 @@ relationship OneToMany{
 	WorkPlace{sessionInfo} to SessionInfo , 
 	Doctor{qualification} to Qualification , 
 	UserRatingReview{reply} to Reply , 
-	Doctor{userRatingReview} to UserRatingReview , 
-	Doctor{slot} to Slot ,
-	Slot{status} to Status
+	Doctor{userRatingReview} to UserRatingReview
+	
 }
 dto * with mapstruct
 paginate * with pagination

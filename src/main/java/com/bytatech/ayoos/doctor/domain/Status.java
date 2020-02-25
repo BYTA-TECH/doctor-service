@@ -1,5 +1,4 @@
 package com.bytatech.ayoos.doctor.domain;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -27,10 +26,6 @@ public class Status implements Serializable {
     @Column(name = "status")
     private String status;
 
-    @ManyToOne
-    @JsonIgnoreProperties("statuses")
-    private Slot slot;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -51,19 +46,6 @@ public class Status implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Slot getSlot() {
-        return slot;
-    }
-
-    public Status slot(Slot slot) {
-        this.slot = slot;
-        return this;
-    }
-
-    public void setSlot(Slot slot) {
-        this.slot = slot;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

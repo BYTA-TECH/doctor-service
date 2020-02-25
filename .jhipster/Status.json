@@ -6,15 +6,7 @@
             "fieldType": "String"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "slot",
-            "otherEntityRelationshipName": "status",
-            "relationshipName": "slot",
-            "otherEntityField": "id"
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20200130040920",
     "entityTableName": "status",
     "dto": "mapstruct",

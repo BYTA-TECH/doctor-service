@@ -1,7 +1,6 @@
 package com.bytatech.ayoos.doctor.service.dto;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,6 +10,8 @@ import java.util.Objects;
 public class SessionInfoDTO implements Serializable {
 
     private Long id;
+
+    private String doctorIdpCode;
 
     private String sessionName;
 
@@ -25,6 +26,8 @@ public class SessionInfoDTO implements Serializable {
     private Long weekDay;
 
 
+    private Long statusId;
+
     private Long workPlaceId;
 
     public Long getId() {
@@ -33,6 +36,14 @@ public class SessionInfoDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDoctorIdpCode() {
+        return doctorIdpCode;
+    }
+
+    public void setDoctorIdpCode(String doctorIdpCode) {
+        this.doctorIdpCode = doctorIdpCode;
     }
 
     public String getSessionName() {
@@ -67,7 +78,13 @@ public class SessionInfoDTO implements Serializable {
         this.toTime = toTime;
     }
 
-   
+    public Long getInterval() {
+        return interval;
+    }
+
+    public void setInterval(Long interval) {
+        this.interval = interval;
+    }
 
     public Long getWeekDay() {
         return weekDay;
@@ -75,6 +92,14 @@ public class SessionInfoDTO implements Serializable {
 
     public void setWeekDay(Long weekDay) {
         this.weekDay = weekDay;
+    }
+
+    public Long getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(Long statusId) {
+        this.statusId = statusId;
     }
 
     public Long getWorkPlaceId() {
@@ -110,21 +135,15 @@ public class SessionInfoDTO implements Serializable {
     public String toString() {
         return "SessionInfoDTO{" +
             "id=" + getId() +
+            ", doctorIdpCode='" + getDoctorIdpCode() + "'" +
             ", sessionName='" + getSessionName() + "'" +
             ", date='" + getDate() + "'" +
             ", fromTime='" + getFromTime() + "'" +
             ", toTime='" + getToTime() + "'" +
             ", interval=" + getInterval() +
             ", weekDay=" + getWeekDay() +
+            ", statusId=" + getStatusId() +
             ", workPlaceId=" + getWorkPlaceId() +
             "}";
     }
-
-	public Long getInterval() {
-		return interval;
-	}
-
-	public void setInterval(Long interval) {
-		this.interval = interval;
-	}
 }

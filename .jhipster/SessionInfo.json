@@ -2,6 +2,10 @@
     "name": "SessionInfo",
     "fields": [
         {
+            "fieldName": "doctorIdpCode",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "sessionName",
             "fieldType": "String"
         },
@@ -27,6 +31,14 @@
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "status",
+            "otherEntityRelationshipName": "sessionInfo",
+            "relationshipName": "status",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "workPlace",

@@ -12,8 +12,6 @@ import org.mapstruct.*;
 public interface ContactInfoMapper extends EntityMapper<ContactInfoDTO, ContactInfo> {
 
 
-    @Mapping(target = "doctor", ignore = true)
-    ContactInfo toEntity(ContactInfoDTO contactInfoDTO);
 
     default ContactInfo fromId(Long id) {
         if (id == null) {

@@ -9,6 +9,8 @@ public class WorkPlaceDTO implements Serializable {
 
     private Long id;
 
+    private String doctorIdpCode;
+
     private String name;
 
     private String locationName;
@@ -24,6 +26,14 @@ public class WorkPlaceDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDoctorIdpCode() {
+        return doctorIdpCode;
+    }
+
+    public void setDoctorIdpCode(String doctorIdpCode) {
+        this.doctorIdpCode = doctorIdpCode;
     }
 
     public String getName() {
@@ -83,6 +93,7 @@ public class WorkPlaceDTO implements Serializable {
     public String toString() {
         return "WorkPlaceDTO{" +
             "id=" + getId() +
+            ", doctorIdpCode='" + getDoctorIdpCode() + "'" +
             ", name='" + getName() + "'" +
             ", locationName='" + getLocationName() + "'" +
             ", location='" + getLocation() + "'" +

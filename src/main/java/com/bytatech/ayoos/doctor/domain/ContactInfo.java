@@ -1,5 +1,4 @@
 package com.bytatech.ayoos.doctor.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -29,10 +28,6 @@ public class ContactInfo implements Serializable {
 
     @Column(name = "twitter_url")
     private String twitterURL;
-
-    @OneToOne(mappedBy = "contactInfo")
-    @JsonIgnore
-    private Doctor doctor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -67,19 +62,6 @@ public class ContactInfo implements Serializable {
 
     public void setTwitterURL(String twitterURL) {
         this.twitterURL = twitterURL;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public ContactInfo doctor(Doctor doctor) {
-        this.doctor = doctor;
-        return this;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -14,11 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -55,23 +51,10 @@ public class ContactInfoServiceImpl implements ContactInfoService {
         ContactInfo contactInfo = contactInfoMapper.toEntity(contactInfoDTO);
         contactInfo = contactInfoRepository.save(contactInfo);
         ContactInfoDTO result = contactInfoMapper.toDto(contactInfo);
-        /*ContactInfo elasticResult=  contactInfoSearchRepository.save(contactInfo);
-        return updateToEs(elasticResult);*/
+        contactInfoSearchRepository.save(contactInfo);
         return result;
     }
 
-  /*  private ContactInfoDTO updateToEs(ContactInfo elasticResult) {
-        log.debug("Request to updateToEs ContactInfo : {}", elasticResult);
-        ContactInfo contactInfo= contactInfoSearchRepository.save(elasticResult);
-        ContactInfoDTO result = contactInfoMapper.toDto(contactInfo);
-        return result;
-    }*/
-    
-    
-    
-    
-    
-    
     /**
      * Get all the contactInfos.
      *
@@ -86,21 +69,6 @@ public class ContactInfoServiceImpl implements ContactInfoService {
             .map(contactInfoMapper::toDto);
     }
 
-
-
-    /**
-    *  Get all the contactInfos where Doctor is {@code null}.
-     *  @return the list of entities.
-     */
-    @Transactional(readOnly = true) 
-    public List<ContactInfoDTO> findAllWhereDoctorIsNull() {
-        log.debug("Request to get all contactInfos where Doctor is null");
-        return StreamSupport
-            .stream(contactInfoRepository.findAll().spliterator(), false)
-            .filter(contactInfo -> contactInfo.getDoctor() == null)
-            .map(contactInfoMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
 
     /**
      * Get one contactInfo by id.
@@ -135,11 +103,11 @@ public class ContactInfoServiceImpl implements ContactInfoService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-  /*  @Override
+    @Override
     @Transactional(readOnly = true)
     public Page<ContactInfoDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of ContactInfos for query {}", query);
         return contactInfoSearchRepository.search(queryStringQuery(query), pageable)
             .map(contactInfoMapper::toDto);
-    }*/
+    }
 }

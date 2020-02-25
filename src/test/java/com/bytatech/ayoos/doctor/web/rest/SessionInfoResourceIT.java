@@ -47,6 +47,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = {DoctorApp.class, TestSecurityConfiguration.class})
 public class SessionInfoResourceIT {
 
+    private static final String DEFAULT_DOCTOR_IDP_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_DOCTOR_IDP_CODE = "BBBBBBBBBB";
+
     private static final String DEFAULT_SESSION_NAME = "AAAAAAAAAA";
     private static final String UPDATED_SESSION_NAME = "BBBBBBBBBB";
 
@@ -121,6 +124,7 @@ public class SessionInfoResourceIT {
      */
     public static SessionInfo createEntity(EntityManager em) {
         SessionInfo sessionInfo = new SessionInfo()
+            .doctorIdpCode(DEFAULT_DOCTOR_IDP_CODE)
             .sessionName(DEFAULT_SESSION_NAME)
             .date(DEFAULT_DATE)
             .fromTime(DEFAULT_FROM_TIME)
@@ -137,6 +141,7 @@ public class SessionInfoResourceIT {
      */
     public static SessionInfo createUpdatedEntity(EntityManager em) {
         SessionInfo sessionInfo = new SessionInfo()
+            .doctorIdpCode(UPDATED_DOCTOR_IDP_CODE)
             .sessionName(UPDATED_SESSION_NAME)
             .date(UPDATED_DATE)
             .fromTime(UPDATED_FROM_TIME)
@@ -167,6 +172,7 @@ public class SessionInfoResourceIT {
         List<SessionInfo> sessionInfoList = sessionInfoRepository.findAll();
         assertThat(sessionInfoList).hasSize(databaseSizeBeforeCreate + 1);
         SessionInfo testSessionInfo = sessionInfoList.get(sessionInfoList.size() - 1);
+        assertThat(testSessionInfo.getDoctorIdpCode()).isEqualTo(DEFAULT_DOCTOR_IDP_CODE);
         assertThat(testSessionInfo.getSessionName()).isEqualTo(DEFAULT_SESSION_NAME);
         assertThat(testSessionInfo.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testSessionInfo.getFromTime()).isEqualTo(DEFAULT_FROM_TIME);
@@ -213,6 +219,7 @@ public class SessionInfoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sessionInfo.getId().intValue())))
+            .andExpect(jsonPath("$.[*].doctorIdpCode").value(hasItem(DEFAULT_DOCTOR_IDP_CODE)))
             .andExpect(jsonPath("$.[*].sessionName").value(hasItem(DEFAULT_SESSION_NAME)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].fromTime").value(hasItem(DEFAULT_FROM_TIME.toString())))
@@ -232,6 +239,7 @@ public class SessionInfoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sessionInfo.getId().intValue()))
+            .andExpect(jsonPath("$.doctorIdpCode").value(DEFAULT_DOCTOR_IDP_CODE))
             .andExpect(jsonPath("$.sessionName").value(DEFAULT_SESSION_NAME))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.fromTime").value(DEFAULT_FROM_TIME.toString()))
@@ -261,6 +269,7 @@ public class SessionInfoResourceIT {
         // Disconnect from session so that the updates on updatedSessionInfo are not directly saved in db
         em.detach(updatedSessionInfo);
         updatedSessionInfo
+            .doctorIdpCode(UPDATED_DOCTOR_IDP_CODE)
             .sessionName(UPDATED_SESSION_NAME)
             .date(UPDATED_DATE)
             .fromTime(UPDATED_FROM_TIME)
@@ -278,6 +287,7 @@ public class SessionInfoResourceIT {
         List<SessionInfo> sessionInfoList = sessionInfoRepository.findAll();
         assertThat(sessionInfoList).hasSize(databaseSizeBeforeUpdate);
         SessionInfo testSessionInfo = sessionInfoList.get(sessionInfoList.size() - 1);
+        assertThat(testSessionInfo.getDoctorIdpCode()).isEqualTo(UPDATED_DOCTOR_IDP_CODE);
         assertThat(testSessionInfo.getSessionName()).isEqualTo(UPDATED_SESSION_NAME);
         assertThat(testSessionInfo.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testSessionInfo.getFromTime()).isEqualTo(UPDATED_FROM_TIME);
@@ -344,6 +354,7 @@ public class SessionInfoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sessionInfo.getId().intValue())))
+            .andExpect(jsonPath("$.[*].doctorIdpCode").value(hasItem(DEFAULT_DOCTOR_IDP_CODE)))
             .andExpect(jsonPath("$.[*].sessionName").value(hasItem(DEFAULT_SESSION_NAME)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].fromTime").value(hasItem(DEFAULT_FROM_TIME.toString())))
