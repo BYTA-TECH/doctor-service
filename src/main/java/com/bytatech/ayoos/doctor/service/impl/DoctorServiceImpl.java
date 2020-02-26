@@ -179,13 +179,6 @@ System.out.println("#################################"+doctorDTO.getDoctorIdpCod
 		siteMembershipBodyCreate.setId(id);
 		return sitesApi.createSiteMembership(siteId, siteMembershipBodyCreate, null).getBody();
 	}
-	 @Override
-	    @Transactional(readOnly = true)
-	    public Page<DoctorDTO> search(String query, Pageable pageable) {
-	        log.debug("Request to search for a page of Doctors for query {}", query);
-	        return doctorSearchRepository.search(queryStringQuery(query), pageable)
-	            .map(doctorMapper::toDto);
-	    }
 	 
 
     
