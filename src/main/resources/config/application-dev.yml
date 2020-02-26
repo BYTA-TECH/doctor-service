@@ -88,7 +88,7 @@ spring:
   data:
      elasticsearch:
         cluster-name: 40097436f7e24cb0b163ff5f89b10638
-        cluster-nodes: https://40097436f7e24cb0b163ff5f89b10638.us-central1.gcp.cloud.es.io
+        cluster-nodes: https://40097436f7e24cb0b163ff5f89b10638.us-central1.gcp.cloud.es.io:9243 
         properties:
            path:
               logs: target/elasticsearch/log
@@ -98,7 +98,7 @@ spring:
  
         username: elastic
         readTimeout: 10000
-        uri: https://40097436f7e24cb0b163ff5f89b10638.us-central1.gcp.cloud.es.io
+        uri: https://40097436f7e24cb0b163ff5f89b10638.us-central1.gcp.cloud.es.io:9243/ 
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
