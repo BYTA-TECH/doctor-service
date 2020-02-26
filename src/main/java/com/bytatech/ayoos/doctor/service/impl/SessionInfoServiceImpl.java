@@ -5,7 +5,7 @@ import com.bytatech.ayoos.doctor.domain.SessionInfo;
 import com.bytatech.ayoos.doctor.repository.SessionInfoRepository;
 import com.bytatech.ayoos.doctor.repository.search.SessionInfoSearchRepository; 
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
-import com.bytatech.ayoos.doctor.service.dto.TimingDetail;
+import com.bytatech.ayoos.doctor.service.dto.TimingDetailDTO;
 import com.bytatech.ayoos.doctor.service.mapper.SessionInfoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,32 +120,32 @@ public class SessionInfoServiceImpl implements SessionInfoService {
      * @author:ajay.e.s
      * Method to split the session of doctors in given dates limit
      */
-    public List<SessionInfoDTO> setSessionInfosByDates(List<TimingDetail> doctorSessionInfoDTO){
+    public List<SessionInfoDTO> setSessionInfosByDates(List<TimingDetailDTO> timingDetailDTO){
 		List<SessionInfoDTO> sessionInfoDTOList =new ArrayList<>();
 		
-		for(TimingDetail doctorSessionInfo:doctorSessionInfoDTO) {
+		for(TimingDetailDTO timingDetail:timingDetailDTO) {
 			//Code to get the int value for Weekday of starting date
-			 DayOfWeek dayOfWeekStart = doctorSessionInfo.getFromDate().getDayOfWeek();
+			 DayOfWeek dayOfWeekStart = timingDetail.getFromDate().getDayOfWeek();
 			 int intValueStart=dayOfWeekStart.getValue();
 			 log.debug(intValueStart+"*****\n");
 			 //Code to get difference with given weekday and starting date's weekday
-			 long dayDifference= doctorSessionInfo.getWeekday()-intValueStart ;
+			 long dayDifference= timingDetail.getWeekday()-intValueStart ;
 			 dayDifference=(dayDifference<0)?(7+dayDifference):dayDifference;
 			 //Calculate the 1st date of given weekday after starting date
-			 LocalDate startDate=doctorSessionInfo.getFromDate().plusDays(dayDifference);
+			 LocalDate startDate=timingDetail.getFromDate().plusDays(dayDifference);
 			 //Loop to get all weekday in between
-			 while (!startDate.isAfter(doctorSessionInfo.getToDate())) {
+			 while (!startDate.isAfter(timingDetail.getToDate())) {
                   /*
 				  * convertion of LocalDate and LocalTime into Instant with using String
 				  */ 
-				 Instant startInstant=Instant.parse(startDate+"T"+doctorSessionInfo.getFromTime()+":00Z");
-				 Instant endInstant=Instant.parse(startDate+"T"+doctorSessionInfo.getToTime()+":00Z");
+				 Instant startInstant=Instant.parse(startDate+"T"+timingDetail.getFromTime()+":00Z");
+				 Instant endInstant=Instant.parse(startDate+"T"+timingDetail.getToTime()+":00Z");
 				 
 				 SessionInfoDTO sessionInfoDTO =new SessionInfoDTO();
 				 sessionInfoDTO.setDate(startDate);
 				 sessionInfoDTO.setFromTime(startInstant);
 				 sessionInfoDTO.setToTime(endInstant);
-				 sessionInfoDTO.setInterval(doctorSessionInfo.getInterval());
+				 sessionInfoDTO.setInterval(timingDetail.getInterval());
 				  save(sessionInfoDTO);
 				 sessionInfoDTOList.add(sessionInfoDTO);
 				 //Calculate next weekday by adding 7
