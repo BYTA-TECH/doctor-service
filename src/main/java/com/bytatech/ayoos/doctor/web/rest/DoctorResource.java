@@ -1,9 +1,10 @@
 package com.bytatech.ayoos.doctor.web.rest;
 
-import com.bytatech.ayoos.doctor.service.DoctorService;
+import com.bytatech.ayoos.doctor.service.*;
 import com.bytatech.ayoos.doctor.web.rest.errors.BadRequestAlertException;
 import com.bytatech.ayoos.doctor.service.dto.DoctorDTO;
-
+import com.bytatech.ayoos.doctor.service.dto.PaymentSettingsDTO;
+import com.bytatech.ayoos.doctor.service.dto.DoctorSettingsDTO;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -41,6 +42,13 @@ public class DoctorResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    @Autowired
+	DoctorSettingsService doctorSettingsService;
+    
+    @Autowired
+	PaymentSettingsService paymentSettingsService;
+    
+    
     private final DoctorService doctorService;
 
     public DoctorResource(DoctorService doctorService) {
@@ -57,9 +65,46 @@ public class DoctorResource {
     @PostMapping("/doctors")
     public ResponseEntity<DoctorDTO> createDoctor(@RequestBody DoctorDTO doctorDTO) throws URISyntaxException {
         log.debug("REST request to save Doctor : {}", doctorDTO);
+      //..................default settings...........................
+      		DoctorSettingsDTO doctorSettings=new DoctorSettingsDTO();
+      		
+      		doctorSettings.setApprovalType("automatic");
+      		
+      		doctorSettings.setIsMailNotificationsEnabled(true);
+      		
+      		doctorSettings.setIsSMSNotificationsEnabled(true);
+      		
+      		DoctorSettingsDTO dto=doctorSettingsService.save(doctorSettings);
+      		
+      		//..................default paymentsettings...........................
+      		
+      		PaymentSettingsDTO payment=new PaymentSettingsDTO();
+      		
+      		payment.setAmount(100.0);
+      		
+      		payment.setIsPaymentEnabled(false);
+      		
+      		payment.setCurrency("INR");
+      		
+      		PaymentSettingsDTO paymentSettings = paymentSettingsService.save(payment);
+      		
+
+      		doctorDTO.setDoctorSettingsId(dto.getId());
+      		
+      		doctorDTO.setPaymentSettingsId(paymentSettings.getId());
+      		
+      		
         if (doctorDTO.getId() != null) {
             throw new BadRequestAlertException("A new doctor cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        
+         doctorService. createPersonOnDMS(doctorDTO);
+        
+        String siteId = doctorDTO.getDoctorIdpCode() + "site";
+		String dmsId =  doctorService.createSite(siteId);
+		doctorDTO.setDmsId(dmsId);
+		doctorService.createSiteMembership(dmsId, doctorDTO.getDoctorIdpCode());
+       
         DoctorDTO result = doctorService.save(doctorDTO);
         return ResponseEntity.created(new URI("/api/doctors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -137,11 +182,11 @@ public class DoctorResource {
      * @param pageable the pagination information.
      * @return the result of the search.
      */
-    @GetMapping("/_search/doctors")
+   /* @GetMapping("/_search/doctors")
     public ResponseEntity<List<DoctorDTO>> searchDoctors(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Doctors for query {}", query);
         Page<DoctorDTO> page = doctorService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+    }*/
 }
