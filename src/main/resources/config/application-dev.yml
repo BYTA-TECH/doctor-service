@@ -94,7 +94,7 @@ spring:
               logs: target/elasticsearch/log
               data: target/elasticsearch/data
      jest:
-        password: P1pSk4Fgx5XYdkdNLlNFOkhq
+        password: PwzrYpkzIGtwdk0fZI9AahwN
  
         username: elastic
         readTimeout: 10000
