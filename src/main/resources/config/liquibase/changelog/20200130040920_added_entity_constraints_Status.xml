@@ -6,13 +6,5 @@
     <!--
         Added the constraints for entity Status.
     -->
-    <changeSet id="20200130040920-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="slot_id"
-                                 baseTableName="status"
-                                 constraintName="fk_status_slot_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="slot"/>
-
-    </changeSet>
+    
 </databaseChangeLog>

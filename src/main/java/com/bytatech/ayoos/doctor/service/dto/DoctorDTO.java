@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Lob;
+
 /**
  * A DTO for the {@link com.bytatech.ayoos.doctor.domain.Doctor} entity.
  */
@@ -29,6 +31,11 @@ public class DoctorDTO implements Serializable {
     private Long phoneNumber;
 
     private String dmsId;
+    
+    @Lob
+    private byte[] image;
+    
+    private String imageContentType;
 
 
     private Long contactInfoId;
@@ -148,6 +155,23 @@ public class DoctorDTO implements Serializable {
     public void setDoctorSettingsId(Long doctorSettingsId) {
         this.doctorSettingsId = doctorSettingsId;
     }
+    
+    public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	
+
+	public String getImageContentType() {
+		return imageContentType;
+	}
+
+	public void setImageContentType(String imageContentType) {
+		this.imageContentType = imageContentType;
+	}
 
     @Override
     public boolean equals(Object o) {
