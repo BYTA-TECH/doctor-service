@@ -10,18 +10,27 @@ import java.time.LocalTime;
 public class TimingDetailDTO implements Serializable{
 
 	private Long id;
+	private String doctorIdpCode;
 	private LocalDate fromDate;
 	private LocalDate toDate;
 	private LocalTime fromTime;
 	private LocalTime toTime;
 	private Long interval;
 	private Long weekday;
+	private Long workPlaceId;
+	
 	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getDoctorIdpCode() {
+		return doctorIdpCode;
+	}
+	public void setDoctorIdpCode(String doctorIdpCode) {
+		this.doctorIdpCode = doctorIdpCode;
 	}
 	public LocalDate getFromDate() {
 		return fromDate;
@@ -58,6 +67,18 @@ public class TimingDetailDTO implements Serializable{
 	}
 	public void setInterval(Long interval) {
 		this.interval = interval;
+	}
+	public Long getWorkPlaceId() {
+		return workPlaceId;
+	}
+	public void setWorkPlaceId(Long workPlaceId) {
+		this.workPlaceId = workPlaceId;
+	}
+	@Override
+	public String toString() {
+		return "TimingDetailDTO [id=" + id + ", doctorIdpCode=" + doctorIdpCode + ", fromDate=" + fromDate + ", toDate="
+				+ toDate + ", fromTime=" + fromTime + ", toTime=" + toTime + ", interval=" + interval + ", weekday="
+				+ weekday + ", workPlaceId=" + workPlaceId + "]";
 	}
 
 }
