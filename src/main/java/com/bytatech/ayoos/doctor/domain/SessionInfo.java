@@ -52,7 +52,7 @@ public class SessionInfo implements Serializable {
     private Status status;
 
     @ManyToOne
-    @JsonIgnoreProperties("sessionInfos")
+    @JsonIgnoreProperties("workPlace")
     private WorkPlace workPlace;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

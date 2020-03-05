@@ -147,6 +147,7 @@ public class SessionInfoResource {
     }
     @PostMapping("/sessionInfoByDate")
    	public List<SessionInfoDTO> setSessionByDates(@RequestBody List<TimingDetailDTO> timingDetailDTO)/* throws ParseException*/ {
+    	log.debug(timingDetailDTO.toString());
     	return sessionInfoService.setSessionInfosByDates(timingDetailDTO);
        	 
    	}

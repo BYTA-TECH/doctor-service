@@ -21,7 +21,7 @@
     <include file="config/liquibase/changelog/20200130040914_added_entity_UserRatingReview.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200130040915_added_entity_Reply.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200130040916_added_entity_SessionInfo.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200130040917_added_entity_Slot.xml" relativeToChangelogFile="false"/>
+    <!-- <include file="config/liquibase/changelog/20200130040917_added_entity_Slot.xml" relativeToChangelogFile="false"/> -->
     <include file="config/liquibase/changelog/20200130040918_added_entity_PaymentSettings.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200130040919_added_entity_DoctorSettings.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200130040920_added_entity_Status.xml" relativeToChangelogFile="false"/>
@@ -32,7 +32,7 @@
     <include file="config/liquibase/changelog/20200130040914_added_entity_constraints_UserRatingReview.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200130040915_added_entity_constraints_Reply.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200130040916_added_entity_constraints_SessionInfo.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200130040917_added_entity_constraints_Slot.xml" relativeToChangelogFile="false"/>
+    <!-- <include file="config/liquibase/changelog/20200130040917_added_entity_constraints_Slot.xml" relativeToChangelogFile="false"/> -->
     <include file="config/liquibase/changelog/20200130040920_added_entity_constraints_Status.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
