@@ -138,8 +138,8 @@ public class SessionInfoServiceImpl implements SessionInfoService {
                   /*
 				  * convertion of LocalDate and LocalTime into Instant with using String
 				  */ 
-				 Instant startInstant=Instant.parse(startDate+"T"+timingDetail.getFromTime()+":00Z");
-				 Instant endInstant=Instant.parse(startDate+"T"+timingDetail.getToTime()+":00Z");
+				 Instant startInstant=Instant.parse(startDate+"T"+timingDetail.getFromTime()+"Z");
+				 Instant endInstant=Instant.parse(startDate+"T"+timingDetail.getToTime()+"Z");
 				 
 				 SessionInfoDTO sessionInfoDTO =new SessionInfoDTO();
 				 sessionInfoDTO.setDate(startDate);
@@ -148,6 +148,7 @@ public class SessionInfoServiceImpl implements SessionInfoService {
 				 sessionInfoDTO.setWorkPlaceId(timingDetail.getWorkPlaceId());
 				 sessionInfoDTO.setInterval(timingDetail.getInterval());
 				 sessionInfoDTO.setDoctorIdpCode(timingDetail.getDoctorIdpCode());
+				 sessionInfoDTO.setStatusId(1L);
 				  save(sessionInfoDTO);
 				 sessionInfoDTOList.add(sessionInfoDTO);
 				 //Calculate next weekday by adding 7
