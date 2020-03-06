@@ -139,8 +139,10 @@ public class SessionInfoServiceImpl implements SessionInfoService {
                   /*
 				  * convertion of LocalDate and LocalTime into Instant with using String
 				  */ 
-				 Instant startInstant=Instant.parse(startDate+"T"+timingDetail.getFromTime()+":01.00Z");
-				 Instant endInstant=Instant.parse(startDate+"T"+timingDetail.getToTime()+":01.00Z");
+				 System.out.println("XXXXXXXXXXXXXXX"+startDate+"T"+timingDetail.getFromTime()+":00.00Z");
+				 Instant startInstant=Instant.parse(startDate+"T"+timingDetail.getFromTime()+":00.00Z");
+				 System.out.println("WWWWWWWWWW"+startDate+"T"+timingDetail.getToTime()+":00.00Z");
+				 Instant endInstant=Instant.parse(startDate+"T"+timingDetail.getToTime()+":00.00Z");
 				
 				 SessionInfoDTO sessionInfoDTO =new SessionInfoDTO();
 				 sessionInfoDTO.setDate(startDate);
