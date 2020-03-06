@@ -1,11 +1,11 @@
-id;doctor_idp_code;session_name;date;from_time;to_time;jhi_interval;week_day
-1;streamline;methodology;2020-01-29;2020-01-29T17:39:28;2020-01-30T02:36:28;17282;43664
-2;Fords Ergonomic;e-services;2020-01-29;2020-01-29T05:50:38;2020-01-30T03:33:18;69839;88190
-3;JSON hard drive solutions;overriding;2020-01-29;2020-01-29T15:48:19;2020-01-29T07:04:10;65020;30
-4;USB;Metrics firmware Representative;2020-01-30;2020-01-29T18:58:39;2020-01-29T08:12:23;3877;40824
-5;relationships HTTP Rubber;open-source;2020-01-29;2020-01-29T08:30:54;2020-01-29T10:30:33;60317;95660
-6;Credit Card Account interface;Soap Fish;2020-01-29;2020-01-29T08:52:50;2020-01-29T08:55:53;14814;8045
-7;Indiana;Intelligent Metal Salad Dalasi yellow;2020-01-29;2020-01-29T16:50:57;2020-01-30T01:33:00;18045;51406
-8;Computers payment Guernsey;Cedi Malaysian Ringgit Steel;2020-01-30;2020-01-30T00:47:13;2020-01-30T03:36:04;89863;51172
-9;purple Track Interactions;Graphical User Interface;2020-01-30;2020-01-29T22:15:38;2020-01-29T17:58:44;83252;34198
-10;withdrawal Product program;migration Bangladesh;2020-01-29;2020-01-29T06:08:07;2020-01-29T06:01:50;42876;6705
+id;doctor_idp_code;session_name;date;from_time;to_time;jhi_interval;week_day;session_status
+1;streamline;methodology;2020-01-29;2020-01-29T17:39:28;2020-01-30T02:36:28;17282;43664;PENDING
+2;emulation Solutions;XSS JSON hard drive;2020-01-29;2020-01-29T21:10:10;2020-01-30T03:45:16;84771;19103;RESERVED
+3;Metrics firmware Representative;revolutionize;2020-01-30;2020-01-29T18:21:22;2020-01-29T11:32:22;40792;53960;RESERVED
+4;Group Credit Card Account;reintermediate Soap Fish;2020-01-29;2020-01-29T08:52:50;2020-01-29T08:55:53;14814;8045;CANCELLED
+5;olive;Dalasi yellow Applications;2020-01-30;2020-01-29T23:49:24;2020-01-29T15:49:00;86321;984;RESERVED
+6;Dynamic national;Steel Games;2020-01-30;2020-01-29T06:35:13;2020-01-29T15:52:22;69648;19955;CANCELLED
+7;Plastic paradigms Managed;impactful withdrawal Product;2020-01-29;2020-01-29T07:18:25;2020-01-29T13:50:45;30416;63215;CANCELLED
+8;United States of America;Singapore ubiquitous;2020-01-29;2020-01-29T13:07:58;2020-01-29T12:41:18;64733;47545;RESERVED
+9;markets;gold;2020-01-29;2020-01-29T11:36:31;2020-01-30T02:44:22;1810;45311;RESERVED
+10;Concrete backing up;Money Market Account;2020-01-29;2020-01-29T19:56:39;2020-01-29T17:09:04;6165;66967;CANCELLED

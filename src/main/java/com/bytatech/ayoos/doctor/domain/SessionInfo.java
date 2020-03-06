@@ -1,4 +1,5 @@
 package com.bytatech.ayoos.doctor.domain;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,6 +10,8 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
+
+import com.bytatech.ayoos.doctor.domain.enumeration.SessionStatus;
 
 /**
  * A SessionInfo.
@@ -23,7 +26,6 @@ public class SessionInfo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "doctor_idp_code")
@@ -47,12 +49,16 @@ public class SessionInfo implements Serializable {
     @Column(name = "week_day")
     private Long weekDay;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "session_status")
+    private SessionStatus sessionStatus;
+
     @OneToOne
     @JoinColumn(unique = true)
     private Status status;
 
     @ManyToOne
-    @JsonIgnoreProperties("workPlace")
+    @JsonIgnoreProperties("sessionInfos")
     private WorkPlace workPlace;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -155,6 +161,19 @@ public class SessionInfo implements Serializable {
         this.weekDay = weekDay;
     }
 
+    public SessionStatus getSessionStatus() {
+        return sessionStatus;
+    }
+
+    public SessionInfo sessionStatus(SessionStatus sessionStatus) {
+        this.sessionStatus = sessionStatus;
+        return this;
+    }
+
+    public void setSessionStatus(SessionStatus sessionStatus) {
+        this.sessionStatus = sessionStatus;
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -209,6 +228,7 @@ public class SessionInfo implements Serializable {
             ", toTime='" + getToTime() + "'" +
             ", interval=" + getInterval() +
             ", weekDay=" + getWeekDay() +
+            ", sessionStatus='" + getSessionStatus() + "'" +
             "}";
     }
 }

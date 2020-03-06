@@ -69,7 +69,6 @@ public class StatusServiceImpl implements StatusService {
             .map(statusMapper::toDto);
     }
 
-
     /**
      * Get one status by id.
      *

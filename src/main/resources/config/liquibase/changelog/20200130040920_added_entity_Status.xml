@@ -12,7 +12,7 @@
         Added the entity Status.
     -->
     <changeSet id="20200130040920-1" author="jhipster">
-        <createTable tableName="status">
+        <createTable tableName="status" remarks="@deprecated This entity is replaced by\nSessionStatus enum">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>

@@ -1,10 +1,13 @@
 package com.bytatech.ayoos.doctor.service.dto;
+
+import io.swagger.annotations.ApiModel;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * A DTO for the {@link com.bytatech.ayoos.doctor.domain.Status} entity.
  */
+@ApiModel(description = "@deprecated This entity is replaced by\nSessionStatus enum")
 public class StatusDTO implements Serializable {
 
     private Long id;

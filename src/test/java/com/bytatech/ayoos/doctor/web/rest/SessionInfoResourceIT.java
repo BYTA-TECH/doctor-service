@@ -41,6 +41,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.bytatech.ayoos.doctor.domain.enumeration.SessionStatus;
 /**
  * Integration tests for the {@link SessionInfoResource} REST controller.
  */
@@ -67,6 +68,9 @@ public class SessionInfoResourceIT {
 
     private static final Long DEFAULT_WEEK_DAY = 1L;
     private static final Long UPDATED_WEEK_DAY = 2L;
+
+    private static final SessionStatus DEFAULT_SESSION_STATUS = SessionStatus.AVAILABLE;
+    private static final SessionStatus UPDATED_SESSION_STATUS = SessionStatus.PENDING;
 
     @Autowired
     private SessionInfoRepository sessionInfoRepository;
@@ -130,7 +134,8 @@ public class SessionInfoResourceIT {
             .fromTime(DEFAULT_FROM_TIME)
             .toTime(DEFAULT_TO_TIME)
             .interval(DEFAULT_INTERVAL)
-            .weekDay(DEFAULT_WEEK_DAY);
+            .weekDay(DEFAULT_WEEK_DAY)
+            .sessionStatus(DEFAULT_SESSION_STATUS);
         return sessionInfo;
     }
     /**
@@ -147,7 +152,8 @@ public class SessionInfoResourceIT {
             .fromTime(UPDATED_FROM_TIME)
             .toTime(UPDATED_TO_TIME)
             .interval(UPDATED_INTERVAL)
-            .weekDay(UPDATED_WEEK_DAY);
+            .weekDay(UPDATED_WEEK_DAY)
+            .sessionStatus(UPDATED_SESSION_STATUS);
         return sessionInfo;
     }
 
@@ -179,6 +185,7 @@ public class SessionInfoResourceIT {
         assertThat(testSessionInfo.getToTime()).isEqualTo(DEFAULT_TO_TIME);
         assertThat(testSessionInfo.getInterval()).isEqualTo(DEFAULT_INTERVAL);
         assertThat(testSessionInfo.getWeekDay()).isEqualTo(DEFAULT_WEEK_DAY);
+        assertThat(testSessionInfo.getSessionStatus()).isEqualTo(DEFAULT_SESSION_STATUS);
 
         // Validate the SessionInfo in Elasticsearch
         verify(mockSessionInfoSearchRepository, times(1)).save(testSessionInfo);
@@ -217,7 +224,7 @@ public class SessionInfoResourceIT {
         // Get all the sessionInfoList
         restSessionInfoMockMvc.perform(get("/api/session-infos?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sessionInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].doctorIdpCode").value(hasItem(DEFAULT_DOCTOR_IDP_CODE)))
             .andExpect(jsonPath("$.[*].sessionName").value(hasItem(DEFAULT_SESSION_NAME)))
@@ -225,7 +232,8 @@ public class SessionInfoResourceIT {
             .andExpect(jsonPath("$.[*].fromTime").value(hasItem(DEFAULT_FROM_TIME.toString())))
             .andExpect(jsonPath("$.[*].toTime").value(hasItem(DEFAULT_TO_TIME.toString())))
             .andExpect(jsonPath("$.[*].interval").value(hasItem(DEFAULT_INTERVAL.intValue())))
-            .andExpect(jsonPath("$.[*].weekDay").value(hasItem(DEFAULT_WEEK_DAY.intValue())));
+            .andExpect(jsonPath("$.[*].weekDay").value(hasItem(DEFAULT_WEEK_DAY.intValue())))
+            .andExpect(jsonPath("$.[*].sessionStatus").value(hasItem(DEFAULT_SESSION_STATUS.toString())));
     }
     
     @Test
@@ -237,7 +245,7 @@ public class SessionInfoResourceIT {
         // Get the sessionInfo
         restSessionInfoMockMvc.perform(get("/api/session-infos/{id}", sessionInfo.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(sessionInfo.getId().intValue()))
             .andExpect(jsonPath("$.doctorIdpCode").value(DEFAULT_DOCTOR_IDP_CODE))
             .andExpect(jsonPath("$.sessionName").value(DEFAULT_SESSION_NAME))
@@ -245,7 +253,8 @@ public class SessionInfoResourceIT {
             .andExpect(jsonPath("$.fromTime").value(DEFAULT_FROM_TIME.toString()))
             .andExpect(jsonPath("$.toTime").value(DEFAULT_TO_TIME.toString()))
             .andExpect(jsonPath("$.interval").value(DEFAULT_INTERVAL.intValue()))
-            .andExpect(jsonPath("$.weekDay").value(DEFAULT_WEEK_DAY.intValue()));
+            .andExpect(jsonPath("$.weekDay").value(DEFAULT_WEEK_DAY.intValue()))
+            .andExpect(jsonPath("$.sessionStatus").value(DEFAULT_SESSION_STATUS.toString()));
     }
 
     @Test
@@ -275,7 +284,8 @@ public class SessionInfoResourceIT {
             .fromTime(UPDATED_FROM_TIME)
             .toTime(UPDATED_TO_TIME)
             .interval(UPDATED_INTERVAL)
-            .weekDay(UPDATED_WEEK_DAY);
+            .weekDay(UPDATED_WEEK_DAY)
+            .sessionStatus(UPDATED_SESSION_STATUS);
         SessionInfoDTO sessionInfoDTO = sessionInfoMapper.toDto(updatedSessionInfo);
 
         restSessionInfoMockMvc.perform(put("/api/session-infos")
@@ -294,6 +304,7 @@ public class SessionInfoResourceIT {
         assertThat(testSessionInfo.getToTime()).isEqualTo(UPDATED_TO_TIME);
         assertThat(testSessionInfo.getInterval()).isEqualTo(UPDATED_INTERVAL);
         assertThat(testSessionInfo.getWeekDay()).isEqualTo(UPDATED_WEEK_DAY);
+        assertThat(testSessionInfo.getSessionStatus()).isEqualTo(UPDATED_SESSION_STATUS);
 
         // Validate the SessionInfo in Elasticsearch
         verify(mockSessionInfoSearchRepository, times(1)).save(testSessionInfo);
@@ -352,7 +363,7 @@ public class SessionInfoResourceIT {
         // Search the sessionInfo
         restSessionInfoMockMvc.perform(get("/api/_search/session-infos?query=id:" + sessionInfo.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sessionInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].doctorIdpCode").value(hasItem(DEFAULT_DOCTOR_IDP_CODE)))
             .andExpect(jsonPath("$.[*].sessionName").value(hasItem(DEFAULT_SESSION_NAME)))
@@ -360,6 +371,7 @@ public class SessionInfoResourceIT {
             .andExpect(jsonPath("$.[*].fromTime").value(hasItem(DEFAULT_FROM_TIME.toString())))
             .andExpect(jsonPath("$.[*].toTime").value(hasItem(DEFAULT_TO_TIME.toString())))
             .andExpect(jsonPath("$.[*].interval").value(hasItem(DEFAULT_INTERVAL.intValue())))
-            .andExpect(jsonPath("$.[*].weekDay").value(hasItem(DEFAULT_WEEK_DAY.intValue())));
+            .andExpect(jsonPath("$.[*].weekDay").value(hasItem(DEFAULT_WEEK_DAY.intValue())))
+            .andExpect(jsonPath("$.[*].sessionStatus").value(hasItem(DEFAULT_SESSION_STATUS.toString())));
     }
 }

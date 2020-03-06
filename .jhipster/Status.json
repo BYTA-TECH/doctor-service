@@ -17,5 +17,6 @@
     "readOnly": false,
     "clientRootFolder": "doctor",
     "applications": "*",
-    "microserviceName": "doctor"
+    "microserviceName": "doctor",
+    "javadoc": "@deprecated This entity is replaced by\\nSessionStatus enum"
 }

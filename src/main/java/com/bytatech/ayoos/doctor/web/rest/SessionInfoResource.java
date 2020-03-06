@@ -1,7 +1,7 @@
 package com.bytatech.ayoos.doctor.web.rest;
 
 import com.bytatech.ayoos.doctor.service.SessionInfoService;
-import com.bytatech.ayoos.doctor.web.rest.errors.BadRequestAlertException; 
+import com.bytatech.ayoos.doctor.web.rest.errors.BadRequestAlertException;
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.TimingDetailDTO;
 
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -91,9 +90,7 @@ public class SessionInfoResource {
     /**
      * {@code GET  /session-infos} : get all the sessionInfos.
      *
-
      * @param pageable the pagination information.
-
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of sessionInfos in body.
      */
     @GetMapping("/session-infos")
@@ -145,6 +142,7 @@ public class SessionInfoResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+    
     @PostMapping("/sessionInfoByDate")
    	public List<SessionInfoDTO> setSessionByDates(@RequestBody List<TimingDetailDTO> timingDetailDTO)/* throws ParseException*/ {
     	log.debug(timingDetailDTO.toString());

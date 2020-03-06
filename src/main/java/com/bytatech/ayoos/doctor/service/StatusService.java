@@ -28,7 +28,6 @@ public interface StatusService {
      */
     Page<StatusDTO> findAll(Pageable pageable);
 
-
     /**
      * Get the "id" status.
      *

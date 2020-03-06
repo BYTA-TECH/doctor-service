@@ -1,8 +1,10 @@
 package com.bytatech.ayoos.doctor.service.dto;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.io.Serializable;
 import java.util.Objects;
+import com.bytatech.ayoos.doctor.domain.enumeration.SessionStatus;
 
 /**
  * A DTO for the {@link com.bytatech.ayoos.doctor.domain.SessionInfo} entity.
@@ -24,6 +26,8 @@ public class SessionInfoDTO implements Serializable {
     private Long interval;
 
     private Long weekDay;
+
+    private SessionStatus sessionStatus;
 
 
     private Long statusId;
@@ -94,6 +98,14 @@ public class SessionInfoDTO implements Serializable {
         this.weekDay = weekDay;
     }
 
+    public SessionStatus getSessionStatus() {
+        return sessionStatus;
+    }
+
+    public void setSessionStatus(SessionStatus sessionStatus) {
+        this.sessionStatus = sessionStatus;
+    }
+
     public Long getStatusId() {
         return statusId;
     }
@@ -142,6 +154,7 @@ public class SessionInfoDTO implements Serializable {
             ", toTime='" + getToTime() + "'" +
             ", interval=" + getInterval() +
             ", weekDay=" + getWeekDay() +
+            ", sessionStatus='" + getSessionStatus() + "'" +
             ", statusId=" + getStatusId() +
             ", workPlaceId=" + getWorkPlaceId() +
             "}";

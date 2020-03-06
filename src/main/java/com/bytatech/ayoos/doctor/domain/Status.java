@@ -1,4 +1,5 @@
 package com.bytatech.ayoos.doctor.domain;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,7 +9,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 
 /**
- * A Status.
+ * @deprecated This entity is replaced by\nSessionStatus enum
  */
 @Entity
 @Table(name = "status")
@@ -20,7 +21,6 @@ public class Status implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "status")

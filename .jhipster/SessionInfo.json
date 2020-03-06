@@ -28,6 +28,11 @@
         {
             "fieldName": "weekDay",
             "fieldType": "Long"
+        },
+        {
+            "fieldName": "sessionStatus",
+            "fieldType": "SessionStatus",
+            "fieldValues": "AVAILABLE,PENDING,RESERVED,CANCELLED"
         }
     ],
     "relationships": [

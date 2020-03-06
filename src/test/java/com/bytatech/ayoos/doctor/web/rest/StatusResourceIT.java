@@ -177,7 +177,7 @@ public class StatusResourceIT {
         // Get all the statusList
         restStatusMockMvc.perform(get("/api/statuses?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(status.getId().intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
     }
@@ -191,7 +191,7 @@ public class StatusResourceIT {
         // Get the status
         restStatusMockMvc.perform(get("/api/statuses/{id}", status.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(status.getId().intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
     }
@@ -288,7 +288,7 @@ public class StatusResourceIT {
         // Search the status
         restStatusMockMvc.perform(get("/api/_search/statuses?query=id:" + status.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(status.getId().intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
     }

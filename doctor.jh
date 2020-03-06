@@ -40,7 +40,8 @@ entity SessionInfo{
 	fromTime Instant ,
 	toTime Instant ,
 	interval Long,
-	weekDay Long
+	weekDay Long,
+	sessionStatus SessionStatus
 }
 entity PaymentSettings{
 	isPaymentEnabled Boolean,
@@ -57,12 +58,24 @@ entity DoctorSettings{
 	isMailNotificationsEnabled Boolean,
 	isSMSNotificationsEnabled Boolean
 }
-relationship OneToOne{
-	Doctor{contactInfo} to ContactInfo , Doctor{paymentSettings} to PaymentSettings , Doctor{doctorSettings} to DoctorSettings , SessionInfo{status} to Status
-}
+
+/**
+	* @deprecated This entity is replaced by
+	* SessionStatus enum
+	*/
+
 entity Status{
 	status String
 }
+
+enum SessionStatus {
+    AVAILABLE, PENDING, RESERVED, CANCELLED
+}
+
+relationship OneToOne{
+	Doctor{contactInfo} to ContactInfo , Doctor{paymentSettings} to PaymentSettings , Doctor{doctorSettings} to DoctorSettings , SessionInfo{status} to Status
+}
+
 relationship OneToMany{
 	Doctor{workPlace} to WorkPlace , 
 	WorkPlace{sessionInfo} to SessionInfo , 

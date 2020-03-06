@@ -1,5 +1,5 @@
 package com.bytatech.ayoos.doctor.service;
- 
+
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.TimingDetailDTO;
 
@@ -30,7 +30,6 @@ public interface SessionInfoService {
      */
     Page<SessionInfoDTO> findAll(Pageable pageable);
 
-
     /**
      * Get the "id" sessionInfo.
      *
@@ -55,5 +54,6 @@ public interface SessionInfoService {
      * @return the list of entities.
      */
     Page<SessionInfoDTO> search(String query, Pageable pageable);
-     List<SessionInfoDTO> setSessionInfosByDates(List<TimingDetailDTO> timingDetailDTO);
+    
+    List<SessionInfoDTO> setSessionInfosByDates(List<TimingDetailDTO> timingDetailDTO);
 }

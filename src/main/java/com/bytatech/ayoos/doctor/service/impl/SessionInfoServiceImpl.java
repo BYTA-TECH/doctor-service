@@ -1,9 +1,10 @@
 package com.bytatech.ayoos.doctor.service.impl;
- 
+
 import com.bytatech.ayoos.doctor.service.SessionInfoService;
 import com.bytatech.ayoos.doctor.domain.SessionInfo;
+import com.bytatech.ayoos.doctor.domain.enumeration.SessionStatus;
 import com.bytatech.ayoos.doctor.repository.SessionInfoRepository;
-import com.bytatech.ayoos.doctor.repository.search.SessionInfoSearchRepository; 
+import com.bytatech.ayoos.doctor.repository.search.SessionInfoSearchRepository;
 import com.bytatech.ayoos.doctor.service.dto.SessionInfoDTO;
 import com.bytatech.ayoos.doctor.service.dto.TimingDetailDTO;
 import com.bytatech.ayoos.doctor.service.mapper.SessionInfoMapper;
@@ -75,7 +76,6 @@ public class SessionInfoServiceImpl implements SessionInfoService {
             .map(sessionInfoMapper::toDto);
     }
 
-
     /**
      * Get one sessionInfo by id.
      *
@@ -116,6 +116,7 @@ public class SessionInfoServiceImpl implements SessionInfoService {
         return sessionInfoSearchRepository.search(queryStringQuery(query), pageable)
             .map(sessionInfoMapper::toDto);
     }
+    
     /*
      * @author:ajay.e.s
      * Method to split the session of doctors in given dates limit
@@ -138,9 +139,9 @@ public class SessionInfoServiceImpl implements SessionInfoService {
                   /*
 				  * convertion of LocalDate and LocalTime into Instant with using String
 				  */ 
-				 Instant startInstant=Instant.parse(startDate+"T"+timingDetail.getFromTime()+"Z");
-				 Instant endInstant=Instant.parse(startDate+"T"+timingDetail.getToTime()+"Z");
-				 
+				 Instant startInstant=Instant.parse(startDate+"T"+timingDetail.getFromTime()+":01.00Z");
+				 Instant endInstant=Instant.parse(startDate+"T"+timingDetail.getToTime()+":01.00Z");
+				
 				 SessionInfoDTO sessionInfoDTO =new SessionInfoDTO();
 				 sessionInfoDTO.setDate(startDate);
 				 sessionInfoDTO.setFromTime(startInstant);
@@ -148,7 +149,8 @@ public class SessionInfoServiceImpl implements SessionInfoService {
 				 sessionInfoDTO.setWorkPlaceId(timingDetail.getWorkPlaceId());
 				 sessionInfoDTO.setInterval(timingDetail.getInterval());
 				 sessionInfoDTO.setDoctorIdpCode(timingDetail.getDoctorIdpCode());
-				 sessionInfoDTO.setStatusId(1L);
+				 sessionInfoDTO.setSessionStatus(SessionStatus.AVAILABLE);
+				 sessionInfoDTO.setWeekDay(timingDetail.getWeekday());
 				  save(sessionInfoDTO);
 				 sessionInfoDTOList.add(sessionInfoDTO);
 				 //Calculate next weekday by adding 7
@@ -159,5 +161,4 @@ public class SessionInfoServiceImpl implements SessionInfoService {
 		 return sessionInfoDTOList;
 		}
  
-		
 }
